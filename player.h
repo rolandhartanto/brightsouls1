@@ -21,6 +21,7 @@
 typedef int ItemID;
 typedef struct{
 	ItemID Inventory[NMax+1];
+	char Nama[20];
 	int NeffInventory;
 	int HP;
 	int Level;
@@ -41,6 +42,7 @@ typedef struct{
 #define Def(P)				(P).Def
 #define	Next(P)				(P).Next
 #define SkillPoint(P)		(P).SkillPoint
+#define Nama(P)				(P).Nama
 /*Konstruktor*/
 void CreatePlayer(Player * P);
 /*I.S. P sembarang*/
