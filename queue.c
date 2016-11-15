@@ -32,12 +32,12 @@ typedef struct { infotype * T;   /* tabel penyimpan elemen */
 #define MaxEl(Q) (Q).MaxEl
 
 /* ********* Prototype ********* */
-boolean IsEmpty (Queue Q)
+boolean IsEmptyQ (Queue Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 {
 	return (Head(Q) == Nil && Tail(Q) == Nil);
 }
-boolean IsFull (Queue Q)
+boolean IsFullQ (Queue Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 {
@@ -47,18 +47,18 @@ boolean IsFull (Queue Q)
     }
     else{
         if(Head(Q) > Tail(Q)){
-            nb = (Tail(Q) + MaxEl(Q)) - Head(Q) + 1 ;   
+            nb = (Tail(Q) + MaxEl(Q)) - Head(Q) + 1 ;
         }
         else{
             nb = Tail(Q) - Head(Q) + 1;
         }
     }
-    
-    
-    
+
+
+
 	return (MaxEl(Q) == nb);
 }
-int NBElmt (Queue Q)
+int NBElmtQ (Queue Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 {
     int nb;
@@ -67,7 +67,7 @@ int NBElmt (Queue Q)
     }
     else{
         if(Head(Q) > Tail(Q)){
-            nb = (Tail(Q) + MaxEl(Q)) - Head(Q) + 1 ;   
+            nb = (Tail(Q) + MaxEl(Q)) - Head(Q) + 1 ;
         }
         else{
             nb = Tail(Q) - Head(Q) + 1;
@@ -77,7 +77,7 @@ int NBElmt (Queue Q)
 }
 
 /* *** Kreator *** */
-void CreateEmpty (Queue * Q, int Max)
+void CreateEmptyQ (Queue * Q, int Max)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -91,7 +91,7 @@ void CreateEmpty (Queue * Q, int Max)
 }
 
 /* *** Destruktor *** */
-void DeAlokasi(Queue * Q)
+void DeAlokasiQ(Queue * Q)
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
@@ -101,13 +101,13 @@ void DeAlokasi(Queue * Q)
 }
 
 /* *** Primitif Add/Delete *** */
-void Add (Queue * Q, infotype X)
+void AddQ (Queue * Q, infotype X)
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 {
 	if(IsEmpty(*Q)){
-        Head(*Q) = 1;   
+        Head(*Q) = 1;
     }
     Tail(*Q) += 1;
 	if (Tail(*Q)>MaxEl(*Q)){
@@ -115,10 +115,10 @@ void Add (Queue * Q, infotype X)
 	}
 	InfoTail(*Q) = X;
 }
-void Del (Queue * Q, infotype * X)
+void DelQ (Queue * Q, infotype * X)
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 {
 	*X = InfoHead(*Q);

@@ -3,6 +3,7 @@
 #include "array.h"
 
 typedef struct{
+	char name[20];
 	int hp;
 	int exp;
 	int str;
@@ -24,16 +25,3 @@ typedef struct{
 #define BaseESTR 3
 #define BaseEDEF 2
 
-void EnemyGen(Enemy * E, int MapCnt, int DropID, int DropProb, boolean BossS){
-	int a;
-	
-	HP(*E) = BaseEHP + (3 * MapCnt);		// HP Setter
-	DEF(*E) = BaseEDEF + (1 * MapCnt);		// DEF Setter
-	STR(*E) = BaseESTR + (2 * MapCnt);		// STR Setter
-	EXP(*E) = BaseEHP + (10 * MapCnt);		// EXP Setter
-	Boss(*E) = BossS;
-	Drop(*E) = DropID;
-	Prob(*E) = DropProb;
-}
-
-void 
