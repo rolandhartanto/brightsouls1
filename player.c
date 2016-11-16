@@ -30,6 +30,7 @@ typedef struct{
 /*Selektor*/
 #define Inventory(P,i) 		(P).Inventory[(i)]
 #define NeffInventory(P)	(P).NeffInventory
+#define NamaP(P)			(P).Nama
 #define HP(P) 				(P).HP
 #define Level(P) 			(P).Level
 #define Exp(P)				(P).Exp
@@ -90,4 +91,4 @@ void LevelUp(Player * P){
 	Str(*P)+=10;
 	Def(*P)+=10;
 	HP(*P)=BaseHP;
-}	
+}

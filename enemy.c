@@ -13,15 +13,15 @@ typedef struct{
 	boolean boss;
 } Enemy;
 
-#define HP(E) (E).hp
-#define EXP(E) (E).exp
-#define STR(E) (E).str
-#define DEF(E) (E).def
-#define Drop(E) (E).drop
-#define Prob(E) (E).prob
+#define NamaE(E) (E).name
+#define HPE(E) (E).hp
+#define EXPE(E) (E).exp
+#define STRE(E) (E).str
+#define DEFE(E) (E).def
+#define DropE(E) (E).drop
+#define ProbE(E) (E).prob
 #define Boss(E) (E).boss
 
 #define BaseEHP 10
 #define BaseESTR 3
 #define BaseEDEF 2
-

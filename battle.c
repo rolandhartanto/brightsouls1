@@ -26,7 +26,7 @@ int RPSComparator(char P, char E){
 		if((P == 'B' && E == 'F') || (P == 'A' && E == 'B') || (P == 'F' && E == 'A')){
 			Out = -1;
 		}
-		if((P == 'F' && E == 'B') || (P == 'B' && E == 'A') || (P == 'A' && E == 'F')){
+		else if((P == 'F' && E == 'B') || (P == 'B' && E == 'A') || (P == 'A' && E == 'F')){
 			Out = 1;
 		}
 	}
@@ -35,30 +35,94 @@ int RPSComparator(char P, char E){
 }
 
 boolean isBattleEnd(int cntr, int maxTurn, Player P, Enemy E){
-	return (cntr == maxTurn || HP(P) == 0 || HP(E) == 0);
+	return (cntr >= maxTurn || HP(P) <= 0 || HP(E) <= 0);
 }
 
 //HP Player -= STR Musuh  - DEF * offset; offset tergantung aksi player&musuh (kalo block kena flank, offset 0; kalo flank kena attack, offset 0.7; kalo draw (attack-attack / flank-flank, 0.8)
-int PDmgCntr(Player Pl, Enemy El, char P, char E, int rslt){
-	if(rslt == 0 && ){
-		HP(Pl)
+int PDmgCntr(Player Pl, Enemy El, char P, int rslt){
+	int dmg;
+	if(rslt == 0){
+		if (P == 'B'){ //BB
+			dmg = 0;
+		}
+		else if (P == 'F' || P == 'A'){ //FF atau AA
+			dmg = 0.8 * ATKE(El);
+		}
 	}
-	if(P == 'B' && rslt == -1){
-		//Block attacked by flank
-		HP(Pl) -= 1 * STR(El);
+	else if(rslt == -1){
+		if (P == 'B'){ //BF
+			dmg = ATKE(El);
+		}
+		else if (P == 'F'){
+			dmg = (ATKE(El) * 12)/10; //FA
+		}
+		else if (P == 'A'){ //AB
+			dmg = 0;
+		}
+	}
+	else if(rslt == 1){
+		if (P == 'B'){
+			dmg = 0; //BA
+		}
+		else if (P == 'F'){
+			dmg = 0 //FB
+		}
+		else if (P == 'A'){
+			dmg = (ATKE(El)*8)/10; //AF
+		}
 	}
 
+	if(dmg > 0){
+		dmg -= DEFE(El);
+	}
+	if(dmg < 0){
+		dmg = 0;
+	}
+
+	return dmg;
 }
 
-int EDmgCntr(Player Pl, Enemy El, char P, char E, int rslt){
-	if(rslt == 0 && ){
-		HP(Pl)
+int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
+	int dmg;
+	if(rslt == 0){
+		if (P == 'B'){ //BB
+			dmg = 0;
+		}
+		else if (P == 'F' || P == 'A'){ //FF atau AA
+			dmg = (ATK(Pl)*8)/10;
+		}
 	}
-	if(P == 'B' && rslt == -1){
-		//Block attacked by flank
-		HP(Pl) -= 1 * STR(El);
+	else if(rslt == -1){
+		if (P == 'B'){ //BF
+			dmg = 0;
+		}
+		else if (P == 'F'){
+			dmg = (ATK(Pl)) * 8)/10; //FA
+		}
+		else if (P == 'A'){ //AB
+			dmg = 0;
+		}
+	}
+	else if(rslt == 1){
+		if (P == 'B'){
+			dmg = 0; //BA
+		}
+		else if (P == 'F'){
+			dmg = ATK(Pl) //FB
+		}
+		else if (P == 'A'){
+			dmg = (ATK(Pl)*12)/10; //AF
+		}
 	}
 
+	if(dmg > 0){
+		dmg -= DEFE(El);
+	}
+	if(dmg < 0){
+		dmg = 0;
+	}
+
+	return dmg;
 }
 // Battle start
 // file dibaca, masuk ke queue
@@ -143,7 +207,7 @@ void BattleProcessing(Player * P, Enemy * E){
 	RandomizeStack(&En,x);
 	turn = 1;
 
-	while(!isBattleEnd(turn,x,P,E)){
+	while(!isBattleEnd(turn,x,*P,*E)){
 		PopSQ(&En,&Q);
 		//Print Enemy Command
 		PrintCmd(Q);
@@ -160,15 +224,50 @@ void BattleProcessing(Player * P, Enemy * E){
 			Del(&Q,&enemyin);
 			x = RPSComparator(cmd[i],enemyin);
 			if(x == 1){
-
+				if(cmd[i] == 'B'){ //B v B
+					printf("%s tries to attack!",NamaE(*E));
+					printf("But %s blocked foe %s's attack", NamaP(*P), NamaE(*E));
+				}
+				if(cmd[i] == 'F'){ //B v B
+					printf("%s tries to block!",NamaE(*E));
+					printf("But %s flanked and break trough foe %s's defense", NamaP(*P), NamaE(*E));
+				}
+				if(cmd[i] == 'A'){ //B v B
+					printf("%s tries to flank!",NamaE(*E));
+					printf("But %s attacked foe %s's right trough", NamaP(*P), NamaE(*E));
+				}
 			}
 			else if(x == 0){
-				if(cmd[i] == 'B' && 
+				if(cmd[i] == 'B'){ //B v B
+					printf("%s and %s blocked at the same time", NamaP(*P), NamaE(*E));
+				}
+				if(cmd[i] == 'F'){ //B v B
+					printf("%s and %s flanked at the same time", NamaP(*P), NamaE(*E));
+				}
+				if(cmd[i] == 'A'){ //B v B
+					printf("%s and %s flanked at the same time", NamaP(*P), NamaE(*E));
+				}
 			}
 			else if(x == -1){
-
+				if(cmd[i] == 'B'){ //B v B
+					printf("%s tries to attack!",NamaP(*P));
+					printf("But foe %s blocked %s's attack", NamaE(*E), NamaP(*P));
+				}
+				if(cmd[i] == 'F'){ //B v B
+					printf("%s tries to block!",NamaP(*P));
+					printf("But foe %s flanked and break trough %s's defense", NamaE(*E), NamaP(*P));
+				}
+				if(cmd[i] == 'A'){ //B v B
+					printf("%s tries to flank!",NamaP(*P));
+					printf("But foe %s attacked %s's right trough", NamaE(*E), NamaP(*P));
+				}
 			}
+			HP(*P) -= PDmgCntr(P,E,cmd[i],x);
+			HPE(*E) -= EDmgCntr(P,E,cmd[i],x);
 
 		}
 		turn++;
+		if (HP(P) <= 0){
+			GameOver(); //GameOver Handler
+		}
 }
