@@ -2,14 +2,14 @@
 #include "boolean.h"
 #include <stdio.h>
 #include <string.h>
-#include "mesinkar.h"
+#include "mesinkata.h"
 #include "stackofq.h"
 
 typedef struct{
-	char cmd[2];
-	boolean hide;
+	char cmd[5];
 } Command;
 
+#define Comd(P,i) (P).cmd[(i)]
 
 int RPSComparator(char P, char E){
 // Condition Output
@@ -134,8 +134,8 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 void ReadCmd(Queue * Q){
 	//Baca huruf dari file, tiap 4 masuk ke queue lain,
 	int i;
+	STARTKATABTL();
 	for(i=1;i<=4;i++){
-		SalinKata();
 		if (CKata == 'A'){
 			Add(Q,'A');
 		}
@@ -145,8 +145,8 @@ void ReadCmd(Queue * Q){
 		else if(CKata =='F'){
 			Add(Q,'F');
 		}
+		SalinKata();
 	}
-	SalinKata(); //in case ada enter tiap line
 }
 
 void RandomizeStack(StackQ * S,int x){
@@ -245,7 +245,7 @@ void BattleProcessing(Player * P, Enemy * E){
 					printf("%s and %s flanked at the same time", NamaP(*P), NamaE(*E));
 				}
 				if(cmd[i] == 'A'){ //B v B
-					printf("%s and %s flanked at the same time", NamaP(*P), NamaE(*E));
+					printf("%s and %s attackked at the same time", NamaP(*P), NamaE(*E));
 				}
 			}
 			else if(x == -1){

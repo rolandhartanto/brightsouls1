@@ -11,12 +11,12 @@
 void delay(int x)
 {
    int c = 1, d = 1;
- 
+
    for ( c = 1 ; c <= x*10 ; c++ )
        for ( d = 1 ; d <= x*10 ; d++ )
        {}
- 
-   
+
+
 }
 void ClearScreen()
 {
@@ -25,7 +25,7 @@ void ClearScreen()
 		printf( "\n\n\n\n\n\n\n\n\n\n" );
 	}
 }
-	
+
 void Back()
 {
 	char x;
@@ -35,13 +35,13 @@ void Back()
 			printf("Ketik 'B' untuk kembali ke menu utama\n");
 		}
 	}while(x!='B');
-}	
+}
 void printMainMenu()
 /*I.S. sembarang
   F.S. menampilkan main menu pada saat program dijalankan
 */
 {
-	
+
 	ClearScreen();
 	//printf("%c==================================================================%c\n",201,187);
 	printf("%c%c%c%c           ___             |   |                    |       %c%c%c%c\n",186,176,176,176,176,176,176,186);
@@ -70,15 +70,15 @@ void printMainMenu()
 	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
 	printf("                           INPUT : ");
 	//	printf("%c==================================================================%c\n",200,188);
-	
+
 	//pilihOpsi(a);
-	
+
 }
 
 void pilihOpsi(char a[],int *b,int *s)
 {
 	char x;
-	
+
 	do{
 		scanf(" %c",&x);
 		switch (x){
@@ -87,11 +87,11 @@ void pilihOpsi(char a[],int *b,int *s)
 			case 'L' : loadingBar(); break;//buat sementara blm ada
 			case 'H' : printHelp(); break;//buat sementara blm ada
 			case 'E' : printExit(b); break;
-			default : printf("Invalid input!\n"); 
+			default : printf("Invalid input!\n");
 		}
 
 	}while(((x!='N')&&(x!='S')&&(x!='L')&&(x!='H')&&(x!='E'))&&(b!=0));
-	
+
 }
 
 void NewGame(char a[])
@@ -99,10 +99,10 @@ void NewGame(char a[])
   F.S. menampilkan kotak pengisian nama pemain pada saat pilihan menu New Game dipilih
 */
 {
-	
+
 	printf("                INSERT YOUR NAME : ");
 	scanf("%s",a);
-	
+
 	printf("Tekan 'B' untuk kembali ke menu utama");
 	Back();
 	/*printf("                                                                      \n"
@@ -119,18 +119,18 @@ void NewGame(char a[])
 		   "                          INSERT YOUR NAME                            \n"
 		   "                                                                      \n"
 		   "                        ");
-	*/	
+	*/
 		   /*13*29*/
-    
+
 }
 void printStartGame(char a[],int *s)
 /*I.S. sembarang
-  F.S. menampilkan cerita awal jika pemain sudah memasukkan nama pemain, 
-  jika belum ada nama pemain, tampilkan "nama pemain belum dimasukkan!" dan kembali ke 
+  F.S. menampilkan cerita awal jika pemain sudah memasukkan nama pemain,
+  jika belum ada nama pemain, tampilkan "nama pemain belum dimasukkan!" dan kembali ke
   tampilan main menu
 */
 {
-	
+
 	if(strlen(a)==0){
 		printf("> Pemain belum ada! Input nama terlebih dahulu dengan memilih menu New Game(N)!\n");
 		printf("> (B)Back\n");
@@ -139,7 +139,7 @@ void printStartGame(char a[],int *s)
 		printf("Selamat bermain %s!\n",a);
 		*s = 1;
 	}
-	
+
 }
 void loadingBar()
 /*I.S. sembarang
@@ -210,7 +210,7 @@ void printExit(int *b)
 {
 	char x;
 	printf("are you sure? Y/N ");
-	
+
 	do{
 		scanf(" %c",&x);
 		if(x=='Y'){
@@ -226,5 +226,5 @@ void printExit(int *b)
 
 void printHelp()
 {
-	
+
 }

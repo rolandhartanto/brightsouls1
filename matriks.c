@@ -10,11 +10,11 @@
 #define KolMax 100
 
 typedef int indeks; /* indeks baris, kolom */
-typedef int ElType; 
+typedef int ElType;
 
 typedef int indeks; /* indeks baris, kolom */
-typedef int ElType; 
-typedef struct { 
+typedef int ElType;
+typedef struct {
     ElType Mem[BrsMax+1][KolMax+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
@@ -23,7 +23,7 @@ typedef struct {
 /* Indeks matriks yang digunakan: [BrsMin..BrsMax][KolMin..KolMax] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */
 
-/* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
+/* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS (int NB, int NK, MATRIKS * M)
 /* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK di "ujung kiri" memori */
@@ -96,20 +96,20 @@ void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl)
     }
 }
 
-/* ********** KELOMPOK BACA/TULIS ********** */ 
+/* ********** KELOMPOK BACA/TULIS ********** */
 void BacaMATRIKS (MATRIKS * M, int NB, int NK)
-/* I.S. IsIdxValid(NB,NK) */ 
+/* I.S. IsIdxValid(NB,NK) */
 /* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
 /* Proses: Melakukan MakeMATRIKS(M,NB,NK) dan mengisi nilai efektifnya */
 /* Selanjutnya membaca nilai elemen per baris dan kolom */
 /* Contoh: Jika NB = 3 dan NK = 3, maka contoh cara membaca isi matriks :
 1 2 3
 4 5 6
-8 9 10 
+8 9 10
 */
 {
     MakeMATRIKS(NB,NK,M);
-    ElType k; 
+    ElType k;
     int i,j;
     for(i =GetFirstIdxBrs(*M); i<=GetLastIdxBrs(*M);i++){
         for(j=GetFirstIdxKol(*M); j<=GetLastIdxKol(*M);j++){
@@ -121,7 +121,7 @@ void BacaMATRIKS (MATRIKS * M, int NB, int NK)
 
 void TulisMATRIKS (MATRIKS M)
 /* I.S. M terdefinisi */
-/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris 
+/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
    dipisahkan sebuah spasi */
 /* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
 /* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
@@ -144,7 +144,7 @@ void TulisMATRIKS (MATRIKS M)
     printf("%d",Elmt(M,i,j));
 }
 
-/* ********** KELOMPOK OPERASI ARITMATIKA TERHADAP TYPE ********** */                                  
+/* ********** KELOMPOK OPERASI ARITMATIKA TERHADAP TYPE ********** */
 MATRIKS TambahMATRIKS (MATRIKS M1, MATRIKS M2)
 /* Prekondisi : M1  berukuran sama dengan M2 */
 /* Mengirim hasil penjumlahan matriks: M1 + M2 */
@@ -161,10 +161,10 @@ MATRIKS TambahMATRIKS (MATRIKS M1, MATRIKS M2)
     }
     return (Hsl);
 }
- 
+
 MATRIKS KurangMATRIKS (MATRIKS M1, MATRIKS M2)
 /* Prekondisi : M berukuran sama dengan M */
-/* Mengirim hasil pengurangan matriks: salinan M1 – M2 */ 
+/* Mengirim hasil pengurangan matriks: salinan M1 – M2 */
 {
     MATRIKS Hsl;
     int i,j;
@@ -186,7 +186,7 @@ MATRIKS KaliMATRIKS (MATRIKS M1, MATRIKS M2)
     MATRIKS M3;
     int h,i,j,k;
     ElType l;
-    
+
     MakeMATRIKS(NBrsEff(M1),NKolEff(M2),&M3);
 
     for(h=GetFirstIdxBrs(M1);h<=GetLastIdxBrs(M1);h++){
@@ -196,11 +196,11 @@ MATRIKS KaliMATRIKS (MATRIKS M1, MATRIKS M2)
                     l += Elmt(M1,h,k) * Elmt(M2,k,i);
                 }
                 Elmt(M3,h,i) = l;
-            }        
+            }
     }
-    
+
     return M3;
-    
+
 }
 
 MATRIKS KaliKons (MATRIKS M, ElType X)
@@ -233,10 +233,10 @@ void PKaliKons (MATRIKS * M, ElType K)
 }
 
 /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP MATRIKS ********** */
-boolean EQ (MATRIKS M1, MATRIKS M2)
+boolean EQM (MATRIKS M1, MATRIKS M2)
 /* Mengirimkan true jika M1 = M2, yaitu NBElmt(M1) = NBElmt(M2) dan */
 /* untuk setiap i,j yang merupakan indeks baris dan kolom M1(i,j) = M2(i,j) */
-/* Juga merupakan strong EQ karena GetFirstIdxBrs(M1) = GetFirstIdxBrs(M2) 
+/* Juga merupakan strong EQ karena GetFirstIdxBrs(M1) = GetFirstIdxBrs(M2)
    dan GetLastIdxKol(M1) = GetLastIdxKol(M2) */
 {
     boolean same;
@@ -261,10 +261,10 @@ boolean EQ (MATRIKS M1, MATRIKS M2)
     return(same);
 }
 
-boolean NEQ (MATRIKS M1, MATRIKS M2)
+boolean NEQM (MATRIKS M1, MATRIKS M2)
 /* Mengirimkan true jika M1 tidak sama dengan M2 */
 {
-    return(!EQ(M1,M2));
+    return(!EQM(M1,M2));
 }
 
 boolean EQSize (MATRIKS M1, MATRIKS M2)
@@ -287,9 +287,9 @@ boolean IsBujurSangkar (MATRIKS M)
 {
     return(NBrsEff(M)==NKolEff(M));
 }
-            
+
 boolean IsSimetri (MATRIKS M)
-/* Mengirimkan true jika M adalah matriks simetri : IsBujurSangkar(M) 
+/* Mengirimkan true jika M adalah matriks simetri : IsBujurSangkar(M)
    dan untuk setiap elemen M, M(i,j)=M(j,i) */
 {
     boolean smtr;
@@ -305,7 +305,7 @@ boolean IsSimetri (MATRIKS M)
                 if(Elmt(M,i,j)!=Elmt(M,j,i)){
                     smtr=false;
                 }
-            j++;            
+            j++;
             }
         i++;
         }
@@ -314,8 +314,8 @@ boolean IsSimetri (MATRIKS M)
 }
 
 boolean IsSatuan (MATRIKS M)
-/* Mengirimkan true jika M adalah matriks satuan: IsBujurSangkar(M) dan 
-   setiap elemen diagonal M bernilai 1 dan elemen yang bukan diagonal bernilai 0 */ 
+/* Mengirimkan true jika M adalah matriks satuan: IsBujurSangkar(M) dan
+   setiap elemen diagonal M bernilai 1 dan elemen yang bukan diagonal bernilai 0 */
 {
     int i,j;
     boolean same;
@@ -341,13 +341,13 @@ boolean IsSatuan (MATRIKS M)
         i++;
         }
     }
-    
+
     return same;
 }
-    
+
 boolean IsSparse (MATRIKS M)
-/* Mengirimkan true jika M adalah matriks sparse: mariks “jarang” dengan definisi: 
-   hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */ 
+/* Mengirimkan true jika M adalah matriks sparse: mariks “jarang” dengan definisi:
+   hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */
 {
     int i,j;
     float f;
@@ -356,9 +356,9 @@ boolean IsSparse (MATRIKS M)
     for (i = GetFirstIdxBrs(M); i<=GetLastIdxBrs(M); i++){
         for (j = GetFirstIdxKol(M); j<=GetLastIdxKol(M); j++){
             if(Elmt(M,i,j)!=0){
-                ct=ct+1;   
+                ct=ct+1;
             }
-        }            
+        }
     }
 
     f = ((ct/NBElmt(M))*100.0);
@@ -372,7 +372,7 @@ MATRIKS Inverse1 (MATRIKS M)
     matr = KaliKons(M,-1);
     return matr;
 }
-            
+
 float Determinan (MATRIKS M)
 /* Prekondisi: IsBujurSangkar(M) */
 /* Menghitung nilai determinan M */
@@ -380,7 +380,7 @@ float Determinan (MATRIKS M)
     int i,j,k,l,m,a;
     float det,dtsmt,dettemp;
     MATRIKS sapi;
-    
+
     if(NBrsEff(M)>2){
         //REKURSIF MEMOTONG MATRIKS SAPI EDISI IDUL ADHA
         det = 0;
@@ -401,14 +401,14 @@ float Determinan (MATRIKS M)
                 }
             }
             dettemp = a * Determinan(sapi);
-            
+
             if(i%2 == 0){
                 det-=dettemp;
             }
             else{
                 det+=dettemp;
-            }                
-        } 
+            }
+        }
     }
     else{ //NBrsEff(M)=2)
     //BASIS
@@ -418,7 +418,7 @@ float Determinan (MATRIKS M)
         l = GetLastIdxKol(M);
         det = (Elmt(M,i,j) * Elmt(M,k,l))-(Elmt(M,i,l) * Elmt(M,k,j));
     }
-    
+
     return det;
 }
 
