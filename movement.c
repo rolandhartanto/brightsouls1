@@ -1,8 +1,5 @@
 #include <stdio.h>
-#include "mapgen.h"
-#include "boolean.h"
-#include "point.h"
-#include "matriks.h"
+#include "movement.h"
 
 /*
 	NOTES

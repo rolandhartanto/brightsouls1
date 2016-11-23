@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "listlinier.h"
-#include "boolean.h"
-#include "movement.h"
 #include "mapgen.h"
 
 

@@ -11,6 +11,9 @@
 #include "matriks.h"
 #include "point.h"
 
+#define MaxN 20
+#define MinPath 60
+
 void nextBlock(int * xa, int * ya, int x, int y, int c);
 
 boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count, int prev);

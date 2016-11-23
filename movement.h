@@ -15,8 +15,7 @@
 	4 = Boss
 
 */
-void EncounterCheck(MATRIKS * M, int x, int y){
-}
+void EncounterCheck(MATRIKS * M, int x, int y);
 
 void GoUp(MATRIKS * M, POINT * CurPos);
 
