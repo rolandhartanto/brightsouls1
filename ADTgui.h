@@ -1,9 +1,9 @@
 /*ADT GUI*/
-
-
-
 #ifndef ADTgui_H
 #define ADTgui_H
+
+
+
 
 void delay();
 void ClearScreen();
@@ -25,8 +25,8 @@ void NewGame(char a[]);
 
 void printStartGame(char a[], int *s);
 /*I.S. sembarang
-  F.S. menampilkan cerita awal jika pemain sudah memasukkan nama pemain, 
-  jika belum ada nama pemain, tampilkan "nama pemain belum dimasukkan!" dan kembali ke 
+  F.S. menampilkan cerita awal jika pemain sudah memasukkan nama pemain,
+  jika belum ada nama pemain, tampilkan "nama pemain belum dimasukkan!" dan kembali ke
   tampilan main menu
 */
 

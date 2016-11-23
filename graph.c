@@ -29,7 +29,7 @@ address Alokasi (infotype X)
 {
 	address P;
 	P = (address) malloc (sizeof(ElmtList));
-	
+
 	if(P!=Nil){
 		Info(P) = X;
 		Prev(P) = Nil;
@@ -63,7 +63,7 @@ address Search (List L, infotype X)
 			P = Next(P);
 		}
 	}
-	
+
 	if(found){
 		return P;
 	}else{
@@ -146,7 +146,7 @@ void DelVLast (List *L, infotype *X)
 	//assert(!IsEmpty(*L));
 	address P;
 	*X = Info(Last(*L));
-	
+
 	P = Last(*L);
 	if((First(*L)==Last(*L))&&(First(*L)!=Nil)){
 		Last(*L) = Nil;
@@ -197,7 +197,7 @@ void InsertAfter (List *L, address P, address Prec)
 		Prev(P) = Prec;
 		Next(Prec) = P;
 	}
-	
+
 }
 void InsertBefore (List *L, address P, address Succ)
 /* I.S. Succ pastilah elemen list; P sudah dialokasi  */
@@ -211,7 +211,7 @@ void InsertBefore (List *L, address P, address Succ)
 		Next(P) = Succ;
 		Prev(Succ) = P;
 	}
-	
+
 }
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
 void DelFirst (List *L, address *P)
@@ -271,7 +271,7 @@ void DelP (List *L, infotype X)
 				address Q = Prev(P);
 				DelAfter(L,&P,Q);
 			}
-			
+
 		}
 		Dealokasi(P);
 	}

@@ -1,7 +1,7 @@
 #include "ADTgui.h"
-#include "mapgen.h"
-#include "player.h"
-#include "enemy.h"
+//#include "mapgen.h"
+//#include "player.h"
+//#include "enemy.h"
 #include<stdio.h>
 
 int main(){
