@@ -1,17 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "matriks.h"
 #include "listlinier.h"
 #include "boolean.h"
 #include "movement.h"
 #include "ADTgui.h" 			// Delete in use
 
+#define BrsMin 1
+#define BrsMax 100
+#define KolMin 1
+#define KolMax 100
+
 #define MaxN 20
 #define MinPath 100
 
-void nextBlock(int * xa, int * ya, int x, int y, int c)
+typedef int indeks; /* indeks baris, kolom */
+typedef int ElType;
+typedef struct {
+	ElType Mem[BrsMax+1][KolMax+1];
+    int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
+	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
+} MATRIKS;
+
+void MakeMATRIKS (int NB, int NK, MATRIKS * M)
+/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK di "ujung kiri" memori */
+/* I.S. NB dan NK adalah valid untuk memori matriks yang dibuat */
+/* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
 {
+    (*M).NBrsEff = NB;
+    (*M).NKolEff = NK;
+}
+
+/* *** Selektor *** */
+#define NBrsEff(M) (M).NBrsEff
+#define NKolEff(M) (M).NKolEff
+#define Elmt(M,i,j) (M).Mem[(i)][(j)]
+
+void nextBlock(int * xa, int * ya, int x, int y, int c) {
 	if (c == 0){
 		*xa = x + 1;
 		*ya = y;
@@ -30,8 +55,7 @@ void nextBlock(int * xa, int * ya, int x, int y, int c)
 	}
 }
 
-boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count, int prev)
-{
+boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count, int prev) {
     boolean oke;
     int xd, yd;
 
@@ -208,19 +232,9 @@ void GenerateNextMap(List * Seed,int * xs,int * ys){
 	//printf("exit x:%d y:%d\n",b,a);
 }
 
-void TulisMap (MATRIKS M, POINT Pos)
-/* I.S. M terdefinisi */
-/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
-   dipisahkan sebuah spasi */
-/* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
-/* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
-1 2 3
-4 5 6
-8 9 10
-*/
-{
+void TulisMap (MATRIKS M, POINT Pos){
     int i,j;
-    for(i =GetFirstIdxBrs(M); i<GetLastIdxBrs(M);i++){
+    for(i =GetFirstIdxBrs(M); i<=GetLastIdxBrs(M);i++){
         for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
 			if (i == Absis(Pos) && j == Ordinat(Pos)){
 				printf("P");
@@ -258,45 +272,7 @@ void TulisMap (MATRIKS M, POINT Pos)
 			}
 		}
     }
-    i = GetLastIdxBrs(M);
-    for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
-		if (i == Absis(Pos) && j == Ordinat(Pos)){
-			printf("P");
-		}
-		else{
-			if(Elmt(M,i,j)==0){
-				printf(" ");
-			}
-			else if(Elmt(M,i,j)==1){
-				printf("I");
-			}
-			else if(Elmt(M,i,j)==2){
-				printf("E");
-			}
-			else if(Elmt(M,i,j)==3){
-				printf("#");
-			}
-		}
-        }
-		if (i == Absis(Pos) && j == Ordinat(Pos)){
-			printf("P");
-		}
-		else{
-			if(Elmt(M,i,j)==0){
-				printf(" ");
-			}
-			else if(Elmt(M,i,j)==1){
-				printf("I");
-			}
-			else if(Elmt(M,i,j)==2){
-				printf("E");
-			}
-			else if(Elmt(M,i,j)==3){
-				printf("#");
-			}
-		}
 }
-
 
 void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 	int xs,ys,x,y,c,a,b;
@@ -328,48 +304,4 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 		P = Next(P);
 	}
 	TulisMap(*map,Pos);
-}
-
-
-int main(){
-	char input;
-	List Seed;
-	int x,y,i;
-	POINT CurPos;
-	boolean stop;
-	MATRIKS M;
-
-	// Buat prosedur load to map;
-	GenerateNewMap(&Seed, &x, &y);					//Initialize first map
-
-	Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
-	Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
-
-
-	PrintMap(Seed,CurPos,&M);
-	while (!stop){
-
-		printf("\n");
-		scanf("%c",&input);
-		if(input == 'W'){ //UP
-			GoLeft(&M,&CurPos);
-		}
-		else if(input == 'S'){ //DOWN
-			GoRight(&M,&CurPos);
-		}
-		else if(input == 'A'){ //LEFT
-			GoDown(&M,&CurPos);
-		}
-		else if(input == 'D'){ //RIGHT
-			GoUp(&M,&CurPos);
-		}
-		ClearScreen();
-		if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){
-			GenerateNextMap(&Seed,&x,&y);
-
-			Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
-			Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
-		}
-		PrintMap(Seed,CurPos,&M);
-	}
 }

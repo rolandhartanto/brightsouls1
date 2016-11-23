@@ -2,9 +2,16 @@
 #define MOVEMENT_H
 
 #include <stdio.h>
-#include "point.h"
 #include "matriks.h"
 #include "boolean.h"
+
+typedef struct {
+	float X; /* absis   */
+	float Y; /* ordinat */
+} POINT;
+
+#define Absis(P) (P).X
+#define Ordinat(P) (P).Y
 
 /*
 	NOTES
@@ -13,7 +20,7 @@
 	2 = Enemy
 	3 = Wall
 	4 = Boss
-	
+
 */
 void EncounterCheck(int x, int y);
 

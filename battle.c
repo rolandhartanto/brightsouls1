@@ -4,6 +4,7 @@
 #include <string.h>
 #include "mesinkata.h"
 #include "stackofq.h"
+#include "battle.h"
 
 typedef struct{
 	char cmd[5];
@@ -270,4 +271,9 @@ void BattleProcessing(Player * P, Enemy * E){
 		if (HP(P) <= 0){
 			GameOver(); //GameOver Handler
 		}
+	}
+}
+
+void GameOver(){
+
 }
