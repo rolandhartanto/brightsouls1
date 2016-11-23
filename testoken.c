@@ -12,8 +12,9 @@ int main(){
 			}else{
 				printf("%c\n",CToken.ID);
 			}
+		ADVTOKEN();
 		}
-		ADVTOKEN();	
+			
 	}
 	return 0;
 }
