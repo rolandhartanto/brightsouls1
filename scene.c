@@ -2,6 +2,7 @@
 #include "mapgen.h"
 #include "listlinier.h"
 #include "graph.h"
+#include "movement.h"
 
 void Overworld(){
     char input;
@@ -43,5 +44,4 @@ void Overworld(){
         }
         PrintMap(Seed,CurPos,&M);
     }
-
 }

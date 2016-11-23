@@ -4,37 +4,11 @@
 #include "listlinier.h"
 #include "boolean.h"
 #include "movement.h"
-#include "ADTgui.h" 			// Delete in use
+#include "mapgen.h"
 
-#define BrsMin 1
-#define BrsMax 100
-#define KolMin 1
-#define KolMax 100
 
 #define MaxN 20
-#define MinPath 100
-
-typedef int indeks; /* indeks baris, kolom */
-typedef int ElType;
-typedef struct {
-	ElType Mem[BrsMax+1][KolMax+1];
-    int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
-	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
-} MATRIKS;
-
-void MakeMATRIKS (int NB, int NK, MATRIKS * M)
-/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK di "ujung kiri" memori */
-/* I.S. NB dan NK adalah valid untuk memori matriks yang dibuat */
-/* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
-{
-    (*M).NBrsEff = NB;
-    (*M).NKolEff = NK;
-}
-
-/* *** Selektor *** */
-#define NBrsEff(M) (M).NBrsEff
-#define NKolEff(M) (M).NKolEff
-#define Elmt(M,i,j) (M).Mem[(i)][(j)]
+#define MinPath 60
 
 void nextBlock(int * xa, int * ya, int x, int y, int c) {
 	if (c == 0){
@@ -77,14 +51,8 @@ void GenerateStart(int * x, int * y){
     srand(time(NULL));			//  Random Seed Init
 
     do{
-       c =(rand() % 2);					//	Init C
-	   //a = (rand() % 2);					//  Randomize Edge
-	   a = ((rand() % MaxN) + 1);		//  Randomize Number
-	   b = ((rand() % MaxN) + 1);		//  Randomize Number
-
-	   //if (a == 0){							//
-		 // a = MaxN;							//
-	   //}									//
+	   a = ((rand() % (MaxN-2)) + 2);		//  Randomize Number
+	   b = ((rand() % (MaxN-2)) + 2);		//  Randomize Number
 	}
     while(a == b);
 
@@ -97,7 +65,6 @@ void GenerateStart(int * x, int * y){
 		*x = b;					//
 		*y = a;					//
 	}							//
-
 
 }
 
