@@ -8,17 +8,17 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmptyGraphGraph (Graph L)
+boolean IsEmptyGraph (Graph L)
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 {
-	return((First(L)==Nil)&&(Last(L)==Nil));
+	return((FirstG(L)==Nil)&&(Last(L)==Nil));
 }
 /****************** PEMBUATAN LIST KOSONG ******************/
 void CreateEmptyGraph (Graph *L)
 /* I.S. L sembarang  */
 /* F.S. Terbentuk list kosong. Lihat definisi di atas. */
 {
-	First(*L)=Nil;
+	FirstG(*L)=Nil;
 	Last(*L)=Nil;
 }
 /****************** Manajemen Memori ******************/
@@ -48,29 +48,6 @@ void DealokasiGraph (addressg P)
 {
 	free(P);
 }
-/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-addressg SearchGraph (Graph L, infotypeg X)
-/* Mencari apakah ada elemen list dengan Info(P)=X */
-/* Jika ada, mengirimkan addressg elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
-{
-	addressg P;
-	P = First(L);
-	boolean found = false;
-	while((P!=Nil)&&(!found)){
-		if(Info(P)==X){
-			found = true;
-		}else{
-			P = Next(P);
-		}
-	}
-
-	if(found){
-		return P;
-	}else{
-		return Nil;
-	}
-}
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN JALUR ***/
 void InsertJalurGraph(addressg *P, addrPeta LJ){
@@ -88,15 +65,15 @@ void InsVFirstGraph (Graph *L, infotypeg X)
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
 {
 	addressg P;
-	P = Alokasi(X);
+	P = AlokasiGraph(X);
 	if(P!=Nil){
 		if(IsEmptyGraph(*L)){
-			First(*L) = P;
+			FirstG(*L) = P;
 			Last(*L) = P;
 		}else{
-			Next(P)=First(*L);
-			Prev(First(*L)) = P;
-			First(*L) = P;
+			Next(P)=FirstG(*L);
+			Prev(FirstG(*L)) = P;
+			FirstG(*L) = P;
 		}
 	}
 }
@@ -107,10 +84,10 @@ void InsVLastGraph (Graph *L, infotypeg X)
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
 	addressg P;
-	P = Alokasi(X);
+	P = AlokasiGraph(X);
 	if(P!=Nil){
 		if(IsEmptyGraph(*L)){
-			First(*L) = P;
+			FirstG(*L) = P;
 			Last(*L) = P;
 		}else{
 			Next(Last(*L)) = P;

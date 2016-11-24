@@ -33,7 +33,7 @@ typedef struct {
 #define Next(P) (P)->next
 #define Prev(P) (P)->prev
 #define FirstJ(P) (P)->FirstJalur
-#define First(L) ((L).First)
+#define FirstG(L) ((L).First)
 #define Last(L) ((L).Last)
 #define NextP(E) (E)->nextP
 #define InfoP(E) (E)->infoP
@@ -49,10 +49,10 @@ addressg AlokasiGraph (infotypeg X);
 
 void DealokasiGraph (addressg P);
 
-/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-addressg SearchGraph (Graph L, infotypeg X);
 
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirstGraph (Graph *L, infotypeg X);
 
 void InsVLastGraph (Graph *L, infotypeg X);
+
+#endif

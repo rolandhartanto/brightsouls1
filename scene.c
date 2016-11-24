@@ -4,10 +4,12 @@
 #include "ADTgui.h"
 #include "graph.h"
 
-Graph Map;
+Graph G;
 List Seed;
 POINT CurPos;
 addressg CurMap;
+int xfirst,yfirst;
+
 void Title(){
     char name[11]={0};
 
@@ -17,6 +19,7 @@ void Title(){
     loadingBar();
     while(b){
         if(s==1){
+
             printGUIInGame(name,lvl,hp,str,def,exp);
         }else{
             printMainMenu();
@@ -26,27 +29,29 @@ void Title(){
 }
 
 void InitGame(){
+    int x,y;
     CreateEmptyGraph(&G);
     GenerateNewMap(&Seed, &x, &y);					//Initialize first map
     Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
     Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
     InsVFirstGraph(&G,Seed);
     CurMap = First(G);
+    xfirst = x;
+    yfirst = y;
 }
 
 void Overworld(){
     char input;
-    int x,y,i,xs,ys;
+    int x,y,i,xs,ys,xe,ye;
     boolean stop;
     MATRIKS M;
 
     // Buat prosedur load to map;
     InitGame();
     PrintMap(Seed,CurPos,&M);
-
+    x = xfirst;
+    y = yfirst;
     while (!stop){
-		xs = Info(First(Seed));
-		ys = Info(Next(First(Seed)));
         printf("\n");
         scanf("%c",&input);
         if(input == 'W'){ //UP
@@ -63,18 +68,51 @@ void Overworld(){
         }
         ClearScreen();
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
-			if (Absis(CurPos) == xs && Ordinat(CurPos) == ys){
-				CurMap = Prev(G);
+            xs = Info(First(Seed));
+    		ys = Info(Next(First(Seed)));
+
+            //Find Exit Point
+            if(Absis(CurPos) < 1){
+                ye = Ordinat(CurPos);
+                xe = Absis(CurPos)+1;
+            }
+            else if(Absis(CurPos) > MaxN){
+                ye = Ordinat(CurPos);
+                xe = Absis(CurPos)-1;
+            }
+            else if(Ordinat(CurPos) < 1){
+                ye = Ordinat(CurPos)+ 1;
+                xe = Absis(CurPos);
+            }
+            else if(Ordinat(CurPos) > MaxN){
+                ye = Ordinat(CurPos)- 1;
+                xe = Absis(CurPos);
+            }
+
+
+			if (xe == Info(First(Seed)) && ye == Info(Next(First(Seed)))){ //Back to prev map
+				CurMap = Prev(CurMap);
 				Seed = Info(CurMap);
+                CountNextStart(&xe,&ye);
+                Absis(CurPos) = xe;
+                Ordinat(CurPos) = ye;
 			}
 			else{
-				if(Next(CurMap) == Nil){
+				if(Next(CurMap) == Nil){ //Generate next map
 	        	    GenerateNextMap(&Seed,&x,&y);
     	    	    Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
     	    	    Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
     	    	    InsVLastGraph(&G,Seed);
     	    	    CurMap = Next(CurMap);
     	    	}
+                else{ //Goto next
+                    CurMap = Next(CurMap);
+    				Seed = Info(CurMap);
+
+                    CountNextStart(&xe,&ye);
+                    Absis(CurPos) = xe;
+                    Ordinat(CurPos) = ye;
+                }
         	}
         }
         PrintMap(Seed,CurPos,&M);
