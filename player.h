@@ -6,7 +6,7 @@
 #include "boolean.h"
 
 /*Kamus umum*/
-#define NMax 100 // definisi untuk jumlah inventory maksimal = 100
+#define NMaxInventory 100 // definisi untuk jumlah inventory maksimal = 100
 #define HPMax 100 //definisi HPMax adalah HP yang bernilai 100
 #define HPMin 0 //definisi HPMin adalah HP yang bernilai 0
 #define BaseHP 100
