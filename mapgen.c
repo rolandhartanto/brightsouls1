@@ -323,5 +323,5 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 		//printf("x : %d y: %d\n",x,y);
 	}
 	TulisMap(*map,Pos);
-	//PrintInfo(Seed);
+	PrintInfo(Seed);
 }

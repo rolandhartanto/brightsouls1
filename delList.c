@@ -4,18 +4,35 @@
 
 void DelList(List * L,int x, int y){
 	address P;
+	int i=1;
+	address temp;
 	boolean found=false;
 	P=First(*L);
-	while((P!=Nil)&&(!found)){
-		if((Info(P)==99)||(Info(P)==98)){
-			if((Info(Next(P))==x)&&((Info(Next(Next(P)))==y))){
+	while((!found)&&(Next(P)!=Nil)){
+		if((Info(Next(P))==99)||(Info(Next(P))==98)||(Info(Next(P))==97)){
+			if((Info(Next(Next(P)))==x)&&((Info(Next(Next(Next(P))))==y))){
 				found=true;
-				DelP(L,Info(P));
-				DelP(L,Info(Next(P)));
-				DelP(L,Info(Next(Next(P))));
+				while(i<=3){
+					
+						DelAfter(L,&temp,P);
+
+						i++;
+					
+					
+					
+						//next P=x
+						DelAfter(L,&temp,P);
+						
+						i++;
+					
+						DelAfter(L,&temp,P);
+						i=5;
+					
+				}
+				
 			}
 		}
-		if(!found&&(P!=Nil)){
+		if(!found){
 			P=Next(P);
 		}
 	}
@@ -23,6 +40,7 @@ void DelList(List * L,int x, int y){
 
 int main(){
 	List L;
+	address P;
 	int count, elmt;
 	CreateEmpty(&L);
 	printf("masukkan berapa banyak elemen yang mau diinputkan\n");
@@ -32,7 +50,9 @@ int main(){
 		scanf("%d",&elmt);
 		InsVLast(&L,elmt);
 	}
+	PrintInfo(L); printf("\n");
 	int x=1; int y=2;
+	P=First(L);
 	DelList(&L,x,y);
 	if(IsEmpty(L)){
 		printf("List Kosong\n");

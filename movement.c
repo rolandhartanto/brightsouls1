@@ -11,18 +11,35 @@
 */
 void DelList(List * L,int x, int y){
 	address P;
+	int i=1;
+	address temp;
 	boolean found=false;
 	P=First(*L);
-	while((P!=Nil)&&(!found)){
-		if((Info(P)==99)||(Info(P)==98)){
-			if((Info(Next(P))==x)&&((Info(Next(Next(P)))==y))){
+	while((!found)&&(Next(P)!=Nil)){
+		if((Info(Next(P))==99)||(Info(Next(P))==98)||(Info(Next(P))==97)){
+			if((Info(Next(Next(P)))==x)&&((Info(Next(Next(Next(P))))==y))){
 				found=true;
-				DelP(L,Info(P));
-				DelP(L,Info(Next(P)));
-				DelP(L,Info(Next(Next(P))));
+				while(i<=3){
+					
+						DelAfter(L,&temp,P);
+
+						i++;
+					
+					
+					
+						//next P=x
+						DelAfter(L,&temp,P);
+						
+						i++;
+					
+						DelAfter(L,&temp,P);
+						i=5;
+					
+				}
+				
 			}
 		}
-		if(!found&&(P!=Nil)){
+		if(!found){
 			P=Next(P);
 		}
 	}
@@ -32,16 +49,18 @@ void DelList(List * L,int x, int y){
 void EncounterCheck(List * Seed,MATRIKS * M, int x, int y){
 		if (Elmt(*M,x,y) == 1){
 			// Inventory Add
-			//DelList(Seed,x,y);
+			DelList(Seed,x,y);
 			printf("Kamu mendapatkan barang!");
 		}
 		else if (Elmt(*M,x,y) == 2){
 			// Battle Proc
-			//DelList(Seed,x,y);
+			DelList(Seed,x,y);
 			printf("Ada musuh muncul!");
 		}
 		else if (Elmt(*M,x,y) == 4){
 			// Boss Battle Proc
+			DelList(Seed,x,y);
+			printf("Ada musuh muncul!");
 		}
 }
 
