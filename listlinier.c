@@ -3,30 +3,18 @@
 /* Representasi address dengan pointer */
 /* infotype adalah integer */
 
-#include "boolean.h"
+#include "listlinier.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 #define Nil NULL
 
-typedef int infotype;
-typedef struct tElmtlist *address;
-typedef struct tElmtlist {
-	infotype info;
-	address next;
-} ElmtList;
-typedef struct {
-	address First;
-} List;
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
 /* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
 /* Elemen terakhir list : jika addressnya Last, maka Next(Last)=Nil */
 
-#define Info(P) (P)->info
-#define Next(P) (P)->next
-#define First(L) ((L).First)
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
