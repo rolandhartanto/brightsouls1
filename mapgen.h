@@ -12,7 +12,7 @@
 #include "point.h"
 
 #define MaxN 20
-#define MinPath 60
+#define MinPath 80
 
 void nextBlock(int * xa, int * ya, int x, int y, int c);
 

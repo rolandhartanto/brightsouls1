@@ -2,7 +2,8 @@
 #include "scene.h"
 
 int main(){
-	Title();
+	//Title();
+	Overworld();
 
 	return 0;
 }

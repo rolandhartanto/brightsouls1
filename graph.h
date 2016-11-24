@@ -4,29 +4,30 @@
 #define graph_H
 
 #include "boolean.h"
+#include "listlinier.h"
 
 #define Nil NULL
 
 /* Definisi Type Data */
-typedef int infotype;
-typedef struct tElmtlist *address;
-typedef struct tElmtlistP *addrPeta;
-typedef struct tElmtlist { 
+typedef List infotype;
+typedef struct tElmtGraph *address;
+typedef struct tElmtGraphP *addrPeta;
+typedef struct tElmtGraph {
 	infotype info;
 	address next;
 	address prev;
 	addrPeta FirstJalur;/*titik pertama pada jalur peta*/
-} ElmtList;
+} ElmtGraph;
 /*list yang berisi elemen jalur peta*/
-typedef struct tElmtlistP { 
+typedef struct tElmtGraphP {
 	infotype infoP;
 	addrPeta nextP;
-} ElmtListP;
+} ElmtGraphP;
 
 typedef struct {
 	address First;
 	address Last;
-} List;
+} Graph;
 
 #define Info(P) (P)->info
 #define Next(P) (P)->next

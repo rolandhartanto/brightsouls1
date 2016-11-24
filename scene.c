@@ -30,10 +30,11 @@ void Overworld(){
 
     // Buat prosedur load to map;
     GenerateNewMap(&Seed, &x, &y);					//Initialize first map
-
+    printf("x %d y %d\n",x,y);
     Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
     Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
-
+    PrintInfo(Seed);
+    printf("\n");
     PrintMap(Seed,CurPos,&M);
     while (!stop){
 
@@ -54,7 +55,6 @@ void Overworld(){
         ClearScreen();
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
             GenerateNextMap(&Seed,&x,&y);
-
             Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
             Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
         }

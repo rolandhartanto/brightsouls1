@@ -5,7 +5,7 @@
 
 
 #define MaxN 20
-#define MinPath 60
+#define MinPath 80
 
 void nextBlock(int * xa, int * ya, int x, int y, int c) {
 	if (c == 0){
@@ -53,25 +53,21 @@ void GenerateStart(int * x, int * y){
 	}
     while(a == b);
 
-
-	if (c == 0){				//
-		*x = a;					//
+		*x = a;					//	set starting point
 		*y = b;					//
-	}							//	Set starting point
-	else if(c == 1){			//  based on c
-		*x = b;					//
-		*y = a;					//
-	}							//
-
 }
 
 void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 	int count,prev,prev2,prevc;
-	int xa,ya,x,y,a,b;
+	int xa,ya,x,y,a,b,d;
 	int lc,llc,c;
 	double start,end;
 	boolean exit,finish;
 	MATRIKS map;
+	List encounter;
+	address P;
+
+	CreateEmpty (&encounter);
 
 	*fail = false;
 	MakeMATRIKS(MaxN,MaxN,&map);//
@@ -115,6 +111,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 				*fail = true;
 				break;
 			}
+			d = rand() % 200;
 			if(PathOK(map, xa, ya, x, y, c, count,prev2) && Elmt(map,xa,ya) == 3 && (xa<=MaxN && xa>=1) && (ya<=MaxN && ya>=1)){
 				//printf("%d : %d, %d",c,xa,ya); // DEBUGGER
 				//printf(" accept V\n"); // DEBUGGER
@@ -129,8 +126,25 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 		}
 
 		count++;
-		Elmt(map,xa,ya)=0;
+
+
+		if(d >= 20 && d <= 29){
+			InsVLast(&encounter,99);
+			InsVLast(&encounter,xa);
+			InsVLast(&encounter,ya);
+		}
+		else if( d >= 45 && d <= 54){
+			InsVLast(&encounter,98);
+			InsVLast(&encounter,x);
+			InsVLast(&encounter,y);
+		}
+		else{
+			Elmt(map,xa,ya)=0;
+		}
 		InsVLast(Seed,c);
+
+
+
 		x = xa;
 		y = ya;
 
@@ -140,6 +154,12 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			finish = true;
 		}
 	} while(!finish);
+
+	P = First(*Seed);
+	while(Next(P) != Nil){
+		P = Next(P);
+	}
+	Next(P) = First(encounter);
 }
 
 void CountNextStart(int * xs, int * ys){
@@ -242,6 +262,7 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 	int xs,ys,x,y,c,a,b;
 	address P;
 
+
 	a = xs;
 	b = ys;
 
@@ -260,12 +281,27 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 
 	while(P != Nil){
 		c = Info(P);
-		nextBlock(&x,&y,xs,ys,c);
-		Elmt(*map,x,y)=0;
-		xs = x;
-		ys = y;
-
-		P = Next(P);
+		//printf("asd");
+		if(c == 98){
+			x = Info(Next(P));
+			y = Info(Next(Next(P)));
+			P = Next(Next(Next(P)));
+			Elmt(*map,x,y)=1;
+		}
+		else if(c == 99){
+			x = Info(Next(P));
+			y = Info(Next(Next(P)));
+			P = Next(Next(Next(P)));
+			Elmt(*map,x,y)=2;
+		}
+		else{
+			nextBlock(&x,&y,xs,ys,c);
+			Elmt(*map,x,y)=0;
+			xs = x;
+			ys = y;
+			P = Next(P);
+		}
+		//printf("x : %d y: %d\n",x,y);
 	}
 	TulisMap(*map,Pos);
 }

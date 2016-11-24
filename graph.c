@@ -1,5 +1,6 @@
 /*ADT Graph dengan representasi list of list*/
 
+
 #include "graph.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,13 +8,13 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L)
+boolean IsEmptyGraph (Graph L)
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 {
 	return((First(L)==Nil)&&(Last(L)==Nil));
 }
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L)
+void CreateEmptyGraph (Graph *L)
 /* I.S. L sembarang  */
 /* F.S. Terbentuk list kosong. Lihat definisi di atas. */
 {
@@ -21,14 +22,14 @@ void CreateEmpty (List *L)
 	Last(*L)=Nil;
 }
 /****************** Manajemen Memori ******************/
-address Alokasi (infotype X)
+address AlokasiGraph (infotype X)
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil. */
 /* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=Nil, Prev(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil. */
 {
 	address P;
-	P = (address) malloc (sizeof(ElmtList));
+	P = (address) malloc (sizeof(ElmtGraph));
 
 	if(P!=Nil){
 		Info(P) = X;
@@ -40,7 +41,7 @@ address Alokasi (infotype X)
 		return Nil;
 	}
 }
-void Dealokasi (address P)
+void DealokasiGraph (address P)
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
@@ -48,7 +49,7 @@ void Dealokasi (address P)
 	free(P);
 }
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address Search (List L, infotype X)
+address SearchGraph (Graph L, infotype X)
 /* Mencari apakah ada elemen list dengan Info(P)=X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -72,16 +73,16 @@ address Search (List L, infotype X)
 }
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN JALUR ***/
-void InsertJalur(address *P, addrPeta LJ){
+void InsertJalurGraph(address *P, addrPeta LJ){
 	FirstJ(*P) = LJ;
 }
 
-void DelJalur(address *P, addrPeta LJ){
+void DelJalurGraph(address *P, addrPeta LJ){
 	FirstJ(*P) = Nil;
 }
 
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, infotype X)
+void InsVFirstGraph (Graph *L, infotype X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
@@ -99,7 +100,7 @@ void InsVFirst (List *L, infotype X)
 		}
 	}
 }
-void InsVLast (List *L, infotype X)
+void InsVLast (Graph *L, infotype X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -119,8 +120,8 @@ void InsVLast (List *L, infotype X)
 	}
 }
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, infotype *X)
-/* I.S. List L tidak kosong  */
+void DelVFirst (Graph *L, infotype *X)
+/* I.S. Graph L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
 {
@@ -138,7 +139,7 @@ void DelVFirst (List *L, infotype *X)
 	}
 	Dealokasi(P);
 }
-void DelVLast (List *L, infotype *X)
+void DelVLast (Graph *L, infotype *X)
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -160,7 +161,7 @@ void DelVLast (List *L, infotype *X)
 }
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, address P)
+void InsertFirst (Graph *L, address P)
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
 {
@@ -173,7 +174,7 @@ void InsertFirst (List *L, address P)
 		First(*L) = P;
 	}
 }
-void InsertLast (List *L, address P)
+void InsertLast (Graph *L, address P)
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 {
@@ -185,7 +186,7 @@ void InsertLast (List *L, address P)
 		Last(*L) = P;
 	}
 }
-void InsertAfter (List *L, address P, address Prec)
+void InsertAfter (Graph *L, address P, address Prec)
 /* I.S. Prec pastilah elemen list; P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
 {
@@ -199,7 +200,7 @@ void InsertAfter (List *L, address P, address Prec)
 	}
 
 }
-void InsertBefore (List *L, address P, address Succ)
+void InsertBefore (Graph *L, address P, address Succ)
 /* I.S. Succ pastilah elemen list; P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sebelum elemen beralamat Succ */
 {
@@ -214,8 +215,8 @@ void InsertBefore (List *L, address P, address Succ)
 
 }
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List *L, address *P)
-/* I.S. List tidak kosong */
+void DelFirst (Graph *L, address *P)
+/* I.S. Graph tidak kosong */
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
@@ -231,8 +232,8 @@ void DelFirst (List *L, address *P)
 	}
 	Next(*P)= Nil;
 }
-void DelLast (List *L, address *P)
-/* I.S. List tidak kosong */
+void DelLast (Graph *L, address *P)
+/* I.S. Graph tidak kosong */
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen pertama yg lama, jika ada */
@@ -248,12 +249,12 @@ void DelLast (List *L, address *P)
 	}
 	Prev(*P)= Nil;
 }
-void DelP (List *L, infotype X)
+void DelP (Graph *L, infotype X)
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* maka P dihapus dari list dan didealokasi */
 /* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
-/* List mungkin menjadi kosong karena penghapusan */
+/* Graph mungkin menjadi kosong karena penghapusan */
 {
 	//assert(!IsEmpty(*L));
 	address P,Q;
@@ -276,8 +277,8 @@ void DelP (List *L, infotype X)
 		Dealokasi(P);
 	}
 }
-void DelAfter (List *L, address *Pdel, address Prec)
-/* I.S. List tidak kosong. Prec adalah anggota list. */
+void DelAfter (Graph *L, address *Pdel, address Prec)
+/* I.S. Graph tidak kosong. Prec adalah anggota list. */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
 {
@@ -294,8 +295,8 @@ void DelAfter (List *L, address *Pdel, address Prec)
 	Next(*Pdel)=Nil;
 	Prev(*Pdel)=Nil;
 }
-void DelBefore (List *L, address *Pdel, address Succ)
-/* I.S. List tidak kosong. Succ adalah anggota list. */
+void DelBefore (Graph *L, address *Pdel, address Succ)
+/* I.S. Graph tidak kosong. Succ adalah anggota list. */
 /* F.S. Menghapus Prev(Succ): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
 {
@@ -313,8 +314,8 @@ void DelBefore (List *L, address *Pdel, address Succ)
 	Prev(*Pdel)= Nil;
 }
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintForward (List L)
-/* I.S. List mungkin kosong */
+void PrintForward (Graph L)
+/* I.S. Graph mungkin kosong */
 /* F.S. Jika list tidak kosong, isi list dicetak dari elemen pertama */
 /* ke elemen terakhir secara horizontal ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
@@ -337,8 +338,8 @@ void PrintForward (List L)
 		printf("]");
 	}
 }
-void PrintBackward (List L)
-/* I.S. List mungkin kosong */
+void PrintBackward (Graph L)
+/* I.S. Graph mungkin kosong */
 /* F.S. Jika list tidak kosong, isi list dicetak dari elemen terakhir */
 /* ke elemen pertama secara horizontal ke kanan: [en,en-1,...,e2,e1] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [30,20,1] */
