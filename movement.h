@@ -2,17 +2,10 @@
 #define MOVEMENT_H
 
 #include <stdio.h>
+#include "mapgen.h"
 #include "matriks.h"
+#include "point.h"
 #include "boolean.h"
-
-typedef struct {
-	float X; /* absis   */
-	float Y; /* ordinat */
-} POINT;
-
-#define Absis(P) (P).X
-#define Ordinat(P) (P).Y
-
 /*
 	NOTES
 	0 = Empty Space
@@ -22,7 +15,7 @@ typedef struct {
 	4 = Boss
 
 */
-void EncounterCheck(int x, int y);
+void EncounterCheck(MATRIKS * M, int x, int y);
 
 void GoUp(MATRIKS * M, POINT * CurPos);
 

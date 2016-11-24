@@ -1,5 +1,6 @@
 /*ADT GUI*/
 #include "ADTgui.h"
+#include "scene.h"
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -150,6 +151,7 @@ void printStartGame(char a[],int *s)
 	}else{
 		printf("Selamat bermain %s!\n",a);
 		*s = 1;
+        Overworld();
 	}
 
 }

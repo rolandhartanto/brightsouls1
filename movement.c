@@ -1,15 +1,5 @@
 #include <stdio.h>
-#include "matriks.h"
-#include "boolean.h"
-
-typedef struct {
-	float X; /* absis   */
-	float Y; /* ordinat */
-} POINT;
-
-/* *** Notasi Akses: Selektor POINT *** */
-#define Absis(P) (P).X
-#define Ordinat(P) (P).Y
+#include "movement.h"
 
 /*
 	NOTES

@@ -3,23 +3,16 @@
 #ifndef MAPGEN_H
 #define MAPGEN_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "listlinier.h"
 #include "boolean.h"
+#include "matriks.h"
+#include "point.h"
 
-/* Ukuran minimum dan maksimum baris dan kolom */
-#define BrsMin 1
-#define BrsMax 100
-#define KolMin 1
-#define KolMax 100
-
-typedef int indeks; /* indeks baris, kolom */
-typedef int ElType;
-typedef struct {
-	ElType Mem[BrsMax+1][KolMax+1];
-    int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
-	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
-} MATRIKS;
-
-void MakeMATRIKS (int NB, int NK, MATRIKS * M);
+#define MaxN 20
+#define MinPath 80
 
 void nextBlock(int * xa, int * ya, int x, int y, int c);
 
