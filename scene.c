@@ -7,7 +7,7 @@
 Graph Map;
 List Seed;
 POINT CurPos;
-
+addressg CurMap;
 void Title(){
     char name[11]={0};
 
@@ -26,23 +26,27 @@ void Title(){
 }
 
 void InitGame(){
-    CreateEmptyGraph(&G)
+    CreateEmptyGraph(&G);
     GenerateNewMap(&Seed, &x, &y);					//Initialize first map
     Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
     Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
+    InsVFirstGraph(&G,Seed);
+    CurMap = First(G);
 }
 
 void Overworld(){
     char input;
-    int x,y,i;
+    int x,y,i,xs,ys;
     boolean stop;
     MATRIKS M;
 
     // Buat prosedur load to map;
     InitGame();
     PrintMap(Seed,CurPos,&M);
-    while (!stop){
 
+    while (!stop){
+		xs = Info(First(Seed));
+		ys = Info(Next(First(Seed)));
         printf("\n");
         scanf("%c",&input);
         if(input == 'W'){ //UP
@@ -59,9 +63,19 @@ void Overworld(){
         }
         ClearScreen();
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
-            GenerateNextMap(&Seed,&x,&y);
-            Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
-            Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
+			if (Absis(CurPos) == xs && Ordinat(CurPos) == ys){
+				CurMap = Prev(G);
+				Seed = Info(CurMap);
+			}
+			else{
+				if(Next(CurMap) == Nil){
+	        	    GenerateNextMap(&Seed,&x,&y);
+    	    	    Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
+    	    	    Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
+    	    	    InsVLastGraph(&G,Seed);
+    	    	    CurMap = Next(CurMap);
+    	    	}
+        	}
         }
         PrintMap(Seed,CurPos,&M);
     }

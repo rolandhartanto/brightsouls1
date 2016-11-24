@@ -22,14 +22,14 @@ void CreateEmptyGraph (Graph *L)
 	Last(*L)=Nil;
 }
 /****************** Manajemen Memori ******************/
-address AlokasiGraph (infotype X)
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil. */
+addressg AlokasiGraph (infotypeg X)
+/* Mengirimkan addressg hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addressg tidak nil. */
 /* Misalnya: menghasilkan P, maka Info(P)=X, Next(P)=Nil, Prev(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil. */
 {
-	address P;
-	P = (address) malloc (sizeof(ElmtGraph));
+	addressg P;
+	P = (addressg) malloc (sizeof(ElmtGraph));
 
 	if(P!=Nil){
 		Info(P) = X;
@@ -41,20 +41,20 @@ address AlokasiGraph (infotype X)
 		return Nil;
 	}
 }
-void DealokasiGraph (address P)
+void DealokasiGraph (addressg P)
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
+/* Melakukan dealokasi/pengembalian addressg P */
 {
 	free(P);
 }
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address SearchGraph (Graph L, infotype X)
+addressg SearchGraph (Graph L, infotypeg X)
 /* Mencari apakah ada elemen list dengan Info(P)=X */
-/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika ada, mengirimkan addressg elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 {
-	address P;
+	addressg P;
 	P = First(L);
 	boolean found = false;
 	while((P!=Nil)&&(!found)){
@@ -73,21 +73,21 @@ address SearchGraph (Graph L, infotype X)
 }
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN JALUR ***/
-void InsertJalurGraph(address *P, addrPeta LJ){
+void InsertJalurGraph(addressg *P, addrPeta LJ){
 	FirstJ(*P) = LJ;
 }
 
-void DelJalurGraph(address *P, addrPeta LJ){
+void DelJalurGraph(addressg *P, addrPeta LJ){
 	FirstJ(*P) = Nil;
 }
 
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirstGraph (Graph *L, infotype X)
+void InsVFirstGraph (Graph *L, infotypeg X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
 {
-	address P;
+	addressg P;
 	P = Alokasi(X);
 	if(P!=Nil){
 		if(IsEmptyGraph(*L)){
@@ -100,13 +100,13 @@ void InsVFirstGraph (Graph *L, infotype X)
 		}
 	}
 }
-void InsVLastGraph (Graph *L, infotype X)
+void InsVLastGraph (Graph *L, infotypeg X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
-	address P;
+	addressg P;
 	P = Alokasi(X);
 	if(P!=Nil){
 		if(IsEmptyGraph(*L)){
