@@ -2,6 +2,11 @@
 #include "mapgen.h"
 #include "movement.h"
 #include "ADTgui.h"
+#include "graph.h"
+
+Graph Map;
+List Seed;
+POINT CurPos;
 
 void Title(){
     char name[11]={0};
@@ -20,21 +25,21 @@ void Title(){
     }
 }
 
+void InitGame(){
+    CreateEmptyGraph(&G)
+    GenerateNewMap(&Seed, &x, &y);					//Initialize first map
+    Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
+    Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
+}
+
 void Overworld(){
     char input;
-    List Seed;
     int x,y,i;
-    POINT CurPos;
     boolean stop;
     MATRIKS M;
 
     // Buat prosedur load to map;
-    GenerateNewMap(&Seed, &x, &y);					//Initialize first map
-    printf("x %d y %d\n",x,y);
-    Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
-    Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
-    PrintInfo(Seed);
-    printf("\n");
+    InitGame();
     PrintMap(Seed,CurPos,&M);
     while (!stop){
 

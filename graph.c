@@ -8,7 +8,7 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmptyGraph (Graph L)
+boolean IsEmptyGraphGraph (Graph L)
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 {
 	return((First(L)==Nil)&&(Last(L)==Nil));
@@ -90,7 +90,7 @@ void InsVFirstGraph (Graph *L, infotype X)
 	address P;
 	P = Alokasi(X);
 	if(P!=Nil){
-		if(IsEmpty(*L)){
+		if(IsEmptyGraph(*L)){
 			First(*L) = P;
 			Last(*L) = P;
 		}else{
@@ -100,7 +100,7 @@ void InsVFirstGraph (Graph *L, infotype X)
 		}
 	}
 }
-void InsVLast (Graph *L, infotype X)
+void InsVLastGraph (Graph *L, infotype X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -109,7 +109,7 @@ void InsVLast (Graph *L, infotype X)
 	address P;
 	P = Alokasi(X);
 	if(P!=Nil){
-		if(IsEmpty(*L)){
+		if(IsEmptyGraph(*L)){
 			First(*L) = P;
 			Last(*L) = P;
 		}else{
@@ -117,248 +117,5 @@ void InsVLast (Graph *L, infotype X)
 			Prev(P)=Last(*L);
 			Last(*L) = P;
 		}
-	}
-}
-/*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (Graph *L, infotype *X)
-/* I.S. Graph L tidak kosong  */
-/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen pertama di-dealokasi */
-{
-	//assert(!IsEmpty(*L));
-	address P;
-	P = First(*L);
-	*X = Info(P);
-	if((First(*L)==Last(*L))&&(First(*L)!=Nil)){
-		Last(*L) = Nil;
-		First(*L) = Nil;
-	}else{
-		First(*L)=Next(P);
-		Next(P) = Nil;
-		Prev(First(*L)) = Nil;
-	}
-	Dealokasi(P);
-}
-void DelVLast (Graph *L, infotype *X)
-/* I.S. list tidak kosong */
-/* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen terakhir di-dealokasi */
-{
-	//assert(!IsEmpty(*L));
-	address P;
-	*X = Info(Last(*L));
-
-	P = Last(*L);
-	if((First(*L)==Last(*L))&&(First(*L)!=Nil)){
-		Last(*L) = Nil;
-		First(*L) = Nil;
-	}else{
-		Last(*L) = Prev(P);
-		Prev(P) = Nil;
-		Next(Last(*L)) = Nil;
-	}
-	Dealokasi(P);
-}
-/****************** PRIMITIF BERDASARKAN ALAMAT ******************/
-/*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (Graph *L, address P)
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
-{
-	if(IsEmpty(*L)){
-		First(*L) = P;
-		Last(*L) = P;
-	}else{
-		Next(P) = First(*L);
-		Prev(First(*L)) = P;
-		First(*L) = P;
-	}
-}
-void InsertLast (Graph *L, address P)
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. P ditambahkan sebagai elemen terakhir yang baru */
-{
-	if(IsEmpty(*L)){
-		InsertFirst(L,P);
-	}else{
-		Prev(P) = Last(*L);
-		Next(Last(*L)) = P;
-		Last(*L) = P;
-	}
-}
-void InsertAfter (Graph *L, address P, address Prec)
-/* I.S. Prec pastilah elemen list; P sudah dialokasi  */
-/* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-{
-	if(Prec == Last(*L)){
-		InsertLast(L,P);
-	}else{
-		Next(P) = Next(Prec);
-		Prev(Next(Prec)) = P;
-		Prev(P) = Prec;
-		Next(Prec) = P;
-	}
-
-}
-void InsertBefore (Graph *L, address P, address Succ)
-/* I.S. Succ pastilah elemen list; P sudah dialokasi  */
-/* F.S. Insert P sebagai elemen sebelum elemen beralamat Succ */
-{
-	if(Succ == First(*L)){
-		InsertFirst(L,P);
-	}else{
-		Prev(P) = Prev(Succ);
-		Next(Prev(Succ)) = P;
-		Next(P) = Succ;
-		Prev(Succ) = P;
-	}
-
-}
-/*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (Graph *L, address *P)
-/* I.S. Graph tidak kosong */
-/* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* First element yg baru adalah suksesor elemen pertama yang lama */
-{
-	//assert(!IsEmpty(*L));
-	*P = First(*L);
-	if((First(*L)==Last(*L))&&(First(*L)!=Nil)){
-		Last(*L) = Nil;
-		First(*L) = Nil;
-	}else{
-		First(*L) = Next(First(*L));
-		Prev(First(*L)) = Nil;
-	}
-	Next(*P)= Nil;
-}
-void DelLast (Graph *L, address *P)
-/* I.S. Graph tidak kosong */
-/* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* Last element baru adalah predesesor elemen pertama yg lama, jika ada */
-{
-	//assert(!IsEmpty(*L));
-	*P = Last(*L);
-	if((First(*L)==Last(*L))&&(First(*L)!=Nil)){
-		Last(*L) = Nil;
-		First(*L) = Nil;
-	}else{
-		Last(*L) = Prev(Last(*L));
-		Next(Last(*L)) = Nil;
-	}
-	Prev(*P)= Nil;
-}
-void DelP (Graph *L, infotype X)
-/* I.S. Sembarang */
-/* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
-/* maka P dihapus dari list dan didealokasi */
-/* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
-/* Graph mungkin menjadi kosong karena penghapusan */
-{
-	//assert(!IsEmpty(*L));
-	address P,Q;
-	P = Search(*L,X);
-	if(P!=Nil){
-		if((First(*L)==Last(*L))&&(First(*L)!=Nil)){
-			Last(*L) = Nil;
-			First(*L) = Nil;
-		}else{
-			if(P == First(*L)){
-				DelFirst(L,&P);
-			}else if(P == Last(*L)){
-				DelLast(L,&P);
-			}else{
-				address Q = Prev(P);
-				DelAfter(L,&P,Q);
-			}
-
-		}
-		Dealokasi(P);
-	}
-}
-void DelAfter (Graph *L, address *Pdel, address Prec)
-/* I.S. Graph tidak kosong. Prec adalah anggota list. */
-/* F.S. Menghapus Next(Prec): */
-/*      Pdel adalah alamat elemen list yang dihapus  */
-{
-	//assert(!IsEmpty(*L));
-	*Pdel = Next(Prec);
-	address Q;
-	if(*Pdel == Last(*L)){
-		DelLast(L,Pdel);
-	}else{
-		Next(Prec)=Next(Next(Prec));
-		Q = Next(Prec);
-		Prev(Q) = Prec;
-	}
-	Next(*Pdel)=Nil;
-	Prev(*Pdel)=Nil;
-}
-void DelBefore (Graph *L, address *Pdel, address Succ)
-/* I.S. Graph tidak kosong. Succ adalah anggota list. */
-/* F.S. Menghapus Prev(Succ): */
-/*      Pdel adalah alamat elemen list yang dihapus  */
-{
-	//assert(!IsEmpty(*L));
-	*Pdel = Prev(Succ);
-	address Q;
-	if(*Pdel == First(*L)){
-		DelFirst(L,Pdel);
-	}else{
-		Prev(Succ)=Prev(Prev(Succ));
-		Q = Prev(Succ);
-		Next(Q) = Succ;
-	}
-	Next(*Pdel)= Nil;
-	Prev(*Pdel)= Nil;
-}
-/****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintForward (Graph L)
-/* I.S. Graph mungkin kosong */
-/* F.S. Jika list tidak kosong, isi list dicetak dari elemen pertama */
-/* ke elemen terakhir secara horizontal ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-{
-	if(IsEmpty(L)){
-		printf("[]");
-	}else{
-		address P;
-		P = First(L);
-		printf("[");
-		while(P!=Nil){
-			printf("%d",Info(P));
-			if(P!=Last(L)){
-				printf(",");
-			}
-			P = Next(P);
-		}
-		printf("]");
-	}
-}
-void PrintBackward (Graph L)
-/* I.S. Graph mungkin kosong */
-/* F.S. Jika list tidak kosong, isi list dicetak dari elemen terakhir */
-/* ke elemen pertama secara horizontal ke kanan: [en,en-1,...,e2,e1] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [30,20,1] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-{
-	if(IsEmpty(L)){
-		printf("[]");
-	}else{
-		address P;
-		P = Last(L);
-		printf("[");
-		while(P!=Nil){
-			printf("%d",Info(P));
-			if(P!=First(L)){
-				printf(",");
-			}
-			P = Prev(P);
-		}
-		printf("]");
 	}
 }
