@@ -13,6 +13,7 @@
 
 #define MaxN 20
 #define MinPath 80
+#define chance 500
 
 void nextBlock(int * xa, int * ya, int x, int y, int c);
 

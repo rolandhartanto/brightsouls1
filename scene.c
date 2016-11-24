@@ -40,6 +40,7 @@ void InitGame(){
     yfirst = y;
 }
 
+
 void Overworld(){
     char input;
     int x,y,i,xs,ys,xe,ye;
@@ -55,17 +56,18 @@ void Overworld(){
         printf("\n");
         scanf("%c",&input);
         if(input == 'W'){ //UP
-            GoLeft(&M,&CurPos);
+            GoLeft(&M,&CurPos,&Seed);
         }
         else if(input == 'S'){ //DOWN
-            GoRight(&M,&CurPos);
+            GoRight(&M,&CurPos,&Seed);
         }
         else if(input == 'A'){ //LEFT
-            GoDown(&M,&CurPos);
+            GoDown(&M,&CurPos,&Seed);
         }
         else if(input == 'D'){ //RIGHT
-            GoUp(&M,&CurPos);
+            GoUp(&M,&CurPos,&Seed);
         }
+        
         ClearScreen();
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
             xs = Info(First(Seed));

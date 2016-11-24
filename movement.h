@@ -15,15 +15,17 @@
 	4 = Boss
 
 */
-void EncounterCheck(MATRIKS * M, int x, int y);
+void DelList(List * L,int x, int y);
 
-void GoUp(MATRIKS * M, POINT * CurPos);
+void EncounterCheck(List * Seed, MATRIKS * M, int x, int y);
 
-void GoDown(MATRIKS * M, POINT * CurPos);
+void GoUp(MATRIKS * M, POINT * CurPos, List * Seed);
 
-void GoLeft(MATRIKS * M, POINT * CurPos);
+void GoDown(MATRIKS * M, POINT * CurPos, List * Seed);
 
-void GoRight(MATRIKS * M, POINT * CurPos);
+void GoLeft(MATRIKS * M, POINT * CurPos, List * Seed);
+
+void GoRight(MATRIKS * M, POINT * CurPos, List * Seed);
 
 
 #endif

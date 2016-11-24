@@ -6,6 +6,7 @@
 
 #define MaxN 20
 #define MinPath 80
+#define chance 500
 
 void nextBlock(int * xa, int * ya, int x, int y, int c) {
 	if (c == 0){
@@ -111,7 +112,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 				*fail = true;
 				break;
 			}
-			d = rand() % 200;
+			d = rand() % chance;
 			if(PathOK(map, xa, ya, x, y, c, count,prev2) && Elmt(map,xa,ya) == 3 && (xa<=MaxN && xa>=1) && (ya<=MaxN && ya>=1)){
 				//printf("%d : %d, %d",c,xa,ya); // DEBUGGER
 				//printf(" accept V\n"); // DEBUGGER
@@ -122,6 +123,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 				xa = x;				// Reset xa
 				ya = y;				// Reset ya
 				//printf(" reject\n"); // DEBUGGER
+
 			}
 		}
 
@@ -133,8 +135,13 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			InsVLast(&encounter,xa);
 			InsVLast(&encounter,ya);
 		}
-		else if( d >= 45 && d <= 54){
+		else if( d >= 45 && d <= 53){
 			InsVLast(&encounter,98);
+			InsVLast(&encounter,x);
+			InsVLast(&encounter,y);
+		}
+		else if( d==100){
+			InsVLast(&encounter,100);
 			InsVLast(&encounter,x);
 			InsVLast(&encounter,y);
 		}
@@ -236,6 +243,9 @@ void TulisMap (MATRIKS M, POINT Pos){
 				else if(Elmt(M,i,j)==3){
 					printf("#");
         		}
+				else if(Elmt(M,i,j)==4){
+					printf("B");
+        		}
 			}
 		}
 		if (i == Absis(Pos) && j == Ordinat(Pos)){
@@ -253,6 +263,9 @@ void TulisMap (MATRIKS M, POINT Pos){
 			}
 			else if(Elmt(M,i,j)==3){
 				printf("#\n");
+			}
+			else if(Elmt(M,i,j)==4){
+				printf("B\n");
 			}
 		}
     }
@@ -294,6 +307,12 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 			P = Next(Next(Next(P)));
 			Elmt(*map,x,y)=2;
 		}
+		else if(c == 100){
+			x = Info(Next(P));
+			y = Info(Next(Next(P)));
+			P = Next(Next(Next(P)));
+			Elmt(*map,x,y)=4;
+		}
 		else{
 			nextBlock(&x,&y,xs,ys,c);
 			Elmt(*map,x,y)=0;
@@ -304,4 +323,5 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 		//printf("x : %d y: %d\n",x,y);
 	}
 	TulisMap(*map,Pos);
+	//PrintInfo(Seed);
 }
