@@ -1,7 +1,9 @@
+
+
 #ifndef SCENE_H
 #define SCENE_H
 
-extern Player P;
+//extern Player P;
 
 
 void Title();

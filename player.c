@@ -1,31 +1,8 @@
 /*MODUL PLAYER*/
+#include "player.h"
+#include <math.h>
 /* Berisi definisi dan semua primitif pemrosesan pada karakteristik (profile) pemain */
 
-#define NMaxInventory 100 // definisi untuk jumlah inventory maksimal = 100
-#define HPMax 100 //definisi HPMax adalah HP yang bernilai 100
-#define HPMin 0 //definisi HPMin adalah HP yang bernilai 0
-#define BaseHP 100
-#define BaseLevel 1
-#define BaseExp 0
-#define BaseStr 10
-#define BaseDef 10
-#define BaseNext 10
-#define BaseSkillPoint 0
-
-/*Definisi koleksi elemen dan objek dari player*/
-typedef int ItemID;
-typedef struct{
-	int Inventory[NMaxInventory+1];
-	char Nama[20];
-	int NeffInventory;
-	int HP;
-	int Level;
-	int Exp;
-	int Str;
-	int Def;
-	int Next;
-	int SkillPoint;
-}Player;
 
 /*Selektor*/
 #define Inventory(P,i) 		(P).Inventory[(i)]
@@ -40,9 +17,6 @@ typedef struct{
 #define SkillPoint(P)		(P).SkillPoint
 #define Nama(P)				(P).Nama
 
-
-#include "player.h"
-#include <math.h>
 
 
 /*Konstruktor*/

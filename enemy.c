@@ -1,27 +1,19 @@
-#include <stdio.h>
-#include "boolean.h"
-#include "array.h"
 
-typedef struct{
-	char name[20];
-	int hp;
-	int exp;
-	int str;
-	int def;
-	int drop;
-	int prob;
-	boolean boss;
-} Enemy;
+#include "enemy.h"
 
-#define NamaE(E) (E).name
-#define HPE(E) (E).hp
-#define EXPE(E) (E).exp
-#define STRE(E) (E).str
-#define DEFE(E) (E).def
-#define DropE(E) (E).drop
-#define ProbE(E) (E).prob
-#define Boss(E) (E).boss
 
-#define BaseEHP 10
-#define BaseESTR 3
-#define BaseEDEF 2
+void initEnemy(Enemy * E, int mapcount, boolean boss){
+	if (!boss){
+		HPE(*E) = BaseEHP + (mapcount * 4);
+		STRE(*E) = BaseESTR + (mapcount * 4);
+		DEFE(*E) = BaseEDEF + (mapcount * 4);
+		EXP(*E) = rand() % (8+(mapcount * 2));
+	}
+	else{
+		HPE(*E) = ((BaseEHP * 3) / 2) + (mapcount * 7);
+		STRE(*E) = (BaseESTR * 2) + (mapcount * 5);
+		DEFE(*E) = (BaseEDEF * 2) + (mapcount * 5);
+		EXP(*E) = rand() % ((BaseEExp * 2)+(mapcount * 3));
+	}
+
+}

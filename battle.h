@@ -1,9 +1,12 @@
+//#include "array.h"
 #include "queue.h"
 #include "boolean.h"
 #include <stdio.h>
 #include <string.h>
 #include "mesinkata.h"
 #include "stackofq.h"
+#include "enemy.h"
+#include "player.h"
 
 typedef struct{
 	char cmd[5];

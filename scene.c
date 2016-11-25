@@ -1,10 +1,10 @@
+#include "scene.h"
 #include <stdio.h>
 #include "mapgen.h"
 #include "movement.h"
 #include "ADTgui.h"
 #include "graph.h"
-#include "player.h"
-
+#include "battle.h"
 
 Graph G;
 List Seed;
@@ -12,6 +12,7 @@ POINT CurPos;
 addressg CurMap;
 int xfirst,yfirst;
 
+extern Player P;
 Player P;
 
 void Title(){
@@ -54,9 +55,12 @@ void Overworld(){
     int x,y,i,xs,ys,xe,ye;
     boolean stop;
     MATRIKS M;
+    int mapcount;
+    Enemy E;
 
     // Buat prosedur load to map;
     InitGame();
+    mapcount = 1;
 	ClearScreen();
     // Controls GUI Generation for first print
     printf(    "_________________________________________________________________________________________________\n\n");
@@ -123,6 +127,7 @@ void Overworld(){
     	    	    Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
     	    	    InsVLastGraph(&G,Seed);
     	    	    CurMap = Next(CurMap);
+                    mapcount++;
     	    	}
                 else{ //Goto next
                     CurMap = Next(CurMap);
@@ -143,6 +148,7 @@ void Overworld(){
 		printf(    "_________________________________________________________________________________________________\n\n");
 		if (ItemFlag){
 			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
+            HP(P) += 10;
 			ItemFlag = false;
 		}
 		else if(EnemyFlag){
