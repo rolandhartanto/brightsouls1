@@ -93,7 +93,7 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0;
 		}
 		else if (P == 'F'){
-			dmg = (ATK(Pl)) * 8)/10; //FA
+			dmg = (ATK(Pl)) * 8/10; //FA
 		}
 		else if (P == 'A'){ //AB
 			dmg = 0;
