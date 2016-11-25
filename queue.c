@@ -58,9 +58,9 @@ boolean IsFullQ (Queue Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 {
-<<<<<<< HEAD
+
     return(NBElmtQ(Q)==MaxEl(Q));
-=======
+
     int nb;
     if (IsEmptyQ(Q)){
         nb = 0;
@@ -78,24 +78,7 @@ boolean IsFullQ (Queue Q)
 
 	return (MaxEl(Q) == nb);
 }
-int NBElmtQ (Queue Q)
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
-{
-    int nb;
-    if (IsEmptyQ(Q)){
-        nb = 0;
-    }
-    else{
-        if(Head(Q) > Tail(Q)){
-            nb = (Tail(Q) + MaxEl(Q)) - Head(Q) + 1 ;
-        }
-        else{
-            nb = Tail(Q) - Head(Q) + 1;
-        }
-    }
-    return nb;
->>>>>>> 31b370adcb634701e842bab958bdca0b438eb23b
-}
+
 
 
 /* *** Kreator *** */
@@ -129,7 +112,7 @@ void AddQ (Queue * Q, infotypeq X)
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 {
 	if(IsEmptyQ(*Q)){
-<<<<<<< HEAD
+
 		Head(*Q)=1;Tail(*Q)=1;
 		InfoHead(*Q)=X;
 	}else{//tidak kosong
@@ -139,13 +122,13 @@ void AddQ (Queue * Q, infotypeq X)
 			Tail(*Q)=1;
 		}
 		InfoTail(*Q)=X;
-=======
+
         Head(*Q) = 1;
     }
     Tail(*Q) += 1;
 	if (Tail(*Q)>MaxEl(*Q)){
 		Tail(*Q) = 1;
->>>>>>> 31b370adcb634701e842bab958bdca0b438eb23b
+
 	}
 }
 void DelQ (Queue * Q, infotypeq * X)
