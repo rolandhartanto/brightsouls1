@@ -7,20 +7,20 @@
 #include <stdlib.h>
 #include "boolean.h"
 
-#define Nil 0
+#define Nila 0
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
-typedef int infotype;
+typedef int infotypeq;
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-typedef struct { infotype * T;   /* tabel penyimpan elemen */
+typedef struct { infotypeq * T;   /* tabel penyimpan elemen */
                  address HEAD;  /* alamat penghapusan */
                  address TAIL;  /* alamat penambahan */
                  int MaxEl;     /* Max elemen queue */
                } Queue;
-/* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
+/* Definisi Queue kosong: HEAD=Nila; TAIL=Nila. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
@@ -35,7 +35,7 @@ typedef struct { infotype * T;   /* tabel penyimpan elemen */
 boolean IsEmptyQ (Queue Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 {
-	return (Head(Q) == Nil && Tail(Q) == Nil);
+	return (Head(Q) == Nila && Tail(Q) == Nila);
 }
 boolean IsFullQ (Queue Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
@@ -84,10 +84,10 @@ void CreateEmptyQ (Queue * Q, int Max)
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 {
-	(*Q).T = (infotype *) malloc (Max+1 * sizeof(infotype));
+	(*Q).T = (infotypeq *) malloc (Max+1 * sizeof(infotypeq));
 	MaxEl(*Q) = Max;
-    Head(*Q) = Nil;
-    Tail(*Q) = Nil;
+    Head(*Q) = Nila;
+    Tail(*Q) = Nila;
 }
 
 /* *** Destruktor *** */
@@ -101,7 +101,7 @@ void DeAlokasiQ(Queue * Q)
 }
 
 /* *** Primitif Add/Delete *** */
-void AddQ (Queue * Q, infotype X)
+void AddQ (Queue * Q, infotypeq X)
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
@@ -115,7 +115,7 @@ void AddQ (Queue * Q, infotype X)
 	}
 	InfoTail(*Q) = X;
 }
-void DelQ (Queue * Q, infotype * X)
+void DelQ (Queue * Q, infotypeq * X)
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;

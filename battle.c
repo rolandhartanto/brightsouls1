@@ -1,9 +1,4 @@
-#include "queue.h"
-#include "boolean.h"
-#include <stdio.h>
-#include <string.h>
-#include "mesinkata.h"
-#include "stackofq.h"
+
 #include "battle.h"
 
 typedef struct{
