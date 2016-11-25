@@ -9,6 +9,17 @@
 	4 = Boss
 
 */
+
+extern boolean ItemFlag;
+extern boolean EnemyFlag;
+extern boolean BossFlag;
+extern boolean WallFlag;
+
+boolean ItemFlag;
+boolean EnemyFlag;
+boolean BossFlag;
+boolean WallFlag;
+
 void DelList(List * L,int x, int y){
 	address P;
 	int i=1;
@@ -20,23 +31,23 @@ void DelList(List * L,int x, int y){
 			if((Info(Next(Next(P)))==x)&&((Info(Next(Next(Next(P))))==y))){
 				found=true;
 				while(i<=3){
-					
+
 						DelAfter(L,&temp,P);
 
 						i++;
-					
-					
-					
+
+
+
 						//next P=x
 						DelAfter(L,&temp,P);
-						
+
 						i++;
-					
+
 						DelAfter(L,&temp,P);
 						i=5;
-					
+
 				}
-				
+
 			}
 		}
 		if(!found){
@@ -50,17 +61,17 @@ void EncounterCheck(List * Seed,MATRIKS * M, int x, int y){
 		if (Elmt(*M,x,y) == 1){
 			// Inventory Add
 			DelList(Seed,x,y);
-			printf("Kamu mendapatkan barang!");
+			ItemFlag = true;
 		}
 		else if (Elmt(*M,x,y) == 2){
 			// Battle Proc
 			DelList(Seed,x,y);
-			printf("Ada musuh muncul!");
+			EnemyFlag = true;
 		}
 		else if (Elmt(*M,x,y) == 4){
 			// Boss Battle Proc
 			DelList(Seed,x,y);
-			printf("Ada musuh muncul!");
+			BossFlag = true;
 		}
 }
 
@@ -74,7 +85,7 @@ void GoUp(MATRIKS * M, POINT * CurPos, List * Seed)
 		Ordinat(*CurPos)+=1;
 	}
 	else{
-		printf("Kamu menabrak tembok");
+		WallFlag = true;
 	}
 }
 
@@ -88,7 +99,7 @@ void GoDown(MATRIKS * M, POINT * CurPos, List * Seed)
 		Ordinat(*CurPos)-=1;
 	}
 	else{
-		printf("Kamu menabrak tembok");
+		WallFlag = true;
 	}
 }
 
@@ -102,7 +113,7 @@ void GoLeft(MATRIKS * M, POINT * CurPos, List * Seed)
 		Absis(*CurPos)-=1;
 	}
 	else{
-		printf("Kamu menabrak tembok");
+		WallFlag = true;
 	}
 }
 
@@ -116,6 +127,6 @@ void GoRight(MATRIKS * M, POINT * CurPos, List * Seed)
 		Absis(*CurPos)+=1;
 	}
 	else{
-		printf("Kamu menabrak tembok");
+		WallFlag = true;
 	}
 }

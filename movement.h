@@ -15,6 +15,12 @@
 	4 = Boss
 
 */
+
+extern boolean ItemFlag;
+extern boolean EnemyFlag;
+extern boolean BossFlag;
+extern boolean WallFlag;
+
 void DelList(List * L,int x, int y);
 
 void EncounterCheck(List * Seed, MATRIKS * M, int x, int y);

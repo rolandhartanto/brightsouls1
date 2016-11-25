@@ -10,6 +10,8 @@ POINT CurPos;
 addressg CurMap;
 int xfirst,yfirst;
 
+
+
 void Title(){
     char name[11]={0};
 
@@ -46,15 +48,20 @@ void Overworld(){
     int x,y,i,xs,ys,xe,ye;
     boolean stop;
     MATRIKS M;
-
+	
     // Buat prosedur load to map;
     InitGame();
+	ClearScreen();
     PrintMap(Seed,CurPos,&M);
     x = xfirst;
     y = yfirst;
-    while (!stop){
-        printf("\n");
-        scanf("%c",&input);
+	i = 0;
+	printf("_____________________________________________\n");
+	printf("                                         \n");
+	printf("_____________________________________________\n");
+    while (!stop){		
+		printf("\n");
+        scanf(" %c",&input);
         if(input == 'W'){ //UP
             GoLeft(&M,&CurPos,&Seed);
         }
@@ -118,5 +125,29 @@ void Overworld(){
         	}
         }
         PrintMap(Seed,CurPos,&M);
+		printf(    "______________________________________________\n");
+		if (ItemFlag){
+			printf("        Kamu mendapatkan barang!         \n");
+			ItemFlag = false;
+		}
+		else if(EnemyFlag){	
+			printf("        Ada musuh muncul!                \n");
+			EnemyFlag = false;
+		}
+		else if(BossFlag){
+			printf("        Ada boss muncul!                 \n");
+			BossFlag = false;
+		}
+		else if(WallFlag){
+			printf("        Kamu menabrak tembok             \n");			
+			WallFlag = false;
+		}
+		else{
+			printf("                                         \n");
+		}
+		printf(    "______________________________________________\n");
     }
+	
+	
+	
 }

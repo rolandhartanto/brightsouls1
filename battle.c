@@ -135,7 +135,7 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 void ReadCmd(Queue * Q){
 	//Baca huruf dari file, tiap 4 masuk ke queue lain,
 	int i;
-	STARTKATABTL();
+	STARTATTACK();
 	for(i=1;i<=4;i++){
 		if (CKata == 'A'){
 			Add(Q,'A');

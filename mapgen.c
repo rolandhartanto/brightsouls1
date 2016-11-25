@@ -225,27 +225,52 @@ void GenerateNextMap(List * Seed,int * xs,int * ys){
 
 void TulisMap (MATRIKS M, POINT Pos){
     int i,j;
+	printf("\n");
     for(i =GetFirstIdxBrs(M); i<=GetLastIdxBrs(M);i++){
         for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
-			if (i == Absis(Pos) && j == Ordinat(Pos)){
-				printf("P");
+			if (j == GetFirstIdxKol(M)){
+				if (i == Absis(Pos) && j == Ordinat(Pos)){
+					printf("\t\tP");
+				}
+				else{
+					if(Elmt(M,i,j)==0){
+						printf("\t\t ");
+					}
+					else if(Elmt(M,i,j)==1){
+						printf("\t\tM");
+					}
+					else if(Elmt(M,i,j)==2){
+						printf("\t\tE");
+					}
+					else if(Elmt(M,i,j)==3){
+						printf("\t\t#");
+					}
+					else if(Elmt(M,i,j)==4){
+						printf("\t\tB");
+					}
+				}
 			}
 			else{
-				if(Elmt(M,i,j)==0){
-					printf(" ");
-        		}
-				else if(Elmt(M,i,j)==1){
-					printf("I");
+				if (i == Absis(Pos) && j == Ordinat(Pos)){
+					printf("P");
 				}
-				else if(Elmt(M,i,j)==2){
-					printf("E");
+				else{
+					if(Elmt(M,i,j)==0){
+						printf(" ");
+					}
+					else if(Elmt(M,i,j)==1){
+						printf("M");
+					}
+					else if(Elmt(M,i,j)==2){
+						printf("E");
+					}
+					else if(Elmt(M,i,j)==3){
+						printf("#");
+					}
+					else if(Elmt(M,i,j)==4){
+						printf("B");
+					}
 				}
-				else if(Elmt(M,i,j)==3){
-					printf("#");
-        		}
-				else if(Elmt(M,i,j)==4){
-					printf("B");
-        		}
 			}
 		}
 		if (i == Absis(Pos) && j == Ordinat(Pos)){
@@ -294,7 +319,6 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 
 	while(P != Nil){
 		c = Info(P);
-		//printf("asd");
 		if(c == 98){
 			x = Info(Next(P));
 			y = Info(Next(Next(P)));
@@ -323,5 +347,5 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 		//printf("x : %d y: %d\n",x,y);
 	}
 	TulisMap(*map,Pos);
-	PrintInfo(Seed);
+	//PrintInfo(Seed);
 }
