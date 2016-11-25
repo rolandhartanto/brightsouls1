@@ -3,6 +3,8 @@
 #include "movement.h"
 #include "ADTgui.h"
 #include "graph.h"
+#include "player.h"
+
 
 Graph G;
 List Seed;
@@ -10,7 +12,7 @@ POINT CurPos;
 addressg CurMap;
 int xfirst,yfirst;
 
-
+Player P;
 
 void Title(){
     char name[11]={0};
@@ -21,7 +23,6 @@ void Title(){
     loadingBar();
     while(b){
         if(s==1){
-
             printGUIInGame(name,lvl,hp,str,def,exp);
         }else{
             printMainMenu();
@@ -32,11 +33,16 @@ void Title(){
 
 void InitGame(){
     int x,y;
-    CreateEmptyGraph(&G);
-    GenerateNewMap(&Seed, &x, &y);					//Initialize first map
-    Absis(CurPos) = Info(First(Seed));				//Initialize starting X position
+    CreateEmptyGraph(&G);                                   //Initialize Graph for map teleportation
+    GenerateNewMap(&Seed, &x, &y);					        //Initialize first map
+    Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
     Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
-    InsVFirstGraph(&G,Seed);
+    InsVFirstGraph(&G,Seed);                                //Add First map to Graph
+
+    CreatePlayer(&P);                                       //Initialize player
+    InitPlayer(&P);                                         //
+
+
     CurMap = First(G);
     xfirst = x;
     yfirst = y;
@@ -48,19 +54,23 @@ void Overworld(){
     int x,y,i,xs,ys,xe,ye;
     boolean stop;
     MATRIKS M;
-	
+
     // Buat prosedur load to map;
     InitGame();
 	ClearScreen();
+    // Controls GUI Generation for first print
+    printf(    "_________________________________________________________________________________________________\n\n");
+    printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+    printf(    "_________________________________________________________________________________________________\n\n");
     PrintMap(Seed,CurPos,&M);
     x = xfirst;
     y = yfirst;
 	i = 0;
-	printf("_____________________________________________\n");
+	printf(    "_________________________________________________________________________________________________\n\n");
 	printf("                                         \n");
-	printf("_____________________________________________\n");
-    while (!stop){		
-		printf("\n");
+	printf(    "_________________________________________________________________________________________________\n");
+    while (!stop){
+		printf("\n\tInput : ");
         scanf(" %c",&input);
         if(input == 'W'){ //UP
             GoLeft(&M,&CurPos,&Seed);
@@ -74,7 +84,7 @@ void Overworld(){
         else if(input == 'D'){ //RIGHT
             GoUp(&M,&CurPos,&Seed);
         }
-        
+
         ClearScreen();
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
             xs = Info(First(Seed));
@@ -124,30 +134,35 @@ void Overworld(){
                 }
         	}
         }
+
+        // Controls GUI Generation on map update
+        printf(    "_________________________________________________________________________________________________\n\n");
+        printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+        printf(    "_________________________________________________________________________________________________\n\n");
         PrintMap(Seed,CurPos,&M);
-		printf(    "______________________________________________\n");
+		printf(    "_________________________________________________________________________________________________\n\n");
 		if (ItemFlag){
-			printf("        Kamu mendapatkan barang!         \n");
+			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
 			ItemFlag = false;
 		}
-		else if(EnemyFlag){	
-			printf("        Ada musuh muncul!                \n");
+		else if(EnemyFlag){
+			printf("\t\t  > Ada musuh muncul!                \n");
 			EnemyFlag = false;
 		}
 		else if(BossFlag){
-			printf("        Ada boss muncul!                 \n");
+			printf("\t\t  > Ada boss muncul!                 \n");
 			BossFlag = false;
 		}
 		else if(WallFlag){
-			printf("        Kamu menabrak tembok             \n");			
+			printf("\t\t  > Kamu menabrak tembok             \n");
 			WallFlag = false;
 		}
 		else{
 			printf("                                         \n");
 		}
-		printf(    "______________________________________________\n");
+		printf(    "_________________________________________________________________________________________________\n");
     }
-	
-	
-	
+
+
+
 }

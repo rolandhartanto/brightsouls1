@@ -27,27 +27,17 @@ void DelList(List * L,int x, int y){
 	boolean found=false;
 	P=First(*L);
 	while((!found)&&(Next(P)!=Nil)){
-		if((Info(Next(P))==99)||(Info(Next(P))==98)||(Info(Next(P))==97)){
+		if((Info(Next(P))==99)||(Info(Next(P))==98)||(Info(Next(P))==100)){
 			if((Info(Next(Next(P)))==x)&&((Info(Next(Next(Next(P))))==y))){
 				found=true;
 				while(i<=3){
-
-						DelAfter(L,&temp,P);
-
-						i++;
-
-
-
-						//next P=x
-						DelAfter(L,&temp,P);
-
-						i++;
-
-						DelAfter(L,&temp,P);
-						i=5;
-
+					DelAfter(L,&temp,P);
+					i++;						//next P=x
+					DelAfter(L,&temp,P);
+					i++;
+					DelAfter(L,&temp,P);
+					i=5;
 				}
-
 			}
 		}
 		if(!found){

@@ -230,23 +230,23 @@ void TulisMap (MATRIKS M, POINT Pos){
         for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
 			if (j == GetFirstIdxKol(M)){
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf("\t\tP");
+					printf("\t\t\t\t\tP");
 				}
 				else{
 					if(Elmt(M,i,j)==0){
-						printf("\t\t ");
+						printf("\t\t\t\t\t ");
 					}
 					else if(Elmt(M,i,j)==1){
-						printf("\t\tM");
+						printf("\t\t\t\t\tM");
 					}
 					else if(Elmt(M,i,j)==2){
-						printf("\t\tE");
+						printf("\t\t\t\t\tE");
 					}
 					else if(Elmt(M,i,j)==3){
-						printf("\t\t#");
+						printf("\t\t\t\t\t#");
 					}
 					else if(Elmt(M,i,j)==4){
-						printf("\t\tB");
+						printf("\t\t\t\t\tB");
 					}
 				}
 			}
@@ -347,5 +347,6 @@ void PrintMap(List Seed, POINT Pos, MATRIKS * map){
 		//printf("x : %d y: %d\n",x,y);
 	}
 	TulisMap(*map,Pos);
+	printf("\n");
 	//PrintInfo(Seed);
 }

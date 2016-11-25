@@ -1,7 +1,7 @@
 /*MODUL PLAYER*/
 /* Berisi definisi dan semua primitif pemrosesan pada karakteristik (profile) pemain */
 
-#define NMax 100 // definisi untuk jumlah inventory maksimal = 100
+#define NMaxInventory 100 // definisi untuk jumlah inventory maksimal = 100
 #define HPMax 100 //definisi HPMax adalah HP yang bernilai 100
 #define HPMin 0 //definisi HPMin adalah HP yang bernilai 0
 #define BaseHP 100
@@ -15,7 +15,7 @@
 /*Definisi koleksi elemen dan objek dari player*/
 typedef int ItemID;
 typedef struct{
-	int Inventory[NMax+1];
+	int Inventory[NMaxInventory+1];
 	char Nama[20];
 	int NeffInventory;
 	int HP;
@@ -36,13 +36,14 @@ typedef struct{
 #define Exp(P)				(P).Exp
 #define Str(P)				(P).Str
 #define Def(P)				(P).Def
-#define	Next(P)				(P).Next
+#define	NextEXP(P)			(P).Next
 #define SkillPoint(P)		(P).SkillPoint
 #define Nama(P)				(P).Nama
 
 
 #include "player.h"
 #include <math.h>
+
 
 /*Konstruktor*/
 void CreatePlayer(Player * P){
@@ -63,7 +64,7 @@ void InitPlayer(Player * P){
 	Exp(*P)=BaseExp;
 	Str(*P)=BaseStr;
 	Def(*P)=BaseDef;
-	Next(*P)=BaseNext;
+	NextEXP(*P)=BaseNext;
 	SkillPoint(*P)=BaseSkillPoint;
 }
 boolean IsReadyNextLvl(int Exp, int Next){
@@ -85,8 +86,8 @@ void LevelUp(Player * P){
 	Exp menjadi Exp-next sebelum;
 */
 	Level(*P)++;
-	Exp(*P)=Exp(*P)-Next(*P);
-	Next(*P)=10* pow(Level(*P),2)+BaseLevel;
+	Exp(*P)=Exp(*P)-NextEXP(*P);
+	NextEXP(*P)=10* pow(Level(*P),2)+BaseLevel;
 	SkillPoint(*P)+=1;
 	Str(*P)+=10;
 	Def(*P)+=10;

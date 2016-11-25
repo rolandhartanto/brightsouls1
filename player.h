@@ -20,7 +20,7 @@
 /*Definisi koleksi elemen dan objek dari player*/
 typedef int ItemID;
 typedef struct{
-	ItemID Inventory[NMax+1];
+	ItemID Inventory[NMaxInventory+1];
 	char Nama[20];
 	int NeffInventory;
 	int HP;
@@ -41,7 +41,7 @@ typedef struct{
 #define Exp(P)				(P).Exp
 #define Str(P)				(P).Str
 #define Def(P)				(P).Def
-#define	Next(P)				(P).Next
+#define	NextEXP(P)				(P).Next
 #define SkillPoint(P)		(P).SkillPoint
 #define Nama(P)				(P).Nama
 /*Konstruktor*/
