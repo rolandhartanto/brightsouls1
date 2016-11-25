@@ -11,7 +11,7 @@
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
-typedef int infotypeq;
+typedef char infotypeq;
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
@@ -42,7 +42,7 @@ boolean IsFullQ (Queue Q)
 /* yaitu mengandung elemen sebanyak MaxEl */
 {
     int nb;
-    if (IsEmpty(Q)){
+    if (IsEmptyQ(Q)){
         nb = 0;
     }
     else{
@@ -62,7 +62,7 @@ int NBElmtQ (Queue Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 {
     int nb;
-    if (IsEmpty(Q)){
+    if (IsEmptyQ(Q)){
         nb = 0;
     }
     else{
@@ -106,7 +106,7 @@ void AddQ (Queue * Q, infotypeq X)
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 {
-	if(IsEmpty(*Q)){
+	if(IsEmptyQ(*Q)){
         Head(*Q) = 1;
     }
     Tail(*Q) += 1;

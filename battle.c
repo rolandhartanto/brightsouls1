@@ -1,11 +1,13 @@
 
 #include "battle.h"
+#include <stdlib.h>
 
-typedef struct{
-	char cmd[5];
-} Command;
 
 #define Comd(P,i) (P).cmd[(i)]
+
+void GameOver(){
+	//SHOW GAME OVER SCREEN
+}
 
 int RPSComparator(char P, char E){
 // Condition Output
@@ -30,8 +32,9 @@ int RPSComparator(char P, char E){
 	return Out;
 }
 
-boolean isBattleEnd(int cntr, int maxTurn, Player P, Enemy E){
-	return (cntr >= maxTurn || HP(P) <= 0 || HP(E) <= 0);
+boolean isBattleEnd( int maxTurn, int cntr, Player P, Enemy E){
+
+	return (cntr >= maxTurn || HP(P) <= 0 || HPE(E) <= 0);
 }
 
 //HP Player -= STR Musuh  - DEF * offset; offset tergantung aksi player&musuh (kalo block kena flank, offset 0; kalo flank kena attack, offset 0.7; kalo draw (attack-attack / flank-flank, 0.8)
@@ -42,15 +45,15 @@ int PDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0;
 		}
 		else if (P == 'F' || P == 'A'){ //FF atau AA
-			dmg = 0.8 * ATKE(El);
+			dmg = (8 * STRE(El))/10;
 		}
 	}
 	else if(rslt == -1){
 		if (P == 'B'){ //BF
-			dmg = ATKE(El);
+			dmg = STRE(El);
 		}
 		else if (P == 'F'){
-			dmg = (ATKE(El) * 12)/10; //FA
+			dmg = (STRE(El) * 12)/10; //FA
 		}
 		else if (P == 'A'){ //AB
 			dmg = 0;
@@ -61,10 +64,10 @@ int PDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0; //BA
 		}
 		else if (P == 'F'){
-			dmg = 0 //FB
+			dmg = 0; //FB
 		}
 		else if (P == 'A'){
-			dmg = (ATKE(El)*8)/10; //AF
+			dmg = (STRE(El)*8)/10; //AF
 		}
 	}
 
@@ -75,6 +78,7 @@ int PDmgCntr(Player Pl, Enemy El, char P, int rslt){
 		dmg = 0;
 	}
 
+	//printf("%d",dmg);
 	return dmg;
 }
 
@@ -85,7 +89,7 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0;
 		}
 		else if (P == 'F' || P == 'A'){ //FF atau AA
-			dmg = (ATK(Pl)*8)/10;
+			dmg = (Str(Pl)*8)/10;
 		}
 	}
 	else if(rslt == -1){
@@ -93,7 +97,7 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0;
 		}
 		else if (P == 'F'){
-			dmg = (ATK(Pl)) * 8)/10; //FA
+			dmg = (Str(Pl) * 8)/10; //FA
 		}
 		else if (P == 'A'){ //AB
 			dmg = 0;
@@ -104,10 +108,10 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0; //BA
 		}
 		else if (P == 'F'){
-			dmg = ATK(Pl) //FB
+			dmg = Str(Pl); //FB
 		}
 		else if (P == 'A'){
-			dmg = (ATK(Pl)*12)/10; //AF
+			dmg = (Str(Pl)*12)/10; //AF
 		}
 	}
 
@@ -117,6 +121,7 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 	if(dmg < 0){
 		dmg = 0;
 	}
+
 
 	return dmg;
 }
@@ -130,145 +135,160 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 void ReadCmd(Queue * Q){
 	//Baca huruf dari file, tiap 4 masuk ke queue lain,
 	int i;
-	STARTATTACK();
+	CreateEmptyQ(Q,4);
 	for(i=1;i<=4;i++){
-		if (CKata == 'A'){
-			Add(Q,'A');
+		if (CKata.TabKata[1] == 'A'){
+			AddQ(Q,'A');
 		}
-		else if(CKata =='B'){
-			Add(Q,'B');
+		else if(CKata.TabKata[1] =='B'){
+			AddQ(Q,'B');
 		}
-		else if(CKata =='F'){
-			Add(Q,'F');
+		else if(CKata.TabKata[1] =='F'){
+			AddQ(Q,'F');
 		}
-		SalinKata();
+		//printf("%d : %c - ",i, CKata.TabKata[1]);
+		ADVKATA();
 	}
 }
 
 void RandomizeStack(StackQ * S,int x){
-	Queue Q[20]
+	Queue Q[30];
 	int n,c;
-
 	n = 0;
-	while(!EndKata){
+	STARTKATABTL();
+	//CreateEmptySQ(S);
+	while(!EndKata && n < 30){
 		ReadCmd(&Q[n]);	//Read X Lines
 		n++;
 	}
-
 	for(n=1;n<=x;n++){
-		c = rand() % (n-1);
-		PushSQ(*S,Q[c]); //Push X Lines
+		c = rand() % (30);
+		PushSQ(S,Q[c]); //Push X Lines
 		n++;
 	}
 }
 
-void PrintCmd(Queue Q){
+void PrintCmd(Queue Q,char * cmd){
 	int x,y,cnt;
-	int e;
+	char e;
 	Queue R;
 
 	R = Q;
-	x = rand() % 3 + 1;
-	y = rand() % 3 + 1;
+	do{
+		x = rand() % 3 + 1;
+		y = rand() % 3 + 1;
+	}while(x==y);
 
-	for (cnt = 1; cnt<= 4; c++){
+	for (cnt = 1; cnt<= 4; cnt++){
 			DelQ(&R,&e);
+			cmd[cnt-1] = e;
 			if (cnt == x || cnt == y){
 				printf("# ");
 			}
 			else{
 				printf("%c ",e);
 			}
-		}
 	}
 }
 
 void BattleProcessing(Player * P, Enemy * E){
 	// Print Enemy / Player Status / Message
-	int i,turn,x;
-	char cmd[4],enemyin;
+	int i,turn,maxt,x;
+	char cmd[4],enemyin[4];
 	StackQ En;
 	Queue Q;
 
 	CreateEmptySQ(&En);
-	CreateEmptyQ(&Q);
 
 	//Generate Stack
-	if(Boss(E)){
-		x = 20;
+	if(Boss(*E)){
+		maxt = 20;
 	}
 	else{
-		x = 10;
+		maxt = 10;
 	}
-	RandomizeStack(&En,x);
+
+	RandomizeStack(&En,maxt);
+
 	turn = 1;
 
-	while(!isBattleEnd(turn,x,*P,*E)){
+	while(!isBattleEnd(maxt,turn,*P,*E)){
+		CreateEmptyQ(&Q,4);
 		PopSQ(&En,&Q);
 		//Print Enemy Command
-		PrintCmd(Q);
+		PrintCmd(Q,enemyin);
+
+		//debugger
+		//printf("%c",enemyin[0]);
+		//printf("%c",enemyin[1]);
+		//printf("%c",enemyin[2]);
+		//printf("%c",enemyin[3]);
 
 		//Player Input
-		printf("Input 4 Attack Commands : ")
-		for(i = 1; i<=4; i++){
-			scanf("%c ",cmd[i]);
+		printf("\n");
+		printf("Input 4 Attack Commands : ");
+		for(i = 0; i<=3; i++){
+			scanf(" %c",&cmd[i]);
 		}
+		printf("\n");
 
 
 		//Input Processing
 		for(i = 1; i<=4; i++){
-			Del(&Q,&enemyin);
-			x = RPSComparator(cmd[i],enemyin);
+			//DelQ(&Q,&enemyin);
+			x = RPSComparator(cmd[i-1],enemyin[i-1]);
 			if(x == 1){
-				if(cmd[i] == 'B'){ //B v B
-					printf("%s tries to attack!",NamaE(*E));
-					printf("But %s blocked foe %s's attack", NamaP(*P), NamaE(*E));
+				if(cmd[i-1] == 'B'){ //B v B
+					printf("Foe tries to attack!\n");
+					printf("But %s blocked foe's attack\n", NamaP(*P));
 				}
-				if(cmd[i] == 'F'){ //B v B
-					printf("%s tries to block!",NamaE(*E));
-					printf("But %s flanked and break trough foe %s's defense", NamaP(*P), NamaE(*E));
+				if(cmd[i-1] == 'F'){ //B v B
+					printf("Foe tries to block!\n");
+					printf("But %s flanked and break trough foe's defense\n", NamaP(*P));
 				}
 				if(cmd[i] == 'A'){ //B v B
-					printf("%s tries to flank!",NamaE(*E));
-					printf("But %s attacked foe %s's right trough", NamaP(*P), NamaE(*E));
+					printf("Foe tries to flank!\n");
+					printf("But %s attacked foe right trough\n", NamaP(*P));
 				}
 			}
 			else if(x == 0){
-				if(cmd[i] == 'B'){ //B v B
-					printf("%s and %s blocked at the same time", NamaP(*P), NamaE(*E));
+				if(cmd[i-1] == 'B'){ //B v B
+					printf("%s and foe blocked at the same time\n", NamaP(*P));
 				}
-				if(cmd[i] == 'F'){ //B v B
-					printf("%s and %s flanked at the same time", NamaP(*P), NamaE(*E));
+				if(cmd[i-1] == 'F'){ //B v B
+					printf("%s and foe flanked at the same time\n", NamaP(*P));
 				}
-				if(cmd[i] == 'A'){ //B v B
-					printf("%s and %s attackked at the same time", NamaP(*P), NamaE(*E));
+				if(cmd[i-1] == 'A'){ //B v B
+					printf("%s and foe attackked at the same time\n", NamaP(*P));
 				}
 			}
 			else if(x == -1){
-				if(cmd[i] == 'B'){ //B v B
-					printf("%s tries to attack!",NamaP(*P));
-					printf("But foe %s blocked %s's attack", NamaE(*E), NamaP(*P));
+				if(cmd[i-1] == 'B'){ //B v B
+					printf("%s tries to attack!\n",NamaP(*P));
+					printf("But foe blocked %s's attack\n", NamaP(*P));
 				}
-				if(cmd[i] == 'F'){ //B v B
-					printf("%s tries to block!",NamaP(*P));
-					printf("But foe %s flanked and break trough %s's defense", NamaE(*E), NamaP(*P));
+				if(cmd[i-1] == 'F'){ //B v B
+					printf("%s tries to block!\n",NamaP(*P));
+					printf("But foe flanked and break trough %s's defense\n", NamaP(*P));
 				}
-				if(cmd[i] == 'A'){ //B v B
-					printf("%s tries to flank!",NamaP(*P));
-					printf("But foe %s attacked %s's right trough", NamaE(*E), NamaP(*P));
+				if(cmd[i-1]== 'A'){ //B v B
+					printf("%s tries to flank!\n",NamaP(*P));
+					printf("But foe attacked %s's right trough\n", NamaP(*P));
 				}
 			}
-			HP(*P) -= PDmgCntr(P,E,cmd[i],x);
-			HPE(*E) -= EDmgCntr(P,E,cmd[i],x);
+			printf("\n\n");
+			HP(*P) -= PDmgCntr(*P,*E,cmd[i-1],x);
+			HPE(*E) -= EDmgCntr(*P,*E,cmd[i-1],x);
+
+			//debugger
+			//printf("P %d E ",HP(*P));
+			//printf("%d",HPE(*E));
 
 		}
 		turn++;
-		if (HP(P) <= 0){
-			GameOver(); //GameOver Handler
-		}
+
 	}
-}
-
-void GameOver(){
-
+	if (HP(*P) <= 0){
+		GameOver(); //GameOver Handler
+	}
 }

@@ -7,7 +7,7 @@
 
 /*Kamus umum*/
 #define NMaxInventory 100 // definisi untuk jumlah inventory maksimal = 100
-#define HPMax 100 //definisi HPMax adalah HP yang bernilai 100
+#define MaxHP 100 //definisi HPMax adalah HP yang bernilai 100
 #define HPMin 0 //definisi HPMin adalah HP yang bernilai 0
 #define BaseHP 100
 #define BaseLevel 1
@@ -30,6 +30,7 @@ typedef struct{
 	int Def;
 	int Next;
 	int SkillPoint;
+	int HPMax;
 }Player;
 
 /*Selektor*/
@@ -37,6 +38,7 @@ typedef struct{
 #define NeffInventory(P)	(P).NeffInventory
 #define NamaP(P)			(P).Nama
 #define HP(P) 				(P).HP
+#define HPMax(P) 				(P).HPMax
 #define Level(P) 			(P).Level
 #define Exp(P)				(P).Exp
 #define Str(P)				(P).Str

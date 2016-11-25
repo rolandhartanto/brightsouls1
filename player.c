@@ -5,18 +5,6 @@
 
 
 /*Selektor*/
-#define Inventory(P,i) 		(P).Inventory[(i)]
-#define NeffInventory(P)	(P).NeffInventory
-#define NamaP(P)			(P).Nama
-#define HP(P) 				(P).HP
-#define Level(P) 			(P).Level
-#define Exp(P)				(P).Exp
-#define Str(P)				(P).Str
-#define Def(P)				(P).Def
-#define	NextEXP(P)			(P).Next
-#define SkillPoint(P)		(P).SkillPoint
-#define Nama(P)				(P).Nama
-
 
 
 /*Konstruktor*/
@@ -40,6 +28,7 @@ void InitPlayer(Player * P){
 	Def(*P)=BaseDef;
 	NextEXP(*P)=BaseNext;
 	SkillPoint(*P)=BaseSkillPoint;
+	HPMax(*P) = MaxHP;
 }
 boolean IsReadyNextLvl(int Exp, int Next){
 /*menghasilkan true jika Exp>=Next*/

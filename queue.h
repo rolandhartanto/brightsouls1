@@ -11,7 +11,7 @@
 /* Konstanta untuk mendefinisikan addressq tak terdefinisi */
 
 /* Definisi elemen dan addressq */
-typedef int infotypeq;
+typedef char infotypeq;
 typedef int addressq;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */

@@ -1,1 +1,1 @@
-gcc utama.c ADTgui.c mapgen.c matriks.c point.c listlinier.c scene.c movement.c graph.c player.c -o lol
+gcc utama.c ADTgui.c mapgen.c matriks.c point.c listlinier.c scene.c battle.c movement.c enemy.c graph.c player.c mesinkata.c queue.c stackofq.c mesinkar.c -o lol
