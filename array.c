@@ -55,7 +55,7 @@ void MakeEmpty (TabInt * T){
 	
 }
 /* ********** SELEKTOR (TAMBAHAN) ********** */
-int NbElmt (TabInt T){
+int NbElmtA (TabInt T){
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 	return(Neff(T));
@@ -69,14 +69,14 @@ IdxType GetFirstIdx (TabInt T){
 IdxType GetLastIdx (TabInt T){
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
-	return(NbElmt(T)+GetFirstIdx(T)-1);
+	return(NbElmtA(T)+GetFirstIdx(T)-1);
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmpty (TabInt T){
+boolean IsEmptyA (TabInt T){
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
-	return(NbElmt(T)==0);
+	return(NbElmtA(T)==0);
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
@@ -93,7 +93,7 @@ void TulisIsi (TabInt T){
    [4]50
 */
 	int i;
-	if(IsEmpty(T)){
+	if(IsEmptyA(T)){
 		printf("Tabel kosong\n");//perhatikan disini..perlu \n atau ga
 	}else{
 		for(i=IdxMin;i<=GetLastIdx(T);i++){
@@ -112,15 +112,15 @@ IdxType Search1 (TabInt T, ElType X){
 /* Memakai skema search TANPA boolean */
 	int i;
 	i=IdxMin;
-	if(IsEmpty(T)){
+	if(IsEmptyA(T)){
 		return(IdxUndef);
 	}else{
-		while((i<=NbElmt(T))&&(X!=Elmt(T,i))){
+		while((i<=NbElmtA(T))&&(X!=Elmt(T,i))){
 			if((X!=Elmt(T,i))){
 				i++;
 			}
 		}
-		if(i>NbElmt(T)){
+		if(i>NbElmtA(T)){
 			return(IdxUndef);
 		}else{
 			return(i);
@@ -134,7 +134,7 @@ void AddAsLastEl (TabInt * T, ElType X){
 /* I.S. Tabel T boleh kosong, tetapi tidak penuh */
 /* F.S. X adalah elemen terakhir T yang baru */
 	int idx;
-	if(IsEmpty(*T)){
+	if(IsEmptyA(*T)){
 		idx=0;
 	}else{
 		idx=GetLastIdx(*T);
