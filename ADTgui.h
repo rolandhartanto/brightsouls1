@@ -51,4 +51,6 @@ void printExit(int *b);
 void printHelp();
 /* untuk menampilkan panduan bermain
 */
+
+void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next );
 #endif

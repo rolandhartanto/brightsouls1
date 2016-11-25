@@ -25,6 +25,6 @@ void ReadCmd(Queue * Q);
 
 void RandomizeStack(StackQ * S,int x);
 
-void PrintCmd(Queue Q);
+void PrintCmd(Queue Q,char * cmd);
 
 void BattleProcessing(Player * P, Enemy * E);

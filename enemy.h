@@ -16,10 +16,7 @@ typedef struct{
 #define DEFE(E) (E).def
 #define Boss(E) (E).boss
 
-#define BaseEHP 80
-#define BaseESTR 7
-#define BaseEDEF 6
-#define BaseEEXP 8
+
 
 
 void initEnemy(Enemy * E, int mapcount, boolean boss);

@@ -63,9 +63,7 @@ void Overworld(){
     mapcount = 1;
 	ClearScreen();
     // Controls GUI Generation for first print
-    printf(    "_________________________________________________________________________________________________\n\n");
-    printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
-    printf(    "_________________________________________________________________________________________________\n\n");
+    PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
     PrintMap(Seed,CurPos,&M);
     x = xfirst;
     y = yfirst;
@@ -76,16 +74,16 @@ void Overworld(){
     while (!stop){
 		printf("\n\tInput : ");
         scanf(" %c",&input);
-        if(input == 'W'){ //UP
+        if(input == 'w'){ //UP
             GoLeft(&M,&CurPos,&Seed);
         }
-        else if(input == 'S'){ //DOWN
+        else if(input == 's'){ //DOWN
             GoRight(&M,&CurPos,&Seed);
         }
-        else if(input == 'A'){ //LEFT
+        else if(input == 'a'){ //LEFT
             GoDown(&M,&CurPos,&Seed);
         }
-        else if(input == 'D'){ //RIGHT
+        else if(input == 'd'){ //RIGHT
             GoUp(&M,&CurPos,&Seed);
         }
 
@@ -141,22 +139,28 @@ void Overworld(){
         }
 
         // Controls GUI Generation on map update
-        printf(    "_________________________________________________________________________________________________\n\n");
-        printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
-        printf(    "_________________________________________________________________________________________________\n\n");
+        PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
         PrintMap(Seed,CurPos,&M);
 		printf(    "_________________________________________________________________________________________________\n\n");
 		if (ItemFlag){
 			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
             HP(P) += 10;
+            printf("%d",HPMax(P));
+            if(HP(P) >= HPMax(P)){
+                HP(P) = HPMax(P);
+            }
 			ItemFlag = false;
 		}
 		else if(EnemyFlag){
 			printf("\t\t  > Ada musuh muncul!                \n");
+            initEnemy(&E, mapcount, false);
+            BattleProcessing(&P, &E);
 			EnemyFlag = false;
 		}
 		else if(BossFlag){
 			printf("\t\t  > Ada boss muncul!                 \n");
+            initEnemy(&E, mapcount, true);
+            BattleProcessing(&P,&E);
 			BossFlag = false;
 		}
 		else if(WallFlag){
