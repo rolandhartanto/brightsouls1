@@ -81,7 +81,6 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 	Elmt(map,*xs,*ys) = 0;
 
 
-
 	count = 0;
 	lc = 0;							// Init lc
 	llc = 0;						// Init llc
@@ -100,6 +99,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 	start = clock();
 	do{
 		exit = false;				// Init exit variable
+
 		while(!exit){
 			xa = x;					// Init xa based on last x position
 			ya = y;					// Init ya based on last y position
@@ -125,7 +125,10 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 				//printf(" reject\n"); // DEBUGGER
 
 			}
+			
 		}
+		
+		
 
 		count++;
 
@@ -149,8 +152,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			Elmt(map,xa,ya)=0;
 		}
 		InsVLast(Seed,c);
-
-
+		PrintInfo(*Seed);
 
 		x = xa;
 		y = ya;
@@ -186,18 +188,23 @@ void CountNextStart(int * xs, int * ys){
 
 void GenerateNewMap(List * Seed,int * xs,int * ys){
 	boolean fail;
-	int a,b;
+	int a,b,i=0;
 
 	srand(time(NULL));			//  Random Seed Init
+	printf("test3\n");
 	GenerateStart(xs,ys);		// 	Generate Starting Point
+	printf("test3\n");
 	//printf("start %d %d\n",*xs,*ys);
 	do{
 		a = *xs;
 		b = *ys;
 		fail = false;
+		printf("testaaaaa\n");
 		CreateEmpty(Seed);			//  Init Seed
 		GenerateSeed(Seed,&a,&b,&fail); //  Generate Map Seed
-	}while(fail);
+		printf("testbbbbb\n");
+
+	}while((fail));
 	*xs = a;
 	*ys = b;
 }

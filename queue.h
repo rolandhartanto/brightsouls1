@@ -29,6 +29,7 @@ typedef struct { infotypeq * T;   /* tabel penyimpan elemen */
 #define Tail(Q) (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
 #define InfoTail(Q) (Q).T[(Q).TAIL]
+#define MaxEl(Q) (Q).MaxEl
 //#define MaxEl(Q) (Q).MaxEl
 
 /* ********* Prototype ********* */

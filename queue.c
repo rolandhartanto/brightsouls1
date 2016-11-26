@@ -6,30 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "queue.h"
 
-#define Nila 0
-/* Konstanta untuk mendefinisikan address tak terdefinisi */
-
-/* Definisi elemen dan address */
-typedef char infotypeq;
-typedef int address;   /* indeks tabel */
-/* Contoh deklarasi variabel bertype Queue : */
-/* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-typedef struct { infotypeq * T;   /* tabel penyimpan elemen */
-                 address HEAD;  /* alamat penghapusan */
-                 address TAIL;  /* alamat penambahan */
-                 int MaxEl;     /* Max elemen queue */
-               } Queue;
-/* Definisi Queue kosong: HEAD=Nila; TAIL=Nila. */
-/* Catatan implementasi: T[0] tidak pernah dipakai */
-
-/* ********* AKSES (Selektor) ********* */
-/* Jika Q adalah Queue, maka akses elemen : */
-#define Head(Q) (Q).HEAD
-#define Tail(Q) (Q).TAIL
-#define InfoHead(Q) (Q).T[(Q).HEAD]
-#define InfoTail(Q) (Q).T[(Q).TAIL]
-#define MaxEl(Q) (Q).MaxEl
 
 /* ********* Prototype ********* */
 boolean IsEmptyQ (Queue Q)
@@ -60,23 +38,6 @@ boolean IsFullQ (Queue Q)
 {
 
     return(NBElmtQ(Q)==MaxEl(Q));
-
-    int nb;
-    if (IsEmptyQ(Q)){
-        nb = 0;
-    }
-    else{
-        if(Head(Q) > Tail(Q)){
-            nb = (Tail(Q) + MaxEl(Q)) - Head(Q) + 1 ;
-        }
-        else{
-            nb = Tail(Q) - Head(Q) + 1;
-        }
-    }
-
-
-
-	return (MaxEl(Q) == nb);
 }
 
 
@@ -112,7 +73,6 @@ void AddQ (Queue * Q, infotypeq X)
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 {
 	if(IsEmptyQ(*Q)){
-
 		Head(*Q)=1;Tail(*Q)=1;
 		InfoHead(*Q)=X;
 	}else{//tidak kosong
@@ -122,13 +82,6 @@ void AddQ (Queue * Q, infotypeq X)
 			Tail(*Q)=1;
 		}
 		InfoTail(*Q)=X;
-
-        Head(*Q) = 1;
-    }
-    Tail(*Q) += 1;
-	if (Tail(*Q)>MaxEl(*Q)){
-		Tail(*Q) = 1;
-
 	}
 }
 void DelQ (Queue * Q, infotypeq * X)

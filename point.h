@@ -8,8 +8,8 @@
 #include "boolean.h"
 
 typedef struct {
-	int X; /* absis   */
-	int Y; /* ordinat */
+	float X; /* absis   */
+	float Y; /* ordinat */
 } POINT;
 
 /* *** Notasi Akses: Selektor POINT *** */
