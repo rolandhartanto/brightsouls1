@@ -198,11 +198,11 @@ void PrintCmd(Queue Q,char * cmd){
 
 void BattleProcessing(Player * P, Enemy * E){
 	// Print Enemy / Player Status / Message
-	int i,turn,maxt,x;
-	char cmd[4],enemyin[4];
+	int i,turn,maxt,x,n,temp;
+	char plin,cmd[4],enemyin[4];
+	Stack Input;
 	StackQ En;
 	Queue Q;
-	boolean error;
 
 	CreateEmptySQ(&En);
 
@@ -215,14 +215,14 @@ void BattleProcessing(Player * P, Enemy * E){
 	}
 
 	RandomizeStack(&En,maxt);
-
 	turn = 1;
 	ClearScreen();
 	while(!isBattleEnd(maxt,turn,*P,*E)){
 		CreateEmptyQ(&Q,4);
 		PopSQ(&En,&Q);
-		//Print Enemy Command
-		printf(    "\n\n_________________________________________________________________________________________________\n");
+		//Print Enemy Command & Header
+		PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
+		printf(    "_________________________________________________________________________________________________\n");
 		printf("\n\n\t Enemy's Command : ");
 		PrintCmd(Q,enemyin);
 		printf("\n\n");
@@ -235,27 +235,34 @@ void BattleProcessing(Player * P, Enemy * E){
 		//printf("%c",enemyin[3]);
 
 		//Player Input
-		error = false;														//Initialize error variable
-		do{
-			printf("\n");
-			printf("Input 4 Attack Commands : ");
-			for(i = 0; i<=3; i++){
-				scanf(" %c",&cmd[i]);
-				if(cmd[i] != 'A' && cmd[i] != 'F' && cmd[i] != 'B' && cmd[i] != 'E'){
-					error = true;
-				}
-				else{
-					push(
-				}
-
+		printf("\n");
+		printf("Input 4 Attack Commands : ");
+		//Player Input
+		CreateEmptyS(&Input);
+		n = 0;
+		while(n<4){
+			scanf(" %c",&plin);
+			plin = toupper(plin);
+			if(plin != 'A' && plin != 'F' && plin != 'B' && plin != 'E'){
+				printf("Command not detected\n");
 			}
-			if(error){
-				printf("Wrong input detected\n");
+			else if(plin=='E'){
+				PopS(&Input,&temp);
+				n--;
 			}
 			else{
-				printf("\n");
+				PushS(&Input,plin);
+				n++;
 			}
-		}while(error);
+		}
+
+		for(i=3;i>=0;i--){
+			PopS(&Input,&temp);
+			cmd[i] = temp;
+			printf("%d",cmd[i]);
+		}
+
+		printf("\n");
 		ClearScreen();
 
 		//Input Processing
@@ -287,15 +294,15 @@ void BattleProcessing(Player * P, Enemy * E){
 			else if(x == 0){
 				if(cmd[i] == 'B'){ //B v B
 					printf("\t\t");
-					printf("%s and foe blocked at the same time\n", NamaP(*P));
+					printf("%s and foe blocked at the same time\n\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
 					printf("\t\t");
-					printf("%s and foe flanked at the same time\n", NamaP(*P));
+					printf("%s and foe flanked at the same time\n\n", NamaP(*P));
 				}
 				if(cmd[i] == 'A'){ //B v B
 					printf("\t\t");
-					printf("%s and foe attacked at the same time\n", NamaP(*P));
+					printf("%s and foe attacked at the same time\n\n", NamaP(*P));
 				}
 			}
 			else if(x == -1){
@@ -329,11 +336,11 @@ void BattleProcessing(Player * P, Enemy * E){
 			//printf("%d",HPE(*E));
 			delay(1500);
 			ClearScreen();
+			if (HP(*P) <= 0){
+				GameOver(); //GameOver Handler
+			}
 		}
 		turn++;
 
-	}
-	if (HP(*P) <= 0){
-		GameOver(); //GameOver Handler
 	}
 }

@@ -1,9 +1,10 @@
 /*ADT GUI*/
 #include "ADTgui.h"
-//#include "scene.h"
+#include "scene.h"
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<time.h>
 //#include<windows.h>
 
 //#define clear() printf("\033[2J")
@@ -17,6 +18,16 @@
         system("cls");
     }
 
+    void delay(int x)
+    {
+       int c = 1, d = 1;
+
+       for ( c = 1 ; c <= x*10 ; c++ )
+           for ( d = 1 ; d <= x*10 ; d++ )
+           {}
+    }
+
+
 
 
 #elif __linux__
@@ -26,18 +37,13 @@
         system("clear");
     }
 
+    void delay(int x){
+        usleep(x*1000);
+        fflush(stdout);
+    }
+
 #endif
 
-void delay(int x)
-{
-   int c = 1, d = 1;
-
-   for ( c = 1 ; c <= x*10 ; c++ )
-       for ( d = 1 ; d <= x*10 ; d++ )
-       {}
-
-
-}
 
 void Back()
 {
@@ -57,32 +63,30 @@ void printMainMenu()
 
 	ClearScreen();
 	//printf("%c==================================================================%c\n",201,187);
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****           ___             |   |                   |        ****\n");
-	printf("****          |   \\            |   |    __             | __     ****\n");
-	printf("****          |   /   __ o  __ |_--|-- /  \\  __        |/  \\    ****\n");
-	printf("****          |---  |/   | /  ||  \\|   \\__  /  \\ |    ||\\__     ****\n");
-	printf("****        A |   \\ |    ||   ||  ||      \\|    ||    ||   \\    ****\n");
-	printf("****       <[>|___/ |    | \\__||  |\\__/\\__/ \\__/  \\__/ |\\__/    ****\n");
-	printf("****        [             \\___|                                 ****\n");
-	printf("****  /\\    [****\\\\\\\\\\*************************>>               ****\n");
-	printf("**** <*******[000000000000***********************>>             ****\n");
-	printf("****  \\/    [****/////*************************>>               ****\n");
-	printf("****        [                                                   ****\n");
-	printf("****       <[>                                                  ****\n");
-	printf("****        V                                                   ****\n");
-	printf("****                      (N)NEW GAME                           ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (S)START GAME                         ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (L)LOAD GAME                          ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (H)? HELP ?                           ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (E)EXIT                               ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
+	printf("%c%c%c%c           ___             |   |                    |       %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c          |   \\            |   |     __             | __    %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c          |   /   __ o  __ |_--|--  /  \\  __        |/  \\   %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c          |---  |/   | /  ||  \\|    \\__  /  \\ |    ||\\__    %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c        A |   \\ |    ||   ||  ||       \\|    ||    ||   \\   %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c       <%c>|___/ |    | \\__||  |\\__/\\__/ \\__/  \\__/ |\\__/   %c%c%c%c\n",186,176,176,176,186,176,176,176,186);
+	printf("%c%c%c%c        %c             \\___|                                 %c%c%c%c\n",186,176,176,176,186,176,176,176,186);
+	printf("%c%c%c%c  /\\    %c%c%c%c%c\\\\\\\\\\%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c>>                    %c%c%c%c\n",186,176,176,176,186,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,176,176,176,186);
+	printf("%c%c%c%c %c%c%c%c%c%c%c%c%c~OOOOOOOOOOO%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c>>                  %c%c%c%c\n",186,176,176,176,174,205,205,205,205,205,205,206,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,176,176,176,186);
+	printf("%c%c%c%c  \\/    %c%c%c%c%c/////%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c>>                    %c%c%c%c\n",186,176,176,176,186,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,205,176,176,176,186);
+	printf("%c%c%c%c        %c                                                   %c%c%c%c\n",186,176,176,176,186,176,176,176,186);
+	printf("%c%c%c%c       <%c>                                                  %c%c%c%c\n",186,176,176,176,186,176,176,176,186);
+	printf("%c%c%c%c        V                                                   %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                     %c(N)NEW GAME                           %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                     %c(S)START GAME                         %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                     %c(L)LOAD GAME                          %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                     %c(H)? HELP ?                           %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                     %c(E)EXIT                               %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
+	printf("%c%c%c%c                                                            %c%c%c%c\n",186,176,176,176,176,176,176,186);
 	printf("                           INPUT : ");
 	//	printf("%c==================================================================%c\n",200,188);
 
@@ -153,7 +157,7 @@ void printStartGame(char a[],int *s)
 	}else{
 		printf("Selamat bermain %s!\n",a);
 		*s = 1;
-        //Overworld();
+        Overworld();
 	}
 
 }
@@ -166,31 +170,25 @@ void loadingBar()
 	ClearScreen();
 	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  LOADING\n");
 	for(int i=1;i<=10;i++){
-		printf(">");
-		fflush(stdout);
-		usleep(500000);
+		printf("%c",176);
+		delay(1000);
 	}
 	for(int i=1;i<=20;i++){
-		printf(">");
-		fflush(stdout);
-		usleep(200000);
+		printf("%c",176);
+		delay(500);
 	}
 	for(int i=1;i<=10;i++){
-		printf(">");
-		fflush(stdout);
-		usleep(300000);
+		printf("%c",176);
+		delay(800);
 	}
 	for(int i=1;i<=10;i++){
-		printf(">");
-		fflush(stdout);
-		usleep(150000);
+		printf("%c",176);
+		delay(350);
 	}
 	for(int i=1;i<=10;i++){
-		printf(">");
-		fflush(stdout);
-		usleep(100000);
+		printf("%c",176);
+		delay(200);
 	}
-	printf("\n");
 }
 void printGUIInGame(char nm[], int lvl, int hp, int str, int def, int exp)
 /*I.S. sembarang
@@ -259,60 +257,9 @@ void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int 
     printf(    "_________________________________________________________________________________________________\n\n");
 }
 
-void printGameOver(){
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
-	printf("****         ___   ___   _  _  ___      __       ___ __               ****\n");
-	printf("****        /   \\ /   \\ / \\/ \\|        /  \\ |  ||   |  \\            ****\n");
-	printf("****       | ___  |___||  |  ||___    |    ||  ||___|__/             ****\n");
-	printf("****       |    | |   ||  |  ||       |    ||  ||   |  \\           ****\n");	
-	printf("****        \\___/ |   ||  |  ||___     \\__/  \\/ |___|  |           ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-}
-
-void printCredits(){
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                          CREDITS                           ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                  Vincent Hendryanto Halim                  ****\n");
-	printf("****                                                            ****\n");
-	printf("****                       Roland Hartanto                      ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                        Dicky Novanto                       ****\n");
-	printf("****                                                            ****\n");
-	printf("****                       Alif Ijlal Wafi                      ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                Daniel Christian Pradipta Baso              ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-
+void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
+    printf(    "\t\t\t\t\t%s\n\n",Nama);
+    printf(    "_________________________________________________________________________________________________\n\n");
+    printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
+    printf(    "_________________________________________________________________________________________________\n\n");
 }

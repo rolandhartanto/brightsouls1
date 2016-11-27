@@ -7,6 +7,7 @@
 #include "stackofq.h"
 #include "enemy.h"
 #include "player.h"
+#include "stackt.h"
 
 typedef struct{
 	char cmd[5];

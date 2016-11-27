@@ -149,7 +149,7 @@ void Overworld(){
 		if (ItemFlag){
 			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
             HP(P) += 10;
-            printf("%d",HPMax(P));
+            //printf("%d",HPMax(P));
             if(HP(P) >= HPMax(P)){      //Case HP > HPMax
                 HP(P) = HPMax(P);
             }
