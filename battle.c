@@ -222,6 +222,7 @@ void BattleProcessing(Player * P, Enemy * E){
 		PopSQ(&En,&Q);
 		//Print Enemy Command & Header
 		PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
+		PrintHeaderE(HPE(*E),STRE(*E),DEFE(*E));
 		printf(    "_________________________________________________________________________________________________\n");
 		printf("\n\n\t Enemy's Command : ");
 		PrintCmd(Q,enemyin);
@@ -268,6 +269,7 @@ void BattleProcessing(Player * P, Enemy * E){
 		//Input Processing
 		for(i = 0; i<=3; i++){
 			PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
+			PrintHeaderE(HPE(*E),STRE(*E),DEFE(*E));
 			printf(    "_________________________________________________________________________________________________\n\n");
 			x = RPSComparator(cmd[i-1],enemyin[i-1]);
 			printf("\t\t\t\t\t -- Phase %d --\n",(i+1));
@@ -327,7 +329,13 @@ void BattleProcessing(Player * P, Enemy * E){
 			}
 			printf("\n");
 			HP(*P) -= PDmgCntr(*P,*E,cmd[i],x);
+			if(HP(*P) < 0){
+				HP(*P) = 0;
+			}
 			HPE(*E) -= EDmgCntr(*P,*E,cmd[i],x);
+			if(HPE(*E) < 0){
+				HPE(*E) = 0;
+			}
 
 			printf(    "_________________________________________________________________________________________________\n");
 
@@ -339,6 +347,9 @@ void BattleProcessing(Player * P, Enemy * E){
 			if (HP(*P) <= 0){
 				GameOver(); //GameOver Handler
 			}
+		}
+		if(turn <= maxt && HP(*P) > 0){
+
 		}
 		turn++;
 

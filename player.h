@@ -12,7 +12,7 @@
 #define BaseHP 100
 #define BaseLevel 1
 #define BaseExp 0
-#define BaseStr 20
+#define BaseStr 99
 #define BaseDef 10
 #define BaseNext 10
 #define BaseSkillPoint 10

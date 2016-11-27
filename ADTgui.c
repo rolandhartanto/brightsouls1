@@ -253,13 +253,12 @@ void printHelp()
 void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
     printf(    "\t\t\t\t\t%s\n\n",Nama);
     printf(    "_________________________________________________________________________________________________\n\n");
-    printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
+    printf(    "| HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
     printf(    "_________________________________________________________________________________________________\n\n");
 }
 
-void PrintHeaderE(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
-    printf(    "\t\t\t\t\t%s\n\n",Nama);
+void PrintHeaderE(int HP, int STR, int DEF){
     printf(    "_________________________________________________________________________________________________\n\n");
-    printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
+    printf(    "|\t Enemy \t\t| \tHP : %d\t\t| \tSTR : %d\t| \tDEF : %d\t|\n",HP,STR,DEF);
     printf(    "_________________________________________________________________________________________________\n\n");
 }
