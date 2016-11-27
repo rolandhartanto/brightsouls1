@@ -196,7 +196,7 @@ void loadingBar()
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  LOADING\n");
+	printf("----------------------------------------------------------- "bold"[LOADING]"col_reset"\n");
 	for(int i=1;i<=10;i++){
 		printf(">");
 		fflush(stdout);
@@ -280,12 +280,36 @@ void printExit(int *b)
 
 void printHelp()
 {
-
+	printf("+-------------------------------+\n");
+	printf("|                               |\n");
+	printf("| +Welcome to Brightsouls v1.0+ |\n");
+	printf("| +Game control :               |\n");
+	printf("|   - 'GU' - go up              |\n");
+	printf("|   - 'GD' - go down            |\n");
+	printf("|   - 'GL' - go left            |\n");
+	printf("|   - 'GR' - go right           |\n");
+	printf("|                               |\n");
+	printf("| +Battle guide :               |\n");
+	printf("|   - 'A' - Attack              |\n");
+	printf("|   - 'B' - Block               |\n");
+	printf("|   - 'F' - Flank               |\n");
+	printf("|                               |\n");
+	printf("| +The Cycle                    |\n");
+	printf("|  (A defeats F, F defeats B,   |\n");
+	printf("|  B defeats A)                 |\n");
+	printf("|                               |\n");
+	printf("|         A -------> F          |\n");
+	printf("|         ^          |          |\n");
+	printf("|         |          |          |\n");
+	printf("|         |          |          |\n");
+	printf("|         +---- B <--+          |\n");
+	printf("|                               |\n");
+	printf("+-------------------------------+\n");
 }
 
 
 void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
-    printf(    "\t\t\t\t\t%s\n\n",Nama);
+    printf(    "\n\t\t\t\t\t\t\x1b[1m-%s-\x1b[0m\n\n",Nama);
     printf(    "_________________________________________________________________________________________________\n\n");
     printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
     printf(    "_________________________________________________________________________________________________\n\n");
@@ -331,7 +355,7 @@ void printCredits(){
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                          CREDITS                           ****\n");
+	printf("****                          "underlineb"CREDITS"underlineb"                           ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                  Vincent Hendryanto Halim                  ****\n");

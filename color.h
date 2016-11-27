@@ -13,7 +13,8 @@
 #define col_purple "\033[38;5;125m"
 #define col_lgreen "\033[38;5;10m"
 
-
+#define bold "\x1b[1m"
+#define underlineb "\x1b[4;1m"
 
 #define blbox "\033[38;5;255;48;5;255m"
 #define col_reset "\x1b[0;m"
