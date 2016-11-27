@@ -17,6 +17,18 @@ void IgnoreBlankTOKEN(){
 		ADV();
 	}
 }
+
+void STARTTOKENMAP(){
+	STARTMAP();
+	IgnoreBlankTOKEN();
+	if(CC==MARK){
+		EndToken=true;
+	}else{
+		EndToken=false;
+		SalinToken();
+	}
+}
+
 void STARTTOKEN(){
 /* I.S. : CC sembarang 
    F.S. : EndToken = true, dan CC = MARK; 
