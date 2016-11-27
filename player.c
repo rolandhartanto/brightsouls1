@@ -82,8 +82,8 @@ void ChangeSkillTree(BinTree * T, TabInt * TI, Player * P,TabInt * Taken){
 		SearchNode(*T,ID,&P1);
 		if(ID==Akar(P1).ID){
 			if(Akar(P1).tkn=='h'){
-				HP(*P)+=Akar(P1).val;
-				if(HP(*P)>100){HP(*P)=100;}
+				MaxHP(*P)+=Akar(P1).val;
+				HP(*P) = MaxHP(*P);
 				printf("HP pemain bertambah sebanyak: %d\n",Akar(P1).val);
 			}else if(Akar(P1).tkn=='s'){
 				Str(*P)+=Akar(P1).val;

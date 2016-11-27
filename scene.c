@@ -10,6 +10,22 @@ BinTree T;
 
 Player P;
 
+void BuildListFromFile(List *L){
+	int i=0; char tkn;
+	infotype info,val;
+	CreateEmpty(L);
+	STARTTOKENMAP();
+	if(EndToken){
+		CreateEmpty(L);
+	}else{
+		while(!EndToken){
+			val=CToken.val;
+			InsVLast(L,val);
+			ADVTOKEN();
+		}
+	}
+}
+
 void Title(){
     char name[12]={0};
     char x;
@@ -33,11 +49,13 @@ void InitGame(){
     int x,y;
 
     BuildTreeFromFile(&T);
-    CreateEmptyGraph(&G);                                   //Initialize Graph for map teleportation
-    GenerateNewMap(&Seed, &x, &y);					        //Initialize first map
+
+    BuildListFromFile(&Seed);                         //Initialize first map
+    //GenerateNewMap(&Seed, &x, &y);					        //Initialize first map
     Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
     Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
     InsVFirstGraph(&G,Seed);                                //Add First map to Graph
+    CreateEmptyGraph(&G);                                   //Initialize Graph for map teleportation
 
     CreatePlayer(&P);                                       //Initialize player
     InitPlayer(&P);                                         //
