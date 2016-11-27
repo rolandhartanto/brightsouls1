@@ -83,18 +83,21 @@ void ChangeSkillTree(BinTree * T, TabInt * TI, Player * P,TabInt * Taken){
 		if(ID==Akar(P1).ID){
 			if(Akar(P1).tkn=='h'){
 				HP(*P)+=Akar(P1).val;
+				if(HP(*P)>100){HP(*P)=100;}
 				printf("HP pemain bertambah sebanyak: %d\n",Akar(P1).val);
 			}else if(Akar(P1).tkn=='s'){
 				Str(*P)+=Akar(P1).val;
+				if(Str(*P)>100){Str(*P)=100;}
 				printf("STR pemain bertambah sebanyak: %d\n",Akar(P1).val);
 			}else if(Akar(P1).tkn=='d'){
 				Def(*P)+=Akar(P1).val;
+				if(Def(*P)>100){Def(*P)=100;}
 				printf("DEF pemain bertambah sebanyak: %d\n",Akar(P1).val);
 			}
 			Akar(P1).val=0;
 			SkillPoint(*P)--;//skill point pemain berkurang 1
 							//setelah diambil skillnya
-			
+			AddAsLastEl(Taken,ID);
 		}
 		PrintTree(*T,2);
 	}

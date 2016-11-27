@@ -67,11 +67,11 @@ boolean IsKataSama(char * kata1, char * kata2){
 
 void Overworld(){
 
-    char input[10],input1[10];
+    char * input;char * input1;
     int x,y,i,j,xs,ys,xe,ye;
     boolean stop;
     MATRIKS M;
-    int mapcount;
+    int mapcount,gameover;
     Enemy E;
     TabInt Taken;//untuk menampilkan skill yang telah diambil
     TabInt TI;//untuk menampilkan list skill yang dapat diambil
@@ -93,13 +93,21 @@ void Overworld(){
 	printf("                                         \n");
 	printf(    "_________________________________________________________________________________________________\n");
     while (!stop){
+    	input=malloc(10*sizeof(char));
+    	input1=malloc(10*sizeof(char));
+    	strcpy(input,"");
 		printf("\n\tInput : ");
         scanf(" %s",input);
 
         printf("\n\n\n");
         //pengubahan ke uppercase
         for(j=0;j<strlen(input);j++){
-            input1[j] = toupper(input[j]);
+        	if(input[j]<97){
+        		input1[j]=input[j];
+        	}else{
+        		input1[j] = (input[j])-32;	
+        	}
+            
         }  
         
         
@@ -130,10 +138,10 @@ void Overworld(){
                 ChangeSkillTree(&T,&TI,&P, &Taken);
             }else{
                 printf("No skill can be acquired\n");
-                printf("SkillPoint left : 1\n");
             }
         }
-    
+        free(input1);free(input);
+        //for(j=0;j<strlen(input1);j++){input1[i]='\0';}
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
             xs = Info(First(Seed));
     		ys = Info(Next(First(Seed)));
