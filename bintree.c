@@ -11,7 +11,7 @@
 /* typedef int infotype{} */ /* type infotype sesuai pada modul listrek */
 /* *** Konstruktor *** */
 
-void BuildTree (BinTree *P,infotype info){
+void BuildTree (BinTree *P,infotypeB info){
 	if(IsTreeEmpty(*P)){
 		*P=AlokNode(info);
 	}else if(IsTreeOneElmt(*P)){
@@ -22,7 +22,7 @@ void BuildTree (BinTree *P,infotype info){
 		BuildTree(&Left(*P),info);
 				}
 }
-addrNode AlokNode (infotype X){
+addrNode AlokNode (infotypeB X){
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P, 
   maka Akar(P) = X, Left(P) = Nil, Right(P)=Nil */

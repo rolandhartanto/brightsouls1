@@ -39,7 +39,7 @@ typedef struct {
 /* ********** SELEKTOR ********** */
 #define Neff(T)   (T).Neff
 #define TI(T)     (T).TI
-#define Elmt(T,i) (T).TI[(i)]
+#define ElmtA(T,i) (T).TI[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
