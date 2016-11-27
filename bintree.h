@@ -19,10 +19,10 @@ typedef struct info{
 	int ID;
 	char tkn;
 	int val;
-}infotype;
+}infotypeB;
 typedef struct tNode *addrNode;
 typedef struct tNode { 
-	infotype info;
+	infotypeB info;
 	addrNode left;
 	addrNode right;
 } Node;
@@ -39,9 +39,9 @@ typedef addrNode BinTree;
 #define Right(P) (P)->right
 
 /* *** Konstruktor *** */
-void BuildTree(BinTree *P, infotype info);
+void BuildTree(BinTree *P, infotypeB info);
 /* Manajemen Memory */
-addrNode AlokNode (infotype X);
+addrNode AlokNode (infotypeB X);
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P, 
   maka Akar(P) = X, Left(P) = Nil, Right(P)=Nil */

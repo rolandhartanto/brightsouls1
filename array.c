@@ -8,43 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*  Kamus Umum */
-#define IdxMax 100
-/* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
-#define IdxMin 1
-/* Indeks minimum array */
-#define IdxUndef -999 
-/* Indeks tak terdefinisi*/
-
-
-/*
-	Nama: Dicky Novanto
-	NIM: 13515134
-	Tanggal pembuatan: 6 September 2016
-	File: array.c
-	Topik: array
-	Deskripsi: operasi array
-*/
-
-/* Indeks yang digunakan [IdxMin..IdxMax] */
-/* Jika T adalah TabInt, cara deklarasi dan akses: */
-/* Deklarasi : T : TabInt */
-typedef int IdxType;  /* type indeks */
-typedef int ElType;   /* type elemen tabel */
-/* Maka cara akses: 
-   T.Neff  untuk mengetahui banyaknya elemen 
-   T.TI    untuk mengakses seluruh nilai elemen tabel 
-   T.TI[i] untuk mengakses elemen ke-i */
-/* Definisi : 
-  Tabel kosong: T.Neff = 0
-  Definisi elemen pertama : T.TI[i] dengan i=1 
-  Definisi elemen terakhir yang terdefinisi: T.TI[i] dengan i=T.Neff */
-  
-/* ********** SELEKTOR ********** */
-#define Neff(T)   (T).Neff
-#define TI(T)     (T).TI
-#define Elmt(T,i) (T).TI[(i)]
-
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
 void MakeEmpty (TabInt * T){
@@ -97,7 +60,7 @@ void TulisIsi (TabInt T){
 		printf("Tabel kosong\n");//perhatikan disini..perlu \n atau ga
 	}else{
 		for(i=IdxMin;i<=GetLastIdx(T);i++){
-			printf("[%d]%d\n",i,Elmt(T,i));
+			printf("[%d]%d\n",i,ElmtA(T,i));
 		}
 	}
 }
@@ -115,8 +78,8 @@ IdxType Search1 (TabInt T, ElType X){
 	if(IsEmptyA(T)){
 		return(IdxUndef);
 	}else{
-		while((i<=NbElmtA(T))&&(X!=Elmt(T,i))){
-			if((X!=Elmt(T,i))){
+		while((i<=NbElmtA(T))&&(X!=ElmtA(T,i))){
+			if((X!=ElmtA(T,i))){
 				i++;
 			}
 		}
@@ -139,6 +102,6 @@ void AddAsLastEl (TabInt * T, ElType X){
 	}else{
 		idx=GetLastIdx(*T);
 	}
-	Elmt(*T,idx+1)=X;
+	ElmtA(*T,idx+1)=X;
 	Neff(*T)++;
 }
