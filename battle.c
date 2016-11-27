@@ -217,12 +217,16 @@ void BattleProcessing(Player * P, Enemy * E){
 	RandomizeStack(&En,maxt);
 
 	turn = 1;
-
+	ClearScreen();
 	while(!isBattleEnd(maxt,turn,*P,*E)){
 		CreateEmptyQ(&Q,4);
 		PopSQ(&En,&Q);
 		//Print Enemy Command
+		printf(    "\n\n_________________________________________________________________________________________________\n");
+		printf("\n\n\t Enemy's Command : ");
 		PrintCmd(Q,enemyin);
+		printf("\n\n");
+		printf(    "_________________________________________________________________________________________________\n");
 
 		//debugger
 		//printf("%c",enemyin[0]);
@@ -237,12 +241,11 @@ void BattleProcessing(Player * P, Enemy * E){
 			printf("Input 4 Attack Commands : ");
 			for(i = 0; i<=3; i++){
 				scanf(" %c",&cmd[i]);
-				cmd[i] = toupper(cmd[i]);
-				if(cmd[i] != 'A' && cmd[i] != 'F' && cmd[i] != 'B'){
-					printf("%d",cmd[i] != 'A');
-					printf("%d",cmd[i] != 'B');
-					printf("%d",cmd[i] != 'F');
+				if(cmd[i] != 'A' && cmd[i] != 'F' && cmd[i] != 'B' && cmd[i] != 'E'){
 					error = true;
+				}
+				else{
+					push(
 				}
 
 			}
@@ -258,77 +261,74 @@ void BattleProcessing(Player * P, Enemy * E){
 		//Input Processing
 		for(i = 0; i<=3; i++){
 			PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
-			printf(    "_________________________________________________________________________________________________\n");
+			printf(    "_________________________________________________________________________________________________\n\n");
 			x = RPSComparator(cmd[i-1],enemyin[i-1]);
+			printf("\t\t\t\t\t -- Phase %d --\n",(i+1));
 			if(x == 1){
 				if(cmd[i] == 'B'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("Foe tries to attack!\n");
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("But %s blocked foe's attack\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("Foe tries to block!\n");
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("But %s flanked and break trough foe's defense\n", NamaP(*P));
 				}
 				if(cmd[i] == 'A'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("Foe tries to flank!\n");
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("But %s attacked foe right trough\n", NamaP(*P));
 				}
 			}
 			else if(x == 0){
 				if(cmd[i] == 'B'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("%s and foe blocked at the same time\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("%s and foe flanked at the same time\n", NamaP(*P));
 				}
 				if(cmd[i] == 'A'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("%s and foe attacked at the same time\n", NamaP(*P));
 				}
 			}
 			else if(x == -1){
 				if(cmd[i] == 'B'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("%s tries to attack!\n",NamaP(*P));
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("But foe blocked %s's attack\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("%s tries to block!\n",NamaP(*P));
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("But foe flanked and break trough %s's defense\n", NamaP(*P));
 				}
 				if(cmd[i]== 'A'){ //B v B
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("%s tries to flank!\n",NamaP(*P));
-					printf("\t\t\t");
+					printf("\t\t");
 					printf("But foe attacked %s's right trough\n", NamaP(*P));
 				}
 			}
-			printf("\n\n");
-			HP(*P) -= PDmgCntr(*P,*E,cmd[i-1],x);
-			HPE(*E) -= EDmgCntr(*P,*E,cmd[i-1],x);
+			printf("\n");
+			HP(*P) -= PDmgCntr(*P,*E,cmd[i],x);
+			HPE(*E) -= EDmgCntr(*P,*E,cmd[i],x);
 
 			printf(    "_________________________________________________________________________________________________\n");
 
 			//debugger
 			//printf("P %d E ",HP(*P));  system("usleep(%c)",x*1000);
 			//printf("%d",HPE(*E));
-			if(i!=3){
-				delay(1000);
-				ClearScreen();
-			}
-			else{
-			}
+			delay(1500);
+			ClearScreen();
 		}
 		turn++;
 

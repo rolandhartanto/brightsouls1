@@ -74,8 +74,9 @@ void Overworld(){
 	printf("                                         \n");
 	printf(    "_________________________________________________________________________________________________\n");
     while (!stop){
-		printf("\n\tInput : ");
+		    printf("\n\tInput : ");
         scanf(" %c",&input);
+        printf("\n\n\n");
         input = toupper(input);
         if(input == 'W'){ //UP
             GoLeft(&M,&CurPos,&Seed);

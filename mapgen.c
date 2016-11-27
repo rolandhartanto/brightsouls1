@@ -228,7 +228,7 @@ void TulisMap (MATRIKS M, POINT Pos){
         for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
 			if (j == GetFirstIdxKol(M)){
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf("\t\t\t\t\tP");
+					printf(col_red "\t\t\t\t\tP" col_reset);
 				}
 				else{
 					if(Elmt(M,i,j)==0){
@@ -250,7 +250,7 @@ void TulisMap (MATRIKS M, POINT Pos){
 			}
 			else{
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf("P");
+					printf(col_red "P" col_reset );
 				}
 				else{
 					if(Elmt(M,i,j)==0){
