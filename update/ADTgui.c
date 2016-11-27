@@ -1,13 +1,18 @@
+
 /*ADT GUI*/
 #include "ADTgui.h"
 //#include "scene.h"
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<time.h>
+#include "color.h"
 //#include<windows.h>
 
 //#define clear() printf("\033[2J")
 //#define gotoxy(x,y) printf("\033[%d;%dH", (x), (y))
+
+//extern Player P;
 
 #ifdef _WIN32
 
@@ -15,6 +20,15 @@
     void ClearScreen()
     {
         system("cls");
+    }
+
+    void delay(int x)
+    {
+       int c = 1, d = 1;
+
+       for ( c = 1 ; c <= x*10 ; c++ )
+           for ( d = 1 ; d <= x*10 ; d++ )
+           {}
     }
 
 
@@ -25,19 +39,15 @@
     {
         system("clear");
     }
+    void delay(int x)
+    {
+        usleep(x*1000);
+        fflush(stdout);
+    }
 
 #endif
 
-void delay(int x)
-{
-   int c = 1, d = 1;
 
-   for ( c = 1 ; c <= x*10 ; c++ )
-       for ( d = 1 ; d <= x*10 ; d++ )
-       {}
-
-
-}
 
 void Back()
 {
@@ -57,33 +67,33 @@ void printMainMenu()
 
 	ClearScreen();
 	//printf("%c==================================================================%c\n",201,187);
-	printf("****                                                            ****\n");	
-	printf("****                                                            ****\n");
-	printf("****           ___             |   |                   |        ****\n");
-	printf("****          |   \\            |   |    __             | __     ****\n");
-	printf("****          |   /   __ o  __ |_--|-- /  \\  __        |/  \\    ****\n");
-	printf("****          |---  |/   | /  ||  \\|   \\__  /  \\ |    ||\\__     ****\n");
-	printf("****        A |   \\ |    ||   ||  ||      \\|    ||    ||   \\    ****\n");
-	printf("****       <[>|___/ |    | \\__||  |\\__/\\__/ \\__/  \\__/ |\\__/    ****\n");
-	printf("****        [             \\___|                                 ****\n");
-	printf("****  /\\    [****\\\\\\\\\\*************************>>               ****\n");
-	printf("**** <*******[000000000000***********************>>             ****\n");
-	printf("****  \\/    [****/////*************************>>               ****\n");
-	printf("****        [                                                   ****\n");
-	printf("****       <[>                                                  ****\n");
-	printf("****        V                                                   ****\n");
-	printf("****                      (N)NEW GAME                           ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (S)START GAME                         ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (L)LOAD GAME                          ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (H)? HELP ?                           ****\n");
-	printf("****                                                            ****\n");
-	printf("****                      (E)EXIT                               ****\n");
-	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");
-	printf("                           INPUT : ");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"           ___             |   |                   |        "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"          |   \\            |   |    __             | __     "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"          |   /   __ o  __ |_--|-- /  \\  __        |/  \\    "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"          |---  |/   | /  ||  \\|   \\__  /  \\ |    ||\\__     "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"        A |   \\ |    ||   ||  ||      \\|    ||    ||   \\    "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"       <[>|___/ |    | \\__||  |\\__/\\__/ \\__/  \\__/ |\\__/    "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"        [             \\___|                                 "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"  /\\    [****\\\\\\\\\\*************************>>               "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset" <*******[000000000000***********************>>             "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"  \\/    [****/////*************************>>               "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"        [                                                   "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"       <[>                                                  "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"        V                                                   "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                      (N)NEW GAME                           "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                      (S)START GAME                         "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                      (L)LOAD GAME                          "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                      (H)? HELP ?                           "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                      (E)EXIT                               "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	printf(blbox"****"col_reset"                                                            "blbox"****"col_reset"\n");
+	//printf("                           INPUT : ");
 	//	printf("%c==================================================================%c\n",200,188);
 
 	//pilihOpsi(a);
@@ -95,6 +105,7 @@ void pilihOpsi(char a[],int *b,int *s)
 	char x;
 
 	do{
+		printf("                           INPUT : ");
 		scanf(" %c",&x);
 		switch (x){
 			case 'N' : NewGame(a); break;
@@ -102,7 +113,7 @@ void pilihOpsi(char a[],int *b,int *s)
 			case 'L' : loadingBar(); break;//buat sementara blm ada
 			case 'H' : printHelp(); break;//buat sementara blm ada
 			case 'E' : printExit(b); break;
-			default : printf("Invalid input!\n");
+			default : printf("                           Invalid input!\n");
 		}
 
 	}while(((x!='N')&&(x!='S')&&(x!='L')&&(x!='H')&&(x!='E'))&&(b!=0));
@@ -118,8 +129,6 @@ void NewGame(char a[])
 	printf("                INSERT YOUR NAME : ");
 	scanf("%s",a);
 
-	printf("Tekan 'B' untuk kembali ke menu utama");
-	Back();
 	/*printf("                                                                      \n"
 		   "                                                                      \n"
 		   "                                                                      \n"
@@ -164,31 +173,54 @@ void loadingBar()
 */
 {
 	ClearScreen();
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
 	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  LOADING\n");
 	for(int i=1;i<=10;i++){
 		printf(">");
 		fflush(stdout);
-		usleep(500000);
+		usleep(90000);
 	}
 	for(int i=1;i<=20;i++){
 		printf(">");
 		fflush(stdout);
-		usleep(200000);
+		usleep(50000);
 	}
 	for(int i=1;i<=10;i++){
 		printf(">");
 		fflush(stdout);
-		usleep(300000);
+		usleep(75000);
 	}
 	for(int i=1;i<=10;i++){
 		printf(">");
 		fflush(stdout);
-		usleep(150000);
+		usleep(30000);
 	}
 	for(int i=1;i<=10;i++){
 		printf(">");
 		fflush(stdout);
-		usleep(100000);
+		usleep(20000);
 	}
 	printf("\n");
 }
@@ -248,10 +280,34 @@ void printExit(int *b)
 
 void printHelp()
 {
-
+	printf("+-------------------------------+\n");
+	printf("|                               |\n");
+	printf("| +Welcome to Brightsouls v1.0+ |\n");
+	printf("| +Game control :               |\n");
+	printf("|   - 'GU' - go up              |\n");
+	printf("|   - 'GD' - go down            |\n");
+	printf("|   - 'GL' - go left            |\n");
+	printf("|   - 'GR' - go right           |\n");
+	printf("|                               |\n");
+	printf("| +Battle guide :               |\n");
+	printf("|   - 'A' - Attack              |\n");
+	printf("|   - 'B' - Block               |\n");
+	printf("|   - 'F' - Flank               |\n");
+	printf("|                               |\n");
+	printf("| +The Cycle                    |\n");
+	printf("|  (A defeats F, F defeats B,   |\n");
+	printf("|  B defeats A)                 |\n");
+	printf("|                               |\n");
+	printf("|         A -------> F          |\n");
+	printf("|         ^          |          |\n");
+	printf("|         |          |          |\n");
+	printf("|         |          |          |\n");
+	printf("|         +---- B <--+          |\n");
+	printf("|                               |\n");
+	printf("+-------------------------------+\n");	
 }
 
-
+ 
 void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
     printf(    "\t\t\t\t\t%s\n\n",Nama);
     printf(    "_________________________________________________________________________________________________\n\n");
@@ -259,29 +315,36 @@ void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int 
     printf(    "_________________________________________________________________________________________________\n\n");
 }
 
+
+void PrintHeaderE(int HP, int STR, int DEF){
+    printf(    "_________________________________________________________________________________________________\n\n");
+    printf(    "|\t Enemy \t\t| \tHP : %d\t| \tSTR : %d\t| \tDEF : %d\t|\n",HP,STR,DEF);
+    printf(    "_________________________________________________________________________________________________\n\n");
+}
+
 void printGameOver(){
-	printf("****                                                            ****\n");	
+  printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
-	printf("****         ___   ___   _  _  ___      __       ___ __               ****\n");
-	printf("****        /   \\ /   \\ / \\/ \\|        /  \\ |  ||   |  \\            ****\n");
-	printf("****       | ___  |___||  |  ||___    |    ||  ||___|__/             ****\n");
-	printf("****       |    | |   ||  |  ||       |    ||  ||   |  \\           ****\n");	
-	printf("****        \\___/ |   ||  |  ||___     \\__/  \\/ |___|  |           ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
+	printf("****         ___   ___   _  _  ___      __       ___ __         ****\n");
+	printf("****        /   \\ /   \\ / \\/ \\|        /  \\ |  ||   |  \\        ****\n");
+	printf("****       | ___  |___||  |  ||___    |    ||  ||___|__/        ****\n");
+	printf("****       |    | |   ||  |  ||       |    ||  ||   |  \\        ****\n");
+	printf("****        \\___/ |   ||  |  ||___     \\__/  \\/ |___|  |        ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
@@ -289,7 +352,7 @@ void printGameOver(){
 }
 
 void printCredits(){
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                          CREDITS                           ****\n");
@@ -297,21 +360,21 @@ void printCredits(){
 	printf("****                                                            ****\n");
 	printf("****                  Vincent Hendryanto Halim                  ****\n");
 	printf("****                                                            ****\n");
-	printf("****                       Roland Hartanto                      ****\n");	
+	printf("****                       Roland Hartanto                      ****\n");
 	printf("****                                                            ****\n");
 	printf("****                        Dicky Novanto                       ****\n");
 	printf("****                                                            ****\n");
 	printf("****                       Alif Ijlal Wafi                      ****\n");
-	printf("****                                                            ****\n");	
-	printf("****                Daniel Christian Pradipta Baso              ****\n");
+	printf("****                                                            ****\n");
+	printf("****              Daniel Christian Pradipta Basoeki             ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 
