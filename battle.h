@@ -13,6 +13,7 @@ typedef struct{
 	char cmd[5];
 } Command;
 
+
 #define Comd(P,i) (P).cmd[(i)]
 
 
@@ -28,4 +29,4 @@ void RandomizeStack(StackQ * S,int x);
 
 void PrintCmd(Queue Q,char * cmd);
 
-void BattleProcessing(Player * P, Enemy * E);
+void BattleProcessing(Player * P, Enemy * E,int * go);

@@ -3,12 +3,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-
 #define Comd(P,i) (P).cmd[(i)]
 
-void GameOver(){
-	//SHOW GAME OVER SCREEN
-}
 
 int RPSComparator(char P, char E){
 // Condition Output
@@ -35,7 +31,7 @@ int RPSComparator(char P, char E){
 
 boolean isBattleEnd( int maxTurn, int cntr, Player P, Enemy E){
 
-	return (cntr >= maxTurn || HP(P) <= 0 || HPE(E) <= 0);
+	return (cntr > maxTurn || HP(P) <= 0 || HPE(E) <= 0);
 }
 
 //HP Player -= STR Musuh  - DEF * offset; offset tergantung aksi player&musuh (kalo block kena flank, offset 0; kalo flank kena attack, offset 0.7; kalo draw (attack-attack / flank-flank, 0.8)
@@ -196,7 +192,7 @@ void PrintCmd(Queue Q,char * cmd){
 	}
 }
 
-void BattleProcessing(Player * P, Enemy * E){
+void BattleProcessing(Player * P, Enemy * E, int * go){
 	// Print Enemy / Player Status / Message
 	int i,turn,maxt,x,n,temp;
 	char plin,cmd[4],enemyin[4];
@@ -260,7 +256,7 @@ void BattleProcessing(Player * P, Enemy * E){
 		for(i=3;i>=0;i--){
 			PopS(&Input,&temp);
 			cmd[i] = temp;
-			printf("%d",cmd[i]);
+			//printf("%d",cmd[i]);
 		}
 
 		printf("\n");
@@ -268,7 +264,9 @@ void BattleProcessing(Player * P, Enemy * E){
 
 		//Input Processing
 		i = 0;
-		while(i<=3 && HPE(*E)>0){
+		// p --> i<=3
+		// q --> HP
+		while(i<=3 && HPE(*E)>0 && HP(*P)>0){
 			PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
 			PrintHeaderE(HPE(*E),STRE(*E),DEFE(*E));
 			printf(    "_________________________________________________________________________________________________\n\n");
@@ -337,7 +335,6 @@ void BattleProcessing(Player * P, Enemy * E){
 			if(HPE(*E) < 0){
 				HPE(*E) = 0;
 
-			i++;
 			}
 
 			printf(    "_________________________________________________________________________________________________\n");
@@ -347,17 +344,20 @@ void BattleProcessing(Player * P, Enemy * E){
 			//printf("%d",HPE(*E));
 			delay(1500);
 			ClearScreen();
-			if (HP(*P) <= 0){
-				GameOver(); //GameOver Handler
-			}
-		}
-		if(turn <= maxt && HP(*P) > 0){
-			Exp(*P) += EXPE(*E);
-			if(IsReadyNextLvl(Exp(*P),NextEXP(*P))){
-				LevelUp(P);
-			}
+			i++;
 		}
 		turn++;
 
+	}
+
+
+	if(turn <= maxt && HP(*P) > 0){
+		Exp(*P) += EXPE(*E);
+		if(IsReadyNextLvl(Exp(*P),NextEXP(*P))){
+			LevelUp(P);
+		}
+	}
+	if (HP(*P) <= 0){
+		*go = 1;; //GameOver Handler
 	}
 }

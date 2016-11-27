@@ -3,7 +3,7 @@
 
 int main(){
 	//Title();
-	Overworld();
+	Title();
 
 	return 0;
 }

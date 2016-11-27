@@ -104,7 +104,9 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 
 			nextBlock(&xa, &ya, x, y, c);
 			end = clock();
-			if ((end-start)>=10000){
+
+			if ((end-start)>=2000){
+
 				//printf("fail\n");
 				*fail = true;
 				break;
@@ -228,67 +230,67 @@ void TulisMap (MATRIKS M, POINT Pos){
         for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
 			if (j == GetFirstIdxKol(M)){
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf(col_red "\t\t\t\t\tP" col_reset);
+					printf("\t\t\t\t\t"col_yellow"P" col_reset);
 				}
 				else{
 					if(Elmt(M,i,j)==0){
 						printf("\t\t\t\t\t ");
 					}
 					else if(Elmt(M,i,j)==1){
-						printf("\t\t\t\t\tM");
+						printf("\t\t\t\t\t"col_green"M"col_reset);
 					}
 					else if(Elmt(M,i,j)==2){
-						printf("\t\t\t\t\tE");
+						printf("\t\t\t\t\t"col_red"E"col_reset);
 					}
 					else if(Elmt(M,i,j)==3){
-						printf("\t\t\t\t\t#");
+						printf("\t\t\t\t\t"blbox"#"col_reset);
 					}
 					else if(Elmt(M,i,j)==4){
-						printf("\t\t\t\t\tB");
+						printf("\t\t\t\t\t"col_purple"B"col_reset);
 					}
 				}
 			}
 			else{
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf(col_red "P" col_reset );
+					printf(col_yellow"P"col_reset );
 				}
 				else{
 					if(Elmt(M,i,j)==0){
 						printf(" ");
 					}
 					else if(Elmt(M,i,j)==1){
-						printf("M");
+						printf(col_green"M"col_reset);
 					}
 					else if(Elmt(M,i,j)==2){
-						printf("E");
+						printf(col_red"E"col_reset);
 					}
 					else if(Elmt(M,i,j)==3){
-						printf("#");
+						printf(blbox"#"col_reset);
 					}
 					else if(Elmt(M,i,j)==4){
-						printf("B");
+						printf(col_purple"B"col_reset);
 					}
 				}
 			}
 		}
 		if (i == Absis(Pos) && j == Ordinat(Pos)){
-			printf(col_red "P\n" col_reset);
+			printf(col_yellow "P\n" col_reset);
 		}
 		else{
 			if(Elmt(M,i,j)==0){
 				printf(" \n");
 			}
 			else if(Elmt(M,i,j)==1){
-				printf("I\n");
+				printf(col_green"M\n"col_reset);
 			}
 			else if(Elmt(M,i,j)==2){
-				printf("E\n");
+				printf(col_red"E\n"col_reset);
 			}
 			else if(Elmt(M,i,j)==3){
-				printf("#\n");
+				printf(blbox"#\n"col_reset);
 			}
 			else if(Elmt(M,i,j)==4){
-				printf("B\n");
+				printf(col_purple"B\n"col_reset);
 			}
 		}
     }
