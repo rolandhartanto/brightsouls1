@@ -105,9 +105,8 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			nextBlock(&xa, &ya, x, y, c);
 			end = clock();
 
-			if ((end-start)>=5000){
-
-				//printf("fail\n");
+			if ((end-start)>=2000){
+				//printf("fail\n");	//DEBUGGER
 				*fail = true;
 				break;
 			}
@@ -135,7 +134,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			InsVLast(&encounter,xa);
 			InsVLast(&encounter,ya);
 		}
-		else if( d >= 45 && d <= 53){
+		else if( d >= 45 && d <= 48){
 			InsVLast(&encounter,98);
 			InsVLast(&encounter,x);
 			InsVLast(&encounter,y);

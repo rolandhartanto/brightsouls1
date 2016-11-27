@@ -11,20 +11,22 @@ BinTree T;
 Player P;
 
 void Title(){
-    char name[11]={0};
+    char name[12]={0};
     char x;
     int b = 1, s = 0;//b status program jalan ato berhenti, s status start ato blm
-    int lvl = 1,hp = 100,str = 2,def = 2,exp = 0;
+
     loadingBar();
     while(b){
         if(s==1){
             Overworld();
+            b = 0;
         }else{
             printMainMenu();
             pilihOpsi(name,&b,&s);
             strcpy(Nama(P),name);
         }
     }
+    ClearScreen();
 }
 
 void InitGame(){
@@ -105,23 +107,26 @@ void Overworld(){
         	if(input[j]<97){
         		input1[j]=input[j];
         	}else{
-        		input1[j] = (input[j])-32;	
+        		input1[j] = (input[j])-32;
         	}
-            
-        }  
-        
-        
-        if(IsKataSama(input1,"W")){ //UP
+
+        }
+
+
+        if(IsKataSama(input1,"GU")){ //UP
             GoLeft(&M,&CurPos,&Seed);
         }
-        else if(IsKataSama(input1,"S")){ //DOWN
+        else if(IsKataSama(input1,"GD")){ //DOWN
             GoRight(&M,&CurPos,&Seed);
         }
-        else if(IsKataSama(input1,"A")){ //LEFT
+        else if(IsKataSama(input1,"GL")){ //LEFT
             GoDown(&M,&CurPos,&Seed);
         }
-        else if(IsKataSama(input1,"D")){ //RIGHT
+        else if(IsKataSama(input1,"GR")){ //RIGHT
             GoUp(&M,&CurPos,&Seed);
+        }
+        else if(IsKataSama(input1,"EXIT")){
+            stop = true;
         }
 
         ClearScreen();
@@ -197,19 +202,15 @@ void Overworld(){
         PrintMap(Seed,CurPos,&M);
 		printf(    "_________________________________________________________________________________________________\n\n");
 		if (ItemFlag){
-			printf("\t\t  > Kamu mendapatkan Obat! " col_lgreen "HP+10" col_reset"\n");
-            HP(P) += 10;
-            //printf("%d",HPMax(P));
-            if(HP(P) >= HPMax(P)){      //Case HP > HPMax
-                HP(P) = HPMax(P);
-            }
+			printf("\t\t  > Got a potion! " col_lgreen "HP fully restored" col_reset"\n");
+      HP(P) = HPMax(P);
 			ItemFlag = false;
 		}
 		else if(EnemyFlag){
-			printf("\t\t  > Ada " col_red "musuh" col_reset" muncul!\n");
+      printf("\t\t  > A wild " col_red "foe" col_reset" appeared!\n");
       printf(    "_________________________________________________________________________________________________\n");
       initEnemy(&E, mapcount, false);
-      delay(1500);
+      delay(500);
       BattleProcessing(&P, &E, &gameover);
 			EnemyFlag = false;
       PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
@@ -217,19 +218,23 @@ void Overworld(){
       printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
 		}
 		else if(BossFlag){
-			printf("\t\t  > Ada "col_purple"boss"col_reset " muncul!\n");
+			printf("\t\t  > "col_purple"Boss"col_reset " appeared!\n");
       printf(    "_________________________________________________________________________________________________\n");
       initEnemy(&E, mapcount, true);
-      delay(1500);
+      delay(500);
       BattleProcessing(&P,&E,&gameover);
 			BossFlag = false;
-      PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+      /*PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
       PrintMap(Seed,CurPos,&M);
-      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
-
-		}
+      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");*/
+      ClearScreen();
+      if(!gameover){
+        printWin();
+        stop=true;
+      }
+    }
 		else if(WallFlag){
-			printf("\t\t  > Kamu menabrak tembok             \n");
+			printf("\t\t  > You can't move there             \n");
 			WallFlag = false;
 		}
 		else{
@@ -237,16 +242,15 @@ void Overworld(){
 		}
 		printf(    "_________________________________________________________________________________________________\n");
 
-    if(gameover == 1){
-      ClearScreen();
-      printGameOver();
-      delay(3500);
-      ClearScreen();
-      printCredits();
-      delay(3500);
-      ClearScreen();
-      stop = true;
+      if(gameover == 1){
+        ClearScreen();
+        printGameOver();
+        delay(3500);
+        ClearScreen();
+        printCredits();
+        delay(3500);
+        ClearScreen();
+        stop = true;
+      }
     }
-    }
-
 }

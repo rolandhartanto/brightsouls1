@@ -10,6 +10,7 @@
 #define col_green "\033[38;5;34m"
 #define col_yellow "\033[38;5;214m"
 #define col_red "\033[38;5;160m"
+#define col_dred "\033[38;5;124m"
 #define col_purple "\033[38;5;125m"
 #define col_lgreen "\033[38;5;10m"
 #define col_lblue "\033[38;5;33m"

@@ -56,4 +56,5 @@ void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int 
 void PrintHeaderE(int HP, int STR, int DEF);
 void printGameOver();
 void printCredits();
+void printWin();
 #endif

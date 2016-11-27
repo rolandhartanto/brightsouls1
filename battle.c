@@ -65,7 +65,7 @@ int PDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0; //FB
 		}
 		else if (P == 'A'){
-			dmg = (STRE(El)*8)/10; //AF
+			dmg = 0; //AF
 		}
 	}
 
@@ -95,11 +95,7 @@ int EDmgCntr(Player Pl, Enemy El, char P, int rslt){
 			dmg = 0;
 		}
 		else if (P == 'F'){
-
-			//dmg = (ATK(Pl)) * 8/10; //FA
-
-			dmg = (Str(Pl) * 8)/10; //FA
-
+			dmg = 0; //FA
 		}
 		else if (P == 'A'){ //AB
 			dmg = 0;
@@ -148,18 +144,18 @@ void ReadCmd(Queue * Q){
 		else if(CKata.TabKata[1] =='F'){
 			AddQ(Q,'F');
 		}
-		//printf("%d : %c - ",i, CKata.TabKata[1]);
+		//printf("%d : %c - ",i, CKata.TabKata[1]); //DEBUGGER
 		ADVKATA();
 	}
 }
 
 void RandomizeStack(StackQ * S,int x){
-	Queue Q[30];
+	Queue Q[96];
 	int n,c;
 	n = 0;
 	STARTKATABTL();
 	//CreateEmptySQ(S);
-	while(!EndKata && n < 30){
+	while(!EndKata && n <= 90){
 		ReadCmd(&Q[n]);	//Read X Lines
 		n++;
 	}
@@ -204,6 +200,7 @@ void PrintCmd(Queue Q,char * cmd){
 void BattleProcessing(Player * P, Enemy * E, int * go){
 	// Print Enemy / Player Status / Message
 	int i,turn,maxt,x,n,temp;
+	int dmgpl, dmgen;
 	char plin,cmd[4],enemyin[4];
 	Stack Input;
 	StackQ En;
@@ -336,15 +333,23 @@ void BattleProcessing(Player * P, Enemy * E, int * go){
 				}
 			}
 			printf("\n");
-			HP(*P) -= PDmgCntr(*P,*E,cmd[i],x);
+			//DAMAGE COUNTER
+			dmgpl = PDmgCntr(*P,*E,cmd[i],x);
+			HP(*P) -= dmgpl;
 			if(HP(*P) < 0){
 				HP(*P) = 0;
 			}
-			HPE(*E) -= EDmgCntr(*P,*E,cmd[i],x);
+			dmgen = EDmgCntr(*P,*E,cmd[i],x);
+			HPE(*E) -= dmgen;
 			if(HPE(*E) < 0){
 				HPE(*E) = 0;
-
 			}
+
+			printf("\t\t"col_green"%s"col_reset" received "col_dred"%d"col_reset" damage\n",Nama(*P),dmgpl);
+			printf("\t\t"col_red"Foe"col_reset" received "col_dred"%d"col_reset"damage\n",dmgen);
+			printf("\n");
+
+
 
 			printf(    "_________________________________________________________________________________________________\n");
 

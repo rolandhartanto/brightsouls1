@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define BaseEHP 80
-#define BaseESTR 15
+#define BaseESTR 999
 #define BaseEDEF 10
 #define BaseEEXP 8
 
