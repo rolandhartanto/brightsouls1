@@ -303,7 +303,7 @@ void printCredits(){
 	printf("****                                                            ****\n");
 	printf("****                       Alif Ijlal Wafi                      ****\n");
 	printf("****                                                            ****\n");	
-	printf("****                Daniel Christian Pradipta Baso              ****\n");
+	printf("****              Daniel Christian Pradipta Basoeki             ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
