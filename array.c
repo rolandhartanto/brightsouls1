@@ -1,7 +1,7 @@
 /* MODUL TABEL INTEGER */
 /* Berisi definisi dan semua primitif pemrosesan tabel integer */
 /* Penempatan elemen selalu rapat kiri */
-/* Versi I : dengan banyaknya elemen didefinisikan secara eksplisit, 
+/* Versi I : dengan banyaknya elemen didefinisikan secara eksplisit,
    memori tabel statik */
 #include "boolean.h"
 #include "array.h"
@@ -13,9 +13,9 @@
 void MakeEmpty (TabInt * T){
 /* I.S. T sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
-	
+
 	Neff(*T)=0;
-	
+
 }
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 int NbElmtA (TabInt T){

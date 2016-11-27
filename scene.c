@@ -7,7 +7,6 @@ addressg CurMap;
 int xfirst,yfirst;
 BinTree T;
 
-
 Player P;
 
 void BuildListFromFile(List *L){
@@ -86,7 +85,6 @@ boolean IsKataSama(char * kata1, char * kata2){
 }
 
 void Overworld(){
-
     char * input;char * input1;
     int x,y,i,j,xs,ys,xe,ye;
     boolean stop;
@@ -113,11 +111,11 @@ void Overworld(){
 	printf("                                         \n");
 	printf(    "_________________________________________________________________________________________________\n");
     while (!stop){
-    	input=malloc(10*sizeof(char));
-    	input1=malloc(10*sizeof(char));
-    	strcpy(input,"");
+    	 input=malloc(10*sizeof(char));
+    	 input1=malloc(10*sizeof(char));
+    	//strcpy(input,"");
 		printf("\n\tInput : ");
-        scanf(" %s",input);
+        scanf("%s",input);
 
         printf("\n\n\n");
         //pengubahan ke uppercase
@@ -146,23 +144,18 @@ void Overworld(){
         else if(IsKataSama(input1,"EXIT")){
             stop = true;
         }
-
-        ClearScreen();
-        if(IsKataSama(input1,"SKILL")){
+        else if(IsKataSama(input1,"SKILL")){
             //menampilkan skill
-            if(IsEmptyA(Taken)){
-                printf("No skill has been achieved\n");
-            }else{//sudah ada skill yang terambil
-                printf("Skill that has been taken:\n");
-                TulisIsi(Taken);printf("\n");
-            }
+            ClearScreen();
+
             //menampilkan skill yang dapat diambil
-            if(IsReadyGetSkill(SkillPoint(P))){
+            //if(IsReadyGetSkill(SkillPoint(P))){
                 ChangeSkillTree(&T,&TI,&P, &Taken);
-            }else{
-                printf("No skill can be acquired\n");
-            }
+            //}else{
+            //    printf("No skill can be acquired\n");
+            //}
         }
+        ClearScreen();
         free(input1);free(input);
         //for(j=0;j<strlen(input1);j++){input1[i]='\0';}
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
@@ -225,22 +218,22 @@ void Overworld(){
 			ItemFlag = false;
 		}
 		else if(EnemyFlag){
-      printf("\t\t  > A wild " col_red "foe" col_reset" appeared!\n");
-      printf(    "_________________________________________________________________________________________________\n");
-      initEnemy(&E, mapcount, false);
-      delay(500);
-      BattleProcessing(&P, &E, &gameover);
+            printf("\t\t  > A wild " col_red "foe" col_reset" appeared!\n");
+            printf(    "_________________________________________________________________________________________________\n");
+            initEnemy(&E, mapcount, false);
+            delay(500);
+            BattleProcessing(&P, &E, &gameover);
 			EnemyFlag = false;
-      PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
-      PrintMap(Seed,CurPos,&M);
+            PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+            PrintMap(Seed,CurPos,&M);
       printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
 		}
 		else if(BossFlag){
 			printf("\t\t  > "col_purple"Boss"col_reset " appeared!\n");
-      printf(    "_________________________________________________________________________________________________\n");
-      initEnemy(&E, mapcount, true);
-      delay(500);
-      BattleProcessing(&P,&E,&gameover);
+            printf(    "_________________________________________________________________________________________________\n");
+            initEnemy(&E, mapcount, true);
+            delay(500);
+            BattleProcessing(&P,&E,&gameover);
 			BossFlag = false;
       /*PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
       PrintMap(Seed,CurPos,&M);

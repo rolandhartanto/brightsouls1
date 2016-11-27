@@ -1,6 +1,6 @@
 /* ADT Pohon Biner */
 /* Implementasi dengan menggunakan pointer */
-/* Penamaan type infotype, type addrNode, dan beberapa fungsi disesuikan 
+/* Penamaan type infotype, type addrNode, dan beberapa fungsi disesuikan
    karena melibatkan modul list rekursif. */
 #include "bintree.h"
 #include <stdio.h>
@@ -44,14 +44,14 @@ void BuildTreeFromFile(BinTree *T){
 				BuildTree(T,info);
 			}
 		}
-			
+
 	}
 }
 
 
 addrNode AlokNode (infotypeB X){
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P, 
+/* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P,
   maka Akar(P) = X, Left(P) = Nil, Right(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 	addrNode P;
@@ -115,11 +115,11 @@ boolean IsAllTaken(BinTree P){
 		}else if(IsUnerLeft(P)){
 			return(IsAllTaken(Left(P)));
 		}else if(IsUnerRight(P)){
-			return(IsAllTaken(Right(P)));	
+			return(IsAllTaken(Right(P)));
 		}else if(IsBiner(P)){
 			return((IsAllTaken(Right(P))&&(IsAllTaken(Left(P)))));
 		}
-		
+
 	}else{
 		return(false);
 	}
@@ -160,7 +160,7 @@ void PrintTree1 (BinTree P, int h,int level){
 /* I.S. P terdefinisi, h adalah jarak indentasi (spasi) */
 /* F.S. Semua simpul P sudah ditulis dengan indentasi (spasi) */
 /* Penulisan akar selalu pada baris baru (diakhiri newline) */
-/* Contoh, jika h = 2: 
+/* Contoh, jika h = 2:
 1) Pohon preorder: (A()()) akan ditulis sbb:
 A
 2) Pohon preorder: (A(B()())(C()())) akan ditulis sbb:
@@ -185,16 +185,49 @@ BinTree temp=P;
 			}
 			PrintTree1(Left(P),h,level+1);
 		}
-		
+
 		if(!IsTreeEmpty(Right(P))){
 			for(i=1;i<=h*level;i++){
 				printf(" ");
 			}
 			PrintTree1(Right(P),h,level+1);
 		}
-		
+
 	}
 }
 void PrintTree (BinTree P, int h){
 	PrintTree1(P,h,1);
+}
+
+boolean SearchIsi(BinTree P, int ID){
+	if(IsTreeEmpty(P)){
+		return false;
+	}
+	else{
+		if(Akar(P).ID == ID){
+			return true;
+		}
+		else{
+			return (SearchIsi(Left(P),ID) || SearchIsi(Right(P),ID));
+		}
+	}
+}
+
+int Tingkat(BinTree P,addrNode A){
+	if(IsTreeEmpty(P)){
+		return 0;
+	}
+	else{
+		if(Akar(P).ID == Akar(A).ID){
+			return 1;
+		}
+		else{
+			if(SearchIsi(Left(P),Akar(A).ID)){
+				return (1 + Tingkat(Left(P),A));
+			}
+			else if(SearchIsi(Right(P),Akar(A).ID)){
+				return (1 + Tingkat(Right(P),A));
+			}
+		}
+	}
 }

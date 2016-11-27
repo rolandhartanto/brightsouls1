@@ -16,6 +16,9 @@
 #define col_lblue "\033[38;5;33m"
 #define col_orange "\033[38;5;202m"
 
+#define col_blue_bg "\033[38;5;255;48;5;31m"
+#define col_gray_bg "\033[38;5;232;48;5;255m"
+
 #define bold "\x1b[1m"
 #define underlineb "\x1b[4;1m"
 

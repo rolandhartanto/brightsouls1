@@ -346,7 +346,7 @@ void BattleProcessing(Player * P, Enemy * E, int * go){
 			}
 
 			printf("\t\t"col_green"%s"col_reset" received "col_dred"%d"col_reset" damage\n",Nama(*P),dmgpl);
-			printf("\t\t"col_red"Foe"col_reset" received "col_dred"%d"col_reset"damage\n",dmgen);
+			printf("\t\t"col_red"Foe"col_reset" received "col_dred"%d"col_reset" damage\n",dmgen);
 			printf("\n");
 
 

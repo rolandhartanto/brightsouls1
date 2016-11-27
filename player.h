@@ -15,7 +15,7 @@
 #define BaseStr 20
 #define BaseDef 10
 #define BaseNext 10
-#define BaseSkillPoint 1
+#define BaseSkillPoint 2
 
 /*Definisi koleksi elemen dan objek dari player*/
 typedef int ItemID;
@@ -79,4 +79,5 @@ void LevelUp(Player * P);
 boolean IsReadyGetSkill(int SkillPoint);
 
 void ChangeSkillTree(BinTree * T, TabInt * TI, Player * P, TabInt * Taken);
+void TulisIsiST (TabInt T, BinTree Ph);
 #endif

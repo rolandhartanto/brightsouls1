@@ -1,6 +1,6 @@
 /* ADT Pohon Biner */
 /* Implementasi dengan menggunakan pointer */
-/* Penamaan type infotype, type addrNode, dan beberapa fungsi disesuikan 
+/* Penamaan type infotype, type addrNode, dan beberapa fungsi disesuikan
    karena melibatkan modul list rekursif. */
 
 #ifndef _BINTREE_H_
@@ -21,7 +21,7 @@ typedef struct info{
 	int val;
 }infotypeB;
 typedef struct tNode *addrNode;
-typedef struct tNode { 
+typedef struct tNode {
 	infotypeB info;
 	addrNode left;
 	addrNode right;
@@ -30,7 +30,7 @@ typedef struct tNode {
 /* Definisi PohonBiner : */
 /* Pohon Biner kosong : P = Nil */
 typedef addrNode BinTree;
- 
+
 /* *** PROTOTYPE *** */
 
 /* *** Selektor *** */
@@ -44,7 +44,7 @@ void BuildTree(BinTree *P, infotypeB info);
 /* Manajemen Memory */
 addrNode AlokNode (infotypeB X);
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P, 
+/* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P,
   maka Akar(P) = X, Left(P) = Nil, Right(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 void DealokNode (addrNode P);
@@ -72,7 +72,7 @@ void PrintTree (BinTree P, int h);
 /* I.S. P terdefinisi, h adalah jarak indentasi (spasi) */
 /* F.S. Semua simpul P sudah ditulis dengan indentasi (spasi) */
 /* Penulisan akar selalu pada baris baru (diakhiri newline) */
-/* Contoh, jika h = 2: 
+/* Contoh, jika h = 2:
 1) Pohon preorder: (A()()) akan ditulis sbb:
 A
 2) Pohon preorder: (A(B()())(C()())) akan ditulis sbb:
@@ -86,5 +86,6 @@ A
   C
     E
 */
-   
+
+int Tingkat(BinTree P,addrNode A);   
 #endif
