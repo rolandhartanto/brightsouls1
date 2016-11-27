@@ -13,6 +13,8 @@ typedef struct{
 	char cmd[5];
 } Command;
 
+extern int gameover;
+
 #define Comd(P,i) (P).cmd[(i)]
 
 

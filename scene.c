@@ -1,13 +1,5 @@
 #include "scene.h"
-#include <stdio.h>
-#include <ctype.h>
-#include "mapgen.h"
-#include "movement.h"
-#include "ADTgui.h"
-#include "color.h"
-#include "battle.h"
-#include "graph.h"
-#include "player.h"
+
 
 Graph G;
 List Seed;
@@ -15,7 +7,7 @@ POINT CurPos;
 addressg CurMap;
 int xfirst,yfirst;
 
-extern Player P;
+
 Player P;
 
 void Title(){
@@ -190,6 +182,14 @@ void Overworld(){
 		printf(    "_________________________________________________________________________________________________\n");
     }
 
-
+    if(gameover == 1){
+      stop = true;
+      ClearScreen();
+      printGameOver();
+      delay(3500);
+      ClearScreen();
+      printCredits();
+      ClearScreen();
+    }
 
 }

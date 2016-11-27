@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-
 #define Comd(P,i) (P).cmd[(i)]
 
+
+int gameover;
+
 void GameOver(){
-	//SHOW GAME OVER SCREEN
+	gameover = 1;
 }
 
 int RPSComparator(char P, char E){
