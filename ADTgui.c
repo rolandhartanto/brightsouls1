@@ -257,7 +257,7 @@ void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int 
     printf(    "_________________________________________________________________________________________________\n\n");
 }
 
-void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
+void PrintHeaderE(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
     printf(    "\t\t\t\t\t%s\n\n",Nama);
     printf(    "_________________________________________________________________________________________________\n\n");
     printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
