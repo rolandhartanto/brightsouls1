@@ -8,18 +8,8 @@
 boolean EndToken;
 Token CToken;
 
-void IgnoreBlankEnter(){
-/* Mengabaikan satu atau beberapa BLANK
-   I.S. : CC sembarang 
-   F.S. : CC ≠ BLANK atau CC = MARK */
-	while(((CC==BLANK)||(CC=='\n'))&&(CC!=MARK)){
-		ADV();
-	}
-}
 
-
-
-void IgnoreBlank(){
+void IgnoreBlankTOKEN(){
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang 
    F.S. : CC ≠ BLANK atau CC = MARK */
@@ -33,7 +23,7 @@ void STARTTOKEN(){
           atau EndToken = false, CToken adalah Token yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir Token */
 	STARTTREE();
-	IgnoreBlank();
+	IgnoreBlankTOKEN();
 	if(CC==MARK){
 		EndToken=true;
 	}else{
@@ -47,12 +37,12 @@ void ADVTOKEN(){
           CC adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika CC = MARK, maka EndToken = true      
    Proses : Akuisisi kata menggunakan procedure SalinKata */
-	IgnoreBlank();
+	IgnoreBlankTOKEN();
 	if(CC==MARK){
 		EndToken=true;
 	}else{
 		SalinToken();
-		IgnoreBlank();
+		IgnoreBlankTOKEN();
 	}
 }
 void SalinToken(){

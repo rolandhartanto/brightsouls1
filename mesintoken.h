@@ -19,9 +19,8 @@ typedef struct {
 extern boolean EndToken;
 extern Token CToken;
 
-void IgnoreBlankEnter();
 
-void IgnoreBlank();
+void IgnoreBlankTOKEN();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang 
    F.S. : CC ≠ BLANK atau CC = MARK */

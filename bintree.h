@@ -39,6 +39,7 @@ typedef addrNode BinTree;
 #define Right(P) (P)->right
 
 /* *** Konstruktor *** */
+void BuildTreeFromFile(BinTree *T);
 void BuildTree(BinTree *P, infotypeB info);
 /* Manajemen Memory */
 addrNode AlokNode (infotypeB X);

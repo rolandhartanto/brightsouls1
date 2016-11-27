@@ -20,8 +20,35 @@ void BuildTree (BinTree *P,infotypeB info){
 		Right(*P)=AlokNode(info);
 	}else if(IsBiner(*P)){
 		BuildTree(&Left(*P),info);
-				}
+	}
 }
+
+void BuildTreeFromFile(BinTree *T){
+	int i=0, val; char tkn;
+	infotypeB info;
+	*T=Nil;
+	STARTTOKEN();
+	if(EndToken){
+		*T=Nil;
+	}else{
+		while(!EndToken){
+			if(CToken.ID=='b'){
+				val=CToken.val;
+			}else{
+				tkn=CToken.ID;
+			}
+			ADVTOKEN();
+			i++;
+			if((i>0)&&(i%2==0)){
+				info.ID=i; info.val=val; info.tkn=tkn;
+				BuildTree(T,info);
+			}
+		}
+			
+	}
+}
+
+
 addrNode AlokNode (infotypeB X){
 /* Mengirimkan addrNode hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addrNode tidak Nil, dan misalnya menghasilkan P, 

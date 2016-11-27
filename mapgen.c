@@ -104,7 +104,7 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 
 			nextBlock(&xa, &ya, x, y, c);
 			end = clock();
-			if ((end-start)>=1000){
+			if ((end-start)>=10000){
 				//printf("fail\n");
 				*fail = true;
 				break;

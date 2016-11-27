@@ -1,24 +1,30 @@
-#include "scene.h"
 #include <stdio.h>
+#include <ctype.h>
+
+#include "scene.h"
+
 #include "mapgen.h"
 #include "movement.h"
 #include "ADTgui.h"
 #include "graph.h"
 #include "battle.h"
-#include <ctype.h>
+#include "array.h"
+#include "player.h"
+#include "bintree.h"
+
 
 Graph G;
 List Seed;
 POINT CurPos;
 addressg CurMap;
 int xfirst,yfirst;
+BinTree T;
 
 extern Player P;
 Player P;
 
 void Title(){
     char name[11]={0};
-
     char x;
     int b = 1, s = 0;//b status program jalan ato berhenti, s status start ato blm
     int lvl = 1,hp = 100,str = 2,def = 2,exp = 0;
@@ -36,6 +42,7 @@ void Title(){
 void InitGame(){
     int x,y;
 
+    BuildTreeFromFile(&T);
     CreateEmptyGraph(&G);                                   //Initialize Graph for map teleportation
     GenerateNewMap(&Seed, &x, &y);					        //Initialize first map
     Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
@@ -51,15 +58,37 @@ void InitGame(){
     yfirst = y;
 }
 
+boolean IsKataSama(char * kata1, char * kata2){
+    int i=0;
+    boolean found=true;
+    if(strlen(kata1)==strlen(kata2)){
+        while((i<strlen(kata1))&&(found)){
+            if(kata1[i]==kata2[i]){
+                i++;
+            }else{
+                return(false);
+            }
+        }
+        if(i==strlen(kata1)){
+            return(true);
+        }
+    }else{
+        return(false);
+    }
+}
 
 void Overworld(){
-    char input;
-    int x,y,i,xs,ys,xe,ye;
+    char input[10],input1[10];
+    int x,y,i,j,xs,ys,xe,ye;
     boolean stop;
     MATRIKS M;
     int mapcount;
     Enemy E;
+    TabInt Taken;//untuk menampilkan skill yang telah diambil
+    TabInt TI;//untuk menampilkan list skill yang dapat diambil
 
+    MakeEmpty(&Taken);
+    MakeEmpty(&TI);
     // Buat prosedur load to map;
     InitGame();
     mapcount = 1;
@@ -74,24 +103,47 @@ void Overworld(){
 	printf("                                         \n");
 	printf(    "_________________________________________________________________________________________________\n");
     while (!stop){
-		    printf("\n\tInput : ");
-        scanf(" %c",&input);
+		printf("\n\tInput : ");
+        scanf(" %s",input);
+
         printf("\n\n\n");
-        input = toupper(input);
-        if(input == 'W'){ //UP
+        //pengubahan ke uppercase
+        for(j=0;j<strlen(input);j++){
+            input1[j] = toupper(input[j]);
+        }  
+        
+        
+        if(IsKataSama(input1,"W")){ //UP
             GoLeft(&M,&CurPos,&Seed);
         }
-        else if(input == 'S'){ //DOWN
+        else if(IsKataSama(input1,"S")){ //DOWN
             GoRight(&M,&CurPos,&Seed);
         }
-        else if(input == 'A'){ //LEFT
+        else if(IsKataSama(input1,"A")){ //LEFT
             GoDown(&M,&CurPos,&Seed);
         }
-        else if(input == 'D'){ //RIGHT
+        else if(IsKataSama(input1,"D")){ //RIGHT
             GoUp(&M,&CurPos,&Seed);
         }
 
         ClearScreen();
+        if(IsKataSama(input1,"SKILL")){
+            //menampilkan skill
+            if(IsEmptyA(Taken)){
+                printf("No skill has been achieved\n");
+            }else{//sudah ada skill yang terambil
+                printf("Skill that has been taken:\n");
+                TulisIsi(Taken);printf("\n");
+            }
+            //menampilkan skill yang dapat diambil
+            if(IsReadyGetSkill(SkillPoint(P))){
+                ChangeSkillTree(&T,&TI,&P, &Taken);
+            }else{
+                printf("No skill can be acquired\n");
+                printf("SkillPoint left : 1\n");
+            }
+        }
+    
         if(Absis(CurPos) > MaxN || Absis(CurPos) < 1 || Ordinat(CurPos) > MaxN || Ordinat(CurPos) < 1){     // TRANSFER
             xs = Info(First(Seed));
     		ys = Info(Next(First(Seed)));
