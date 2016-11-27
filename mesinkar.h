@@ -11,7 +11,7 @@
 extern char CC;
 extern boolean EOP;
 
-
+void STARTMAP();
 
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.

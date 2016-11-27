@@ -24,7 +24,7 @@ void IgnoreBlankTOKEN();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang 
    F.S. : CC ≠ BLANK atau CC = MARK */
-
+void STARTTOKENMAP();
 void STARTTOKEN();
 /* I.S. : CC sembarang 
    F.S. : EndToken = true, dan CC = MARK; 
