@@ -6,12 +6,6 @@
 #define Comd(P,i) (P).cmd[(i)]
 
 
-int gameover;
-
-void GameOver(){
-	gameover = 1;
-}
-
 int RPSComparator(char P, char E){
 // Condition Output
 // 0 = draw
@@ -198,7 +192,7 @@ void PrintCmd(Queue Q,char * cmd){
 	}
 }
 
-void BattleProcessing(Player * P, Enemy * E){
+void BattleProcessing(Player * P, Enemy * E, int * go){
 	// Print Enemy / Player Status / Message
 	int i,turn,maxt,x,n,temp;
 	char plin,cmd[4],enemyin[4];
@@ -272,7 +266,7 @@ void BattleProcessing(Player * P, Enemy * E){
 		i = 0;
 		// p --> i<=3
 		// q --> HP
-		while(i<=3 && HPE(*E)>0){
+		while(i<=3 && HPE(*E)>0 && HP(*P)>0){
 			PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
 			PrintHeaderE(HPE(*E),STRE(*E),DEFE(*E));
 			printf(    "_________________________________________________________________________________________________\n\n");
@@ -350,18 +344,20 @@ void BattleProcessing(Player * P, Enemy * E){
 			//printf("%d",HPE(*E));
 			delay(1500);
 			ClearScreen();
-			if (HP(*P) <= 0){
-				GameOver(); //GameOver Handler
-			}
 			i++;
 		}
 		turn++;
 
 	}
+
+
 	if(turn <= maxt && HP(*P) > 0){
 		Exp(*P) += EXPE(*E);
 		if(IsReadyNextLvl(Exp(*P),NextEXP(*P))){
 			LevelUp(P);
 		}
+	}
+	if (HP(*P) <= 0){
+		*go = 1;; //GameOver Handler
 	}
 }

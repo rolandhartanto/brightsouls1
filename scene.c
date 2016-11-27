@@ -19,10 +19,11 @@ void Title(){
     loadingBar();
     while(b){
         if(s==1){
-            printGUIInGame(name,lvl,hp,str,def,exp);
+            Overworld();  
         }else{
             printMainMenu();
             pilihOpsi(name,&b,&s);
+            strcpy(Nama(P),name);
         }
     }
 }
@@ -51,10 +52,11 @@ void Overworld(){
   int x,y,i,xs,ys,xe,ye;
   boolean stop;
   MATRIKS M;
-  int mapcount;
+  int mapcount,gameover;
   Enemy E;
 
   // Buat prosedur load to map;
+  stop = false;
   InitGame();
   mapcount = 1;
 	ClearScreen();
@@ -154,7 +156,7 @@ void Overworld(){
       printf(    "_________________________________________________________________________________________________\n");
       initEnemy(&E, mapcount, false);
       delay(1500);
-      BattleProcessing(&P, &E);
+      BattleProcessing(&P, &E, &gameover);
 			EnemyFlag = false;
       PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
       PrintMap(Seed,CurPos,&M);
@@ -165,11 +167,11 @@ void Overworld(){
       printf(    "_________________________________________________________________________________________________\n");
       initEnemy(&E, mapcount, true);
       delay(1500);
-      BattleProcessing(&P,&E);
+      BattleProcessing(&P,&E,&gameover);
 			BossFlag = false;
-      /*PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+      PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
       PrintMap(Seed,CurPos,&M);
-      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");*/
+      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
 
 		}
 		else if(WallFlag){
@@ -180,16 +182,17 @@ void Overworld(){
 			printf("                                         \n");
 		}
 		printf(    "_________________________________________________________________________________________________\n");
-    }
 
     if(gameover == 1){
-      stop = true;
       ClearScreen();
       printGameOver();
       delay(3500);
       ClearScreen();
       printCredits();
+      delay(3500);
       ClearScreen();
+      stop = true;
+    }
     }
 
 }
