@@ -17,7 +17,7 @@
 
 void nextBlock(int * xa, int * ya, int x, int y, int c);
 
-boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count, int prev);
+boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count);
 
 void GenerateStart(int * x, int * y);
 

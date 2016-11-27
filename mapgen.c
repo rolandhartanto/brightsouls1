@@ -27,7 +27,7 @@ void nextBlock(int * xa, int * ya, int x, int y, int c) {
 	}
 }
 
-boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count, int prev) {
+boolean PathOK(MATRIKS map, int xa, int ya, int x, int y, int c, int count) {
     boolean oke;
     int xd, yd;
 
@@ -59,7 +59,7 @@ void GenerateStart(int * x, int * y){
 }
 
 void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
-	int count,prev,prev2,prevc;
+	int count;
 	int xa,ya,x,y,a,b,d;
 	int lc,llc,c;
 	double start,end;
@@ -90,9 +90,6 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 	InsVLast(Seed,*xs);				// Insert X and Y
 	InsVLast(Seed,*ys);				// into Seed
 
-	prev2 = -1;						// Init Prev2 & Prev
-	prev = -1;						//
-
 	count = count + 1;				//
 	//printf("%d, %d\n",*xs,*ys); // DEBUGGER
 	x = *xs;						// Init xa
@@ -106,23 +103,24 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			c = rand() % 4;
 
 			nextBlock(&xa, &ya, x, y, c);
-			//printf("%d : %d, %d",c,xa,ya); // DEBUGGER
 			end = clock();
-			if ((end-start)>=0.01){
+			if ((end-start)>=1000){
+				printf("fail\n");
 				*fail = true;
 				break;
 			}
+			printf("%d : %d, %d",c,xa,ya); // DEBUGGER
 			d = rand() % chance;
-			if(PathOK(map, xa, ya, x, y, c, count,prev2) && Elmt(map,xa,ya) == 3 && (xa<=MaxN && xa>=1) && (ya<=MaxN && ya>=1)){
+			if(PathOK(map, xa, ya, x, y, c, count) && Elmt(map,xa,ya) == 3 && (xa<=MaxN && xa>=1) && (ya<=MaxN && ya>=1)){
 				//printf("%d : %d, %d",c,xa,ya); // DEBUGGER
-				//printf(" accept V\n"); // DEBUGGER
+				printf(" accept V\n"); // DEBUGGER
 				exit = true;
 			}
 
 			else{
 				xa = x;				// Reset xa
 				ya = y;				// Reset ya
-				//printf(" reject\n"); // DEBUGGER
+				printf(" reject\n"); // DEBUGGER
 
 			}
 		}
@@ -196,6 +194,7 @@ void GenerateNewMap(List * Seed,int * xs,int * ys){
 		b = *ys;
 		fail = false;
 		CreateEmpty(Seed);			//  Init Seed
+		printf("a");
 		GenerateSeed(Seed,&a,&b,&fail); //  Generate Map Seed
 	}while(fail);
 	*xs = a;
