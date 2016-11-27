@@ -29,6 +29,7 @@ typedef struct { infotypeq * T;   /* tabel penyimpan elemen */
 #define Tail(Q) (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
 #define InfoTail(Q) (Q).T[(Q).TAIL]
+#define MaxEl(Q) (Q).MaxEl
 //#define MaxEl(Q) (Q).MaxEl
 
 /* ********* Prototype ********* */
@@ -64,5 +65,8 @@ void DelQ (Queue * Q, infotypeq * X);
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
+
+void CopyQueue(Queue Qin, Queue * Qout);
+
 
 #endif

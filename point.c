@@ -7,8 +7,8 @@
 #include <math.h>
 
 typedef struct {
-	int X; /* absis   */
-	int Y; /* ordinat */
+	float X; /* absis   */
+	float Y; /* ordinat */
 } POINT;
 
 /* *** Notasi Akses: Selektor POINT *** */
@@ -37,7 +37,7 @@ void BacaPOINT (POINT * P)
 /* I.S. Sembarang */
 /* F.S. P terdefinisi */
 {
-    int x,y;
+    float x,y;
     scanf("%f",&x);
     scanf("%f",&y);
 
