@@ -53,22 +53,22 @@ void InitGame(){
 
 
 void Overworld(){
-    char input;
-    int x,y,i,xs,ys,xe,ye;
-    boolean stop;
-    MATRIKS M;
-    int mapcount;
-    Enemy E;
-
-    // Buat prosedur load to map;
-    InitGame();
-    mapcount = 1;
+  char input;
+  int x,y,i,xs,ys,xe,ye;
+  boolean stop;
+  MATRIKS M;
+  int mapcount;
+  Enemy E;
+  
+  // Buat prosedur load to map;
+  InitGame();
+  mapcount = 1;
 	ClearScreen();
-    // Controls GUI Generation for first print
-    PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
-    PrintMap(Seed,CurPos,&M);
-    x = xfirst;
-    y = yfirst;
+  // Controls GUI Generation for first print
+  PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+  PrintMap(Seed,CurPos,&M);
+  x = xfirst;
+  y = yfirst;
 	i = 0;
 	printf(    "_________________________________________________________________________________________________\n\n");
 	printf("                                         \n");
@@ -160,17 +160,19 @@ void Overworld(){
       initEnemy(&E, mapcount, false);
       BattleProcessing(&P, &E);
 			EnemyFlag = false;
+      PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
       PrintMap(Seed,CurPos,&M);
       printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
-      //printf(    "_________________________________________________________________________________________________\n");
 		}
 		else if(BossFlag){
 			printf("\t\t  > Ada boss muncul!                 \n");
       initEnemy(&E, mapcount, true);
       BattleProcessing(&P,&E);
 			BossFlag = false;
-      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
-      printf(    "_________________________________________________________________________________________________\n");
+      /*PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+      PrintMap(Seed,CurPos,&M);
+      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");*/
+
 		}
 		else if(WallFlag){
 			printf("\t\t  > Kamu menabrak tembok             \n");

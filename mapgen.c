@@ -228,20 +228,20 @@ void TulisMap (MATRIKS M, POINT Pos){
         for(j=GetFirstIdxKol(M); j<GetLastIdxKol(M); j++){
 			if (j == GetFirstIdxKol(M)){
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf(col_red "\t\t\t\t\tP" col_reset);
+					printf(col_red_bg "\t\t\t\t\tP" col_reset);
 				}
 				else{
 					if(Elmt(M,i,j)==0){
 						printf("\t\t\t\t\t ");
 					}
 					else if(Elmt(M,i,j)==1){
-						printf("\t\t\t\t\tM");
+						printf(col_green"\t\t\t\t\tM"col_reset);
 					}
 					else if(Elmt(M,i,j)==2){
 						printf("\t\t\t\t\tE");
 					}
 					else if(Elmt(M,i,j)==3){
-						printf("\t\t\t\t\t#");
+						printf("\t\t\t\t\t" blbox"#"col_reset);
 					}
 					else if(Elmt(M,i,j)==4){
 						printf("\t\t\t\t\tB");
@@ -250,20 +250,20 @@ void TulisMap (MATRIKS M, POINT Pos){
 			}
 			else{
 				if (i == Absis(Pos) && j == Ordinat(Pos)){
-					printf(col_red "P" col_reset );
+					printf(col_red_bg "P" col_reset );
 				}
 				else{
 					if(Elmt(M,i,j)==0){
 						printf(" ");
 					}
 					else if(Elmt(M,i,j)==1){
-						printf("M");
+						printf(col_green"M"col_reset);
 					}
 					else if(Elmt(M,i,j)==2){
 						printf("E");
 					}
 					else if(Elmt(M,i,j)==3){
-						printf("#");
+						printf(blbox"#"col_reset);
 					}
 					else if(Elmt(M,i,j)==4){
 						printf("B");
@@ -272,20 +272,20 @@ void TulisMap (MATRIKS M, POINT Pos){
 			}
 		}
 		if (i == Absis(Pos) && j == Ordinat(Pos)){
-			printf(col_red "P\n" col_reset);
+			printf(col_red_bg "P\n" col_reset);
 		}
 		else{
 			if(Elmt(M,i,j)==0){
 				printf(" \n");
 			}
 			else if(Elmt(M,i,j)==1){
-				printf("I\n");
+				printf(col_green"M\n"col_reset);
 			}
 			else if(Elmt(M,i,j)==2){
 				printf("E\n");
 			}
 			else if(Elmt(M,i,j)==3){
-				printf("#\n");
+				printf(blbox"#\n"col_reset);
 			}
 			else if(Elmt(M,i,j)==4){
 				printf("B\n");
