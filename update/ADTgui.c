@@ -53,9 +53,10 @@ void Back()
 {
 	char x;
 	do{
+		printf("\t\t\n");
 		scanf(" %c",&x);
 		if(x!='B'){
-			printf("Ketik 'B' untuk kembali ke menu utama\n");
+			printf("\t\t ~ Press B to back to Main Menu ~\n");
 		}
 	}while(x!='B');
 }
@@ -160,8 +161,9 @@ void printStartGame(char a[],int *s)
 		printf("> (B)Back\n");
 		Back();
 	}else{
-		printf("Have fun %s!\n",a);
+		printf("\t\t Have fun %s!\n",a);
 		*s = 1;
+		delay(1000);
         //Overworld();
 	}
 
@@ -263,49 +265,49 @@ void printExit(int *b)
 */
 {
 	char x;
-	printf("are you sure? Y/N ");
+	printf("\t\tare you sure? Y/N ");
 
 	do{
 		scanf(" %c",&x);
 		if(x=='Y'){
-			printf("Good bye!\n");
+			printf("\t\tGood bye!\n");
 			*b = 0;
 		}else if(x=='N'){
 			*b = 1;
 		}else{
-			printf("Invalid input!\n");
+			printf("\t\tInvalid input!\n");
 		}
 	}while((x!='Y')&&(x!='N'));
 }
 
 void printHelp()
 {
-	printf("+-------------------------------+\n");
-	printf("|                               |\n");
-	printf("| +Welcome to Brightsouls v1.0+ |\n");
-	printf("| +Game control :               |\n");
-	printf("|   - 'GU' - go up              |\n");
-	printf("|   - 'GD' - go down            |\n");
-	printf("|   - 'GL' - go left            |\n");
-	printf("|   - 'GR' - go right           |\n");
-	printf("|                               |\n");
-	printf("| +Battle guide :               |\n");
-	printf("|   - 'A' - Attack              |\n");
-	printf("|   - 'B' - Block               |\n");
-	printf("|   - 'F' - Flank               |\n");
-	printf("|                               |\n");
-	printf("| +The Cycle                    |\n");
-	printf("|  (A defeats F, F defeats B,   |\n");
-	printf("|  B defeats A)                 |\n");
-	printf("|                               |\n");
-	printf("|         A -------> F          |\n");
-	printf("|         ^          |          |\n");
-	printf("|         |          |          |\n");
-	printf("|         |          |          |\n");
-	printf("|         +---- B <--+          |\n");
-	printf("|                               |\n");
-	printf("+-------------------------------+\n");
-	printf(" ~ Press B to back to Main Menu ~\n");	
+	printf("\t\t+-------------------------------+\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t| +Welcome to Brightsouls v1.0+ |\n");
+	printf("\t\t| +Game control :               |\n");
+	printf("\t\t|   - 'GU' - go up              |\n");
+	printf("\t\t|   - 'GD' - go down            |\n");
+	printf("\t\t|   - 'GL' - go left            |\n");
+	printf("\t\t|   - 'GR' - go right           |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t| +Battle guide :               |\n");
+	printf("\t\t|   - 'A' - Attack              |\n");
+	printf("\t\t|   - 'B' - Block               |\n");
+	printf("\t\t|   - 'F' - Flank               |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t| +The Cycle                    |\n");
+	printf("\t\t|  (A defeats F, F defeats B,   |\n");
+	printf("\t\t|  B defeats A)                 |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t|         A -------> F          |\n");
+	printf("\t\t|         ^          |          |\n");
+	printf("\t\t|         |          |          |\n");
+	printf("\t\t|         |          |          |\n");
+	printf("\t\t|         +---- B <--+          |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t+-------------------------------+\n");
+	printf("\t\t ~ Press B to back to Main Menu ~\n");	
 	Back();
 }
 
