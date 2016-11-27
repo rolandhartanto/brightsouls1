@@ -55,7 +55,8 @@ void LevelUp(Player * P){
 	SkillPoint(*P)+=1;
 	Str(*P)+=10;
 	Def(*P)+=10;
-	HP(*P)=BaseHP;
+	HPMax(*P) = HPMax(*P) + 10;
+	HP(*P)=HPMax(*P);
 }
 
 boolean IsReadyGetSkill(int SkillPoint){

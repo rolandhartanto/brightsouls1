@@ -267,7 +267,8 @@ void BattleProcessing(Player * P, Enemy * E){
 		ClearScreen();
 
 		//Input Processing
-		for(i = 0; i<=3; i++){
+		i = 0;
+		while(i<=3 && HPE(*E)>0){
 			PrintHeader(Nama(*P),HP(*P),Str(*P),Def(*P),Level(*P),Exp(*P),NextEXP(*P));
 			PrintHeaderE(HPE(*E),STRE(*E),DEFE(*E));
 			printf(    "_________________________________________________________________________________________________\n\n");
@@ -335,6 +336,8 @@ void BattleProcessing(Player * P, Enemy * E){
 			HPE(*E) -= EDmgCntr(*P,*E,cmd[i],x);
 			if(HPE(*E) < 0){
 				HPE(*E) = 0;
+
+			i++;
 			}
 
 			printf(    "_________________________________________________________________________________________________\n");
@@ -349,7 +352,10 @@ void BattleProcessing(Player * P, Enemy * E){
 			}
 		}
 		if(turn <= maxt && HP(*P) > 0){
-
+			Exp(*P) += EXPE(*E);
+			if(IsReadyNextLvl(Exp(*P),NextEXP(*P))){
+				LevelUp(P);
+			}
 		}
 		turn++;
 
