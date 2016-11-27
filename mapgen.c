@@ -105,22 +105,22 @@ void GenerateSeed(List * Seed, int * xs, int * ys,boolean * fail){
 			nextBlock(&xa, &ya, x, y, c);
 			end = clock();
 			if ((end-start)>=1000){
-				printf("fail\n");
+				//printf("fail\n");
 				*fail = true;
 				break;
 			}
-			printf("%d : %d, %d",c,xa,ya); // DEBUGGER
+			//printf("%d : %d, %d",c,xa,ya); // DEBUGGER
 			d = rand() % chance;
 			if(PathOK(map, xa, ya, x, y, c, count) && Elmt(map,xa,ya) == 3 && (xa<=MaxN && xa>=1) && (ya<=MaxN && ya>=1)){
 				//printf("%d : %d, %d",c,xa,ya); // DEBUGGER
-				printf(" accept V\n"); // DEBUGGER
+				//printf(" accept V\n"); // DEBUGGER
 				exit = true;
 			}
 
 			else{
 				xa = x;				// Reset xa
 				ya = y;				// Reset ya
-				printf(" reject\n"); // DEBUGGER
+				//printf(" reject\n"); // DEBUGGER
 
 			}
 		}
@@ -194,7 +194,6 @@ void GenerateNewMap(List * Seed,int * xs,int * ys){
 		b = *ys;
 		fail = false;
 		CreateEmpty(Seed);			//  Init Seed
-		printf("a");
 		GenerateSeed(Seed,&a,&b,&fail); //  Generate Map Seed
 	}while(fail);
 	*xs = a;

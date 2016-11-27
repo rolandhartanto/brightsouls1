@@ -36,9 +36,7 @@ void InitGame(){
     int x,y;
 
     CreateEmptyGraph(&G);                                   //Initialize Graph for map teleportation
-    printf("test2\n");
     GenerateNewMap(&Seed, &x, &y);					        //Initialize first map
-    printf("test2\n");
     Absis(CurPos) = Info(First(Seed));				        //Initialize starting X position
     Ordinat(CurPos) = Info(Next(First(Seed)));				//Initialize startiny Y position
     InsVFirstGraph(&G,Seed);                                //Add First map to Graph
@@ -62,23 +60,18 @@ void Overworld(){
     Enemy E;
 
     // Buat prosedur load to map;
-    printf("test\n");
     InitGame();
-    printf("test\n");
     mapcount = 1;
 	ClearScreen();
     // Controls GUI Generation for first print
     PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
-    printf("test\n");
     PrintMap(Seed,CurPos,&M);
-    printf("test\n");
     x = xfirst;
     y = yfirst;
 	i = 0;
 	printf(    "_________________________________________________________________________________________________\n\n");
 	printf("                                         \n");
 	printf(    "_________________________________________________________________________________________________\n");
-	printf("test\n");
     while (!stop){
 		printf("\n\tInput : ");
         scanf(" %c",&input);
