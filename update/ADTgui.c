@@ -156,11 +156,11 @@ void printStartGame(char a[],int *s)
 {
 
 	if(strlen(a)==0){
-		printf("> Pemain belum ada! Input nama terlebih dahulu dengan memilih menu New Game(N)!\n");
+		printf("> Player doesn't exist! Please enter your name by choosing New Game option.\n");
 		printf("> (B)Back\n");
 		Back();
 	}else{
-		printf("Selamat bermain %s!\n",a);
+		printf("Have fun %s!\n",a);
 		*s = 1;
         //Overworld();
 	}
@@ -304,7 +304,9 @@ void printHelp()
 	printf("|         |          |          |\n");
 	printf("|         +---- B <--+          |\n");
 	printf("|                               |\n");
-	printf("+-------------------------------+\n");	
+	printf("+-------------------------------+\n");
+	printf(" ~ Press B to back to Main Menu ~\n");	
+	Back();
 }
 
  
