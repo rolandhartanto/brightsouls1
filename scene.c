@@ -1,11 +1,13 @@
 #include "scene.h"
 #include <stdio.h>
+#include <ctype.h>
 #include "mapgen.h"
 #include "movement.h"
 #include "ADTgui.h"
-#include "graph.h"
+#include "color.h"
 #include "battle.h"
-#include <ctype.h>
+#include "graph.h"
+#include "player.h"
 
 Graph G;
 List Seed;
@@ -53,22 +55,22 @@ void InitGame(){
 
 
 void Overworld(){
-    char input;
-    int x,y,i,xs,ys,xe,ye;
-    boolean stop;
-    MATRIKS M;
-    int mapcount;
-    Enemy E;
+  char input;
+  int x,y,i,xs,ys,xe,ye;
+  boolean stop;
+  MATRIKS M;
+  int mapcount;
+  Enemy E;
 
-    // Buat prosedur load to map;
-    InitGame();
-    mapcount = 1;
+  // Buat prosedur load to map;
+  InitGame();
+  mapcount = 1;
 	ClearScreen();
-    // Controls GUI Generation for first print
-    PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
-    PrintMap(Seed,CurPos,&M);
-    x = xfirst;
-    y = yfirst;
+  // Controls GUI Generation for first print
+  PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+  PrintMap(Seed,CurPos,&M);
+  x = xfirst;
+  y = yfirst;
 	i = 0;
 	printf(    "_________________________________________________________________________________________________\n\n");
 	printf("                                         \n");
@@ -147,7 +149,7 @@ void Overworld(){
         PrintMap(Seed,CurPos,&M);
 		printf(    "_________________________________________________________________________________________________\n\n");
 		if (ItemFlag){
-			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
+			printf("\t\t  > Kamu mendapatkan Obat! " col_lgreen "HP+10" col_reset"\n");
             HP(P) += 10;
             //printf("%d",HPMax(P));
             if(HP(P) >= HPMax(P)){      //Case HP > HPMax
@@ -156,21 +158,27 @@ void Overworld(){
 			ItemFlag = false;
 		}
 		else if(EnemyFlag){
-			printf("\t\t  > Ada musuh muncul!                \n");
+			printf("\t\t  > Ada " col_red "musuh" col_reset" muncul!\n");
+      printf(    "_________________________________________________________________________________________________\n");
       initEnemy(&E, mapcount, false);
+      delay(1500);
       BattleProcessing(&P, &E);
 			EnemyFlag = false;
+      PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
       PrintMap(Seed,CurPos,&M);
       printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
-      //printf(    "_________________________________________________________________________________________________\n");
 		}
 		else if(BossFlag){
-			printf("\t\t  > Ada boss muncul!                 \n");
+			printf("\t\t  > Ada "col_purple"boss"col_reset " muncul!\n");
+      printf(    "_________________________________________________________________________________________________\n");
       initEnemy(&E, mapcount, true);
+      delay(1500);
       BattleProcessing(&P,&E);
 			BossFlag = false;
-      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");
-      printf(    "_________________________________________________________________________________________________\n");
+      /*PrintHeader(Nama(P),HP(P),Str(P),Def(P),Level(P),Exp(P),NextEXP(P));
+      PrintMap(Seed,CurPos,&M);
+      printf(    "\n\n_________________________________________________________________________________________________\n\n\n\n");*/
+
 		}
 		else if(WallFlag){
 			printf("\t\t  > Kamu menabrak tembok             \n");
