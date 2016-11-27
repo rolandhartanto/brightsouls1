@@ -149,7 +149,7 @@ void Overworld(){
 		if (ItemFlag){
 			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
             HP(P) += 10;
-            printf("%d",HPMax(P));
+            //printf("%d",HPMax(P));
             if(HP(P) >= HPMax(P)){      //Case HP > HPMax
                 HP(P) = HPMax(P);
             }
@@ -160,12 +160,17 @@ void Overworld(){
       initEnemy(&E, mapcount, false);
       BattleProcessing(&P, &E);
 			EnemyFlag = false;
+      PrintMap(Seed,CurPos,&M);
+      printf(    "_________________________________________________________________________________________________\n\n\n");
+      printf(    "_________________________________________________________________________________________________\n");
 		}
 		else if(BossFlag){
 			printf("\t\t  > Ada boss muncul!                 \n");
       initEnemy(&E, mapcount, true);
       BattleProcessing(&P,&E);
 			BossFlag = false;
+      printf(    "_________________________________________________________________________________________________\n\n\n");
+      printf(    "_________________________________________________________________________________________________\n");
 		}
 		else if(WallFlag){
 			printf("\t\t  > Kamu menabrak tembok             \n");

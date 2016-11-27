@@ -4,7 +4,7 @@
 #define _PLAYER_h
 
 #include "boolean.h"
-
+#include "bintree.h"
 /*Kamus umum*/
 #define NMaxInventory 100 // definisi untuk jumlah inventory maksimal = 100
 #define MaxHP 100 //definisi HPMax adalah HP yang bernilai 100
@@ -12,7 +12,7 @@
 #define BaseHP 100
 #define BaseLevel 1
 #define BaseExp 0
-#define BaseStr 20
+#define BaseStr 99
 #define BaseDef 10
 #define BaseNext 10
 #define BaseSkillPoint 10
@@ -75,4 +75,8 @@ void LevelUp(Player * P);
 	HP penuh kembali
 	Exp menjadi Exp-next sebelum
 */
+
+boolean IsReadyGetSkill(int SkillPoint);
+
+void ChangeSkillTree(BinTree * T);
 #endif

@@ -1,6 +1,7 @@
 /*MODUL PLAYER*/
 #include "player.h"
 #include <math.h>
+#include <stdio.h>
 /* Berisi definisi dan semua primitif pemrosesan pada karakteristik (profile) pemain */
 
 
@@ -56,3 +57,42 @@ void LevelUp(Player * P){
 	Def(*P)+=10;
 	HP(*P)=BaseHP;
 }
+
+boolean IsReadyGetSkill(int SkillPoint){
+	return(SkillPoint>=1);
+}
+
+void ChangeSkillTree(BinTree * T){
+//Fungsi untuk mengubah skill tree karena
+		TabInt TI;
+		Player P;
+		int ID;
+		addrNode P1;
+		MakeEmpty(&TI);
+		ToBeTaken(*T,&TI);
+		printf("Congratulations! You unlocked new skills\n");
+		printf("Skill ID that can be achieved:\n");
+		TulisIsi(TI);
+		printf("Enter one of the ID:\n");
+		scanf("%d",&ID);
+		while(Search1(TI,ID)==IdxUndef){//jika input salah
+			printf("Wrong ID input\nPlease input again!\n");
+			scanf("%d",&ID);
+		}
+		//input sudah benar
+		SearchNode(*T,ID,&P1);
+		if(ID==Akar(P1).ID){
+			if(Akar(P1).tkn=='h'){
+				HP(P)+=Akar(P1).val;
+				printf("HP pemain bertambah sebanyak: %d\n",Akar(P1).val);
+			}else if(Akar(P1).tkn=='s'){
+				Str(P)+=Akar(P1).val;
+				printf("STR pemain bertambah sebanyak: %d\n",Akar(P1).val);
+			}else if(Akar(P1).tkn=='d'){
+				Def(P)+=Akar(P1).val;
+				printf("DEF pemain bertambah sebanyak: %d\n",Akar(P1).val);
+			}
+			Akar(P1).val=0;
+		}
+		PrintTree(*T,2);
+	}
