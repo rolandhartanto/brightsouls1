@@ -33,7 +33,7 @@ boolean IsEmptySQ (StackQ S)
 boolean IsFullSQ (StackQ S)
 /* Mengirim true jika tabel penampung nilai elemen StackQ penuh */
 {
-    return (Top(S) == MaxEl);
+    return (Top(S) == MaxElSQ);
 }
 
 /* ************ Menambahkan sebuah elemen ke StackQ ************ */
