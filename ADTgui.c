@@ -58,7 +58,7 @@ void printMainMenu()
 
 	ClearScreen();
 	//printf("%c==================================================================%c\n",201,187);
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****           ___             |   |                   |        ****\n");
 	printf("****          |   \\            |   |    __             | __     ****\n");
@@ -261,28 +261,28 @@ void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int 
 }
 
 void printGameOver(){
-	printf("****                                                            ****\n");	
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
 	printf("****         ___   ___   _  _  ___      __       ___ __               ****\n");
 	printf("****        /   \\ /   \\ / \\/ \\|        /  \\ |  ||   |  \\            ****\n");
 	printf("****       | ___  |___||  |  ||___    |    ||  ||___|__/             ****\n");
-	printf("****       |    | |   ||  |  ||       |    ||  ||   |  \\           ****\n");	
+	printf("****       |    | |   ||  |  ||       |    ||  ||   |  \\           ****\n");
 	printf("****        \\___/ |   ||  |  ||___     \\__/  \\/ |___|  |           ****\n");
-	printf("****                                                            ****\n");	
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
@@ -290,7 +290,7 @@ void printGameOver(){
 }
 
 void printCredits(){
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                          CREDITS                           ****\n");
@@ -298,21 +298,21 @@ void printCredits(){
 	printf("****                                                            ****\n");
 	printf("****                  Vincent Hendryanto Halim                  ****\n");
 	printf("****                                                            ****\n");
-	printf("****                       Roland Hartanto                      ****\n");	
+	printf("****                       Roland Hartanto                      ****\n");
 	printf("****                                                            ****\n");
 	printf("****                        Dicky Novanto                       ****\n");
 	printf("****                                                            ****\n");
 	printf("****                       Alif Ijlal Wafi                      ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
 	printf("****              Daniel Christian Pradipta Basoeki             ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                                                            ****\n");	
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 
@@ -582,4 +582,69 @@ void PrintHeaderE(int HP, int STR, int DEF){
     printf(    "|\t Enemy \t\t| \tHP : %d\t\t| \tSTR : %d\t| \tDEF : %d\t|\n",HP,STR,DEF);
     printf(    "_________________________________________________________________________________________________\n\n");
 }
->>>>>>> 7758167351874d398b7276c1a5fc525bd47035d6
+
+
+void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
+    printf(    "\t\t\t\t\t%s\n\n",Nama);
+    printf(    "_________________________________________________________________________________________________\n\n");
+    printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
+    printf(    "_________________________________________________________________________________________________\n\n");
+}
+
+void printGameOver(){
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****         ___   ___   _  _  ___      __       ___ __               ****\n");
+	printf("****        /   \\ /   \\ / \\/ \\|        /  \\ |  ||   |  \\            ****\n");
+	printf("****       | ___  |___||  |  ||___    |    ||  ||___|__/             ****\n");
+	printf("****       |    | |   ||  |  ||       |    ||  ||   |  \\           ****\n");
+	printf("****        \\___/ |   ||  |  ||___     \\__/  \\/ |___|  |           ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+}
+
+void printCredits(){
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                          CREDITS                           ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                  Vincent Hendryanto Halim                  ****\n");
+	printf("****                                                            ****\n");
+	printf("****                       Roland Hartanto                      ****\n");
+	printf("****                                                            ****\n");
+	printf("****                        Dicky Novanto                       ****\n");
+	printf("****                                                            ****\n");
+	printf("****                       Alif Ijlal Wafi                      ****\n");
+	printf("****                                                            ****\n");
+	printf("****                Daniel Christian Pradipta Baso              ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+	printf("****                                                            ****\n");
+
+}
