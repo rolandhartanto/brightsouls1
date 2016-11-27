@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<time.h>
 //#include<windows.h>
 
 //#define clear() printf("\033[2J")
@@ -17,6 +18,16 @@
         system("cls");
     }
 
+    void delay(int x)
+    {
+       int c = 1, d = 1;
+
+       for ( c = 1 ; c <= x*10 ; c++ )
+           for ( d = 1 ; d <= x*10 ; d++ )
+           {}
+    }
+
+
 
 
 #elif __linux__
@@ -26,18 +37,13 @@
         system("clear");
     }
 
+    void delay(int x){
+        usleep(x*1000);
+        fflush(stdout);
+    }
+
 #endif
 
-void delay(int x)
-{
-   int c = 1, d = 1;
-
-   for ( c = 1 ; c <= x*10 ; c++ )
-       for ( d = 1 ; d <= x*10 ; d++ )
-       {}
-
-
-}
 
 void Back()
 {

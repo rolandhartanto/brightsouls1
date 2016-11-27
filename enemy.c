@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 #define BaseEHP 80
-#define BaseESTR 7
-#define BaseEDEF 6
+#define BaseESTR 30
+#define BaseEDEF 10
 #define BaseEEXP 8
 
 void initEnemy(Enemy * E, int mapcount, boolean boss){

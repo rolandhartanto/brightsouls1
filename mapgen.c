@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "mapgen.h"
-
+#include "color.h"
 
 #define MaxN 20
 #define MinPath 80
@@ -272,7 +272,7 @@ void TulisMap (MATRIKS M, POINT Pos){
 			}
 		}
 		if (i == Absis(Pos) && j == Ordinat(Pos)){
-			printf("P\n");
+			printf(col_red "P\n" col_reset);
 		}
 		else{
 			if(Elmt(M,i,j)==0){

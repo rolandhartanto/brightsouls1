@@ -5,6 +5,7 @@
 #include "ADTgui.h"
 #include "graph.h"
 #include "battle.h"
+#include <ctype.h>
 
 Graph G;
 List Seed;
@@ -75,16 +76,17 @@ void Overworld(){
     while (!stop){
 		printf("\n\tInput : ");
         scanf(" %c",&input);
-        if(input == 'w'){ //UP
+        input = toupper(input);
+        if(input == 'W'){ //UP
             GoLeft(&M,&CurPos,&Seed);
         }
-        else if(input == 's'){ //DOWN
+        else if(input == 'S'){ //DOWN
             GoRight(&M,&CurPos,&Seed);
         }
-        else if(input == 'a'){ //LEFT
+        else if(input == 'A'){ //LEFT
             GoDown(&M,&CurPos,&Seed);
         }
-        else if(input == 'd'){ //RIGHT
+        else if(input == 'D'){ //RIGHT
             GoUp(&M,&CurPos,&Seed);
         }
 
@@ -147,21 +149,21 @@ void Overworld(){
 			printf("\t\t  > Kamu mendapatkan Obat! HP+10         \n");
             HP(P) += 10;
             printf("%d",HPMax(P));
-            if(HP(P) >= HPMax(P)){
+            if(HP(P) >= HPMax(P)){      //Case HP > HPMax
                 HP(P) = HPMax(P);
             }
 			ItemFlag = false;
 		}
 		else if(EnemyFlag){
 			printf("\t\t  > Ada musuh muncul!                \n");
-            initEnemy(&E, mapcount, false);
-            BattleProcessing(&P, &E);
+      initEnemy(&E, mapcount, false);
+      BattleProcessing(&P, &E);
 			EnemyFlag = false;
 		}
 		else if(BossFlag){
 			printf("\t\t  > Ada boss muncul!                 \n");
-            initEnemy(&E, mapcount, true);
-            BattleProcessing(&P,&E);
+      initEnemy(&E, mapcount, true);
+      BattleProcessing(&P,&E);
 			BossFlag = false;
 		}
 		else if(WallFlag){
