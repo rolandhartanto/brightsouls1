@@ -18,7 +18,7 @@ void Title(){
     loadingBar();
     while(b){
         if(s==1){
-            Overworld();  
+            Overworld();
         }else{
             printMainMenu();
             pilihOpsi(name,&b,&s);

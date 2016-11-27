@@ -2,6 +2,7 @@
 #include "battle.h"
 #include <stdlib.h>
 #include <ctype.h>
+#include "color.h"
 
 #define Comd(P,i) (P).cmd[(i)]
 
@@ -187,7 +188,15 @@ void PrintCmd(Queue Q,char * cmd){
 				printf("# ");
 			}
 			else{
-				printf("%c ",e);
+				if(e == 'A'){
+					printf(col_orange"%c "col_reset,e);
+				}
+				else if(e == 'B'){
+					printf(col_lblue"%c "col_reset,e);
+				}
+				else if(e == 'F'){
+					printf(col_purple"%c "col_reset,e);
+				}
 			}
 	}
 }
@@ -277,33 +286,33 @@ void BattleProcessing(Player * P, Enemy * E, int * go){
 					printf("\t\t");
 					printf("Foe tries to attack!\n");
 					printf("\t\t");
-					printf("But %s blocked foe's attack\n", NamaP(*P));
+					printf("But %s blocked "col_red"foe's"col_reset" attack\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
 					printf("\t\t");
 					printf("Foe tries to block!\n");
 					printf("\t\t");
-					printf("But %s flanked and break trough foe's defense\n", NamaP(*P));
+					printf("But %s flanked and break trough "col_red"foe's"col_reset" defense\n", NamaP(*P));
 				}
 				if(cmd[i] == 'A'){ //B v B
 					printf("\t\t");
 					printf("Foe tries to flank!\n");
 					printf("\t\t");
-					printf("But %s attacked foe right trough\n", NamaP(*P));
+					printf("But %s attacked "col_red"foe"col_reset" right trough\n", NamaP(*P));
 				}
 			}
 			else if(x == 0){
 				if(cmd[i] == 'B'){ //B v B
 					printf("\t\t");
-					printf("%s and foe blocked at the same time\n\n", NamaP(*P));
+					printf("%s and "col_red"foe"col_reset" blocked at the same time\n\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
 					printf("\t\t");
-					printf("%s and foe flanked at the same time\n\n", NamaP(*P));
+					printf("%s and "col_red"foe"col_reset" flanked at the same time\n\n", NamaP(*P));
 				}
 				if(cmd[i] == 'A'){ //B v B
 					printf("\t\t");
-					printf("%s and foe attacked at the same time\n\n", NamaP(*P));
+					printf("%s and "col_red"foe"col_reset" attacked at the same time\n\n", NamaP(*P));
 				}
 			}
 			else if(x == -1){
@@ -311,19 +320,19 @@ void BattleProcessing(Player * P, Enemy * E, int * go){
 					printf("\t\t");
 					printf("%s tries to attack!\n",NamaP(*P));
 					printf("\t\t");
-					printf("But foe blocked %s's attack\n", NamaP(*P));
+					printf("But "col_red"foe"col_reset" blocked %s's attack\n", NamaP(*P));
 				}
 				if(cmd[i] == 'F'){ //B v B
 					printf("\t\t");
 					printf("%s tries to block!\n",NamaP(*P));
 					printf("\t\t");
-					printf("But foe flanked and break trough %s's defense\n", NamaP(*P));
+					printf("But "col_red"foe"col_reset" flanked and break trough %s's defense\n", NamaP(*P));
 				}
 				if(cmd[i]== 'A'){ //B v B
 					printf("\t\t");
 					printf("%s tries to flank!\n",NamaP(*P));
 					printf("\t\t");
-					printf("But foe attacked %s's right trough\n", NamaP(*P));
+					printf("But "col_red"foe"col_reset" attacked %s's right trough\n", NamaP(*P));
 				}
 			}
 			printf("\n");
@@ -342,7 +351,7 @@ void BattleProcessing(Player * P, Enemy * E, int * go){
 			//debugger
 			//printf("P %d E ",HP(*P));  system("usleep(%c)",x*1000);
 			//printf("%d",HPE(*E));
-			delay(1500);
+			delay(2500);
 			ClearScreen();
 			i++;
 		}

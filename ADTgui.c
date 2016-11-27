@@ -53,9 +53,10 @@ void Back()
 {
 	char x;
 	do{
+		printf("\t\t\n");
 		scanf(" %c",&x);
 		if(x!='B'){
-			printf("Ketik 'B' untuk kembali ke menu utama\n");
+			printf("\t\t ~ Press B to back to Main Menu ~\n");
 		}
 	}while(x!='B');
 }
@@ -156,12 +157,13 @@ void printStartGame(char a[],int *s)
 {
 
 	if(strlen(a)==0){
-		printf("> Pemain belum ada! Input nama terlebih dahulu dengan memilih menu New Game(N)!\n");
+		printf("> Player doesn't exist! Please enter your name by choosing New Game option.\n");
 		printf("> (B)Back\n");
 		Back();
 	}else{
-		printf("Selamat bermain %s!\n",a);
+		printf("\t\t\t Have fun, %s!\n",a);
 		*s = 1;
+		delay(1000);
         //Overworld();
 	}
 
@@ -196,29 +198,29 @@ void loadingBar()
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  LOADING\n");
+	printf("----------------------------------------------------------- "bold"[LOADING]"col_reset"\n");
 	for(int i=1;i<=10;i++){
-		printf(">");
+		printf(blbox">"col_reset);
 		fflush(stdout);
 		usleep(90000);
 	}
 	for(int i=1;i<=20;i++){
-		printf(">");
+		printf(blbox">"col_reset);
 		fflush(stdout);
 		usleep(50000);
 	}
 	for(int i=1;i<=10;i++){
-		printf(">");
+		printf(blbox">"col_reset);
 		fflush(stdout);
 		usleep(75000);
 	}
 	for(int i=1;i<=10;i++){
-		printf(">");
+		printf(blbox">"col_reset);
 		fflush(stdout);
 		usleep(30000);
 	}
 	for(int i=1;i<=10;i++){
-		printf(">");
+		printf(blbox">"col_reset);
 		fflush(stdout);
 		usleep(20000);
 	}
@@ -231,31 +233,6 @@ void printGUIInGame(char nm[], int lvl, int hp, int str, int def, int exp)
 {
 	char x;
 	ClearScreen();
-	/*printf("|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-			|                                                                    |\n
-	");*/
-	printf(" %s / LVL : %d / HP : %d / STR : %d / DEF : %d / EXP : %d \n",nm,lvl,hp,str,def,exp);
-	printf("Command : ");
-	scanf(" %c",&x);
-	printf("\n");
 }
 void printExit(int *b)
 /*I.S. sembarang
@@ -263,29 +240,56 @@ void printExit(int *b)
 */
 {
 	char x;
-	printf("are you sure? Y/N ");
+	printf("\t\tare you sure? Y/N ");
 
 	do{
 		scanf(" %c",&x);
 		if(x=='Y'){
-			printf("Good bye!\n");
+			printf("\t\tGood bye!\n");
 			*b = 0;
 		}else if(x=='N'){
 			*b = 1;
 		}else{
-			printf("Invalid input!\n");
+			printf("\t\tInvalid input!\n");
 		}
 	}while((x!='Y')&&(x!='N'));
 }
 
 void printHelp()
 {
-
+	printf("\t\t+-------------------------------+\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t| +Welcome to Brightsouls v1.0+ |\n");
+	printf("\t\t| +Game control :               |\n");
+	printf("\t\t|   - 'GU' - go up              |\n");
+	printf("\t\t|   - 'GD' - go down            |\n");
+	printf("\t\t|   - 'GL' - go left            |\n");
+	printf("\t\t|   - 'GR' - go right           |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t| +Battle guide :               |\n");
+	printf("\t\t|   - 'A' - Attack              |\n");
+	printf("\t\t|   - 'B' - Block               |\n");
+	printf("\t\t|   - 'F' - Flank               |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t| +The Cycle                    |\n");
+	printf("\t\t|  (A defeats F, F defeats B,   |\n");
+	printf("\t\t|  B defeats A)                 |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t|         A -------> F          |\n");
+	printf("\t\t|         ^          |          |\n");
+	printf("\t\t|         |          |          |\n");
+	printf("\t\t|         |          |          |\n");
+	printf("\t\t|         +---- B <--+          |\n");
+	printf("\t\t|                               |\n");
+	printf("\t\t+-------------------------------+\n");
+	printf("\t\t ~ Press B to back to Main Menu ~\n");
+	Back();
 }
 
 
 void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int Next ){
-    printf(    "\t\t\t\t\t%s\n\n",Nama);
+    printf(    "_________________________________________________________________________________________________\n\n");
+    printf(    "\n\t\t\t\t\t\t\x1b[1m-%s-\x1b[0m\n\n",Nama);
     printf(    "_________________________________________________________________________________________________\n\n");
     printf(    " | HP : %d\t| STR : %d\t| DEF : %d\t| Lv : %d\t| EXP : %d\t| Next : %d\t|\n",HP,STR,DEF,Level,EXP,Next);
     printf(    "_________________________________________________________________________________________________\n\n");
@@ -294,7 +298,7 @@ void PrintHeader(char * Nama, int HP, int STR, int DEF, int Level, int EXP, int 
 
 void PrintHeaderE(int HP, int STR, int DEF){
     printf(    "_________________________________________________________________________________________________\n\n");
-    printf(    "|\t Enemy \t\t| \tHP : %d\t| \tSTR : %d\t| \tDEF : %d\t|\n",HP,STR,DEF);
+    printf(    "|\t Enemy \t\t| \tHP : %d\t\t| \tSTR : %d\t| \tDEF : %d\t|\n",HP,STR,DEF);
     printf(    "_________________________________________________________________________________________________\n\n");
 }
 
@@ -331,7 +335,7 @@ void printCredits(){
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
-	printf("****                          CREDITS                           ****\n");
+	printf("****                          "underlineb"CREDITS"underlineb"                           ****\n");
 	printf("****                                                            ****\n");
 	printf("****                                                            ****\n");
 	printf("****                  Vincent Hendryanto Halim                  ****\n");
